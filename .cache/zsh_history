@@ -1,0 +1,253 @@
+: 1654721774:0;;
+: 1654721779:0;l
+: 1654721787:0;rm -rf lib
+: 1654722240:0;mkdir outputs
+: 1654722274:0;touch outputs/home-conf.nix
+: 1654722853:0;nix flake update
+: 1654722988:0;nix build .#homeManagerConfigurations.Softsun2.activationPackage
+: 1654723002:0;nix build .#homeManagerConfigurations.main.activationPackage
+: 1654723042:0;nix build .#homeManagerConfigurations.Softsun2.activationPackage
+: 1654723065:0;nix flake info
+: 1654723110:0;nix build .#homeManagerConfigurations.main.activationPackage
+: 1654723170:0;l
+: 1654723177:0;result/activate
+: 1654723187:0;flake
+: 1654723217:0;rebuild
+: 1654723221:0;cd ..
+: 1654723245:0;sudo nixos-rebuild switch --flake .#
+: 1654723276:0;home
+: 1654723430:0;rm -rf outputs
+: 1654723759:0;nix build .#homeManagerConfigurations.Softsun2.activationPackage
+: 1654723780:0;result/activate
+: 1654723846:0;config
+: 1654723892:0;sudo nixos-rebuild switch --flake .#
+: 1654723909:0;home
+: 1654723990:0;sudo nixos-rebuild switch --flake .#
+: 1654724001:0;home
+: 1654724014:0;nix build .#homeManagerConfigurations.Softsun2.activationPackage
+: 1654724019:0;result/activate
+: 1654724030:0;rebuild
+: 1654724037:0;sudo nixos-rebuild switch --flake .#
+: 1654724048:0;home
+: 1654724060:0;rebuild
+: 1654724134:0;nix flake update
+: 1654724143:0;nix build .#homeManagerConfigurations.Softsun2.activationPackage
+: 1654724147:0;result/activate
+: 1654724150:0;home
+: 1654724159:0;sudo nixos-rebuild switch --flake .#
+: 1654724190:0;l
+: 1654724229:0;sudo nixos-rebuild switch --flake .#buffalo
+: 1654724271:0;nix build .#homeManagerConfigurations.Softsun2.activationPackage
+: 1654724277:0;result/activate
+: 1654724290:0;sudo nixos-rebuild switch --flake .#buffalo
+: 1654724302:0;home
+: 1654724319:0;rebuild
+: 1654724555:0;bruh
+: 1654724561:0;rebuild
+: 1654724576:0;bruh
+: 1654724598:0;nix build .#homeManagerConfigurations.Softsun2.activationPackage
+: 1654724605:0;result/activate
+: 1654724618:0;rebuild
+: 1654724642:0;nix build .#homeManagerConfigurations.Softsun2.activationPackage
+: 1654724647:0;result/activate
+: 1654724649:0;rebuild
+: 1654724663:0;bruh
+: 1654724698:0;nix flake update
+: 1654724707:0;rebuild
+: 1654724730:0;nix build .#homeManagerConfigurations.Softsun2.activationPackage
+: 1654724739:0;result/activate
+: 1654724752:0;rebuild
+: 1654724767:0;bruh
+: 1654724786:0;echo bruh
+: 1654724819:0;rebuild
+: 1654724858:0;bruh
+: 1654724872:0;rebuild
+: 1654724901:0;bruh
+: 1654724929:0;nix flake update
+: 1654724932:0;rebuild
+: 1654724959:0;bruh
+: 1654724966:0;nix build .#homeManagerConfigurations.Softsun2.activationPackage
+: 1654724980:0;sudo nixos-rebuild switch --flake .#buffalo
+: 1654724992:0;bruh
+: 1654725169:0;nix flakes update
+: 1654725173:0;nix flake update
+: 1654725176:0;bruh
+: 1654725178:0;rebuild
+: 1654725210:0;nix build .#homeManagerConfigurations.Softsun2.activationPackage
+: 1654725219:0;result/activate
+: 1654725577:0;nix build .#homeManagerConfigurations.Softsun2.activationPackage
+: 1654725598:0;l
+: 1654725603:0;nix build .#homeManagerConfigurations.Softsun2.activationPackage
+: 1654725612:0;result/activate
+: 1654748123:0;home
+: 1654748157:0;flake
+: 1654748183:0;cd
+: 1654748282:0;l
+: 1654748284:0;cd nvim
+: 1654748285:16;vim .
+: 1654748318:21;home
+: 1654748345:0;cd ..
+: 1654748350:0;cat home.nix
+: 1654748387:0;nix build .#homeManagerConfigurations.softsun2.activationPackage
+: 1654748399:0;result/activate
+: 1654748403:0;apply
+: 1654748422:0;home
+: 1654748514:0;flake
+: 1654748603:0;cd /home/softsun2
+: 1654748637:0;apply
+: 1654748651:0;l
+: 1654748667:0;ls /home/softsun2/.dotfiles
+: 1654748695:0;home
+: 1654748713:0;nix build .#homeManagerConfigurations.softsun2.activationPackage
+: 1654748722:0;result/activate
+: 1654748724:0;apply
+: 1654749060:0;nix build .#homeManagerConfigurations.softsun2.activationPackage
+: 1654749068:0;result/activate
+: 1654749336:0;apply
+: 1654750748:0;nix flake update
+: 1654750752:0;apply
+: 1654782446:0;nix flake update
+: 1654782463:0;apply
+: 1654782795:0;nix flake update
+: 1654782800:0;apply
+: 1654783401:0;apply
+: 1654783423:0;df --help
+: 1654783431:0;l
+: 1654783452:0;cd
+: 1654783467:0;nix flake update
+: 1654783473:0;apply
+: 1654783507:0;l
+: 1654783508:0;cd
+: 1654783516:0;rebuild
+: 1654783533:0;apply
+: 1654783594:0;apply
+: 1654784459:0;rm zsh/*
+: 1654784467:0;cd zsh
+: 1654784467:0;l
+: 1654784468:0;ll
+: 1654784472:0;rm .p10k.zsh
+: 1654784477:0;cd ..
+: 1654784478:0;ls
+: 1654784503:0;apply
+: 1654785650:0;rmdir zsh
+: 1654785656:0;touch zsh.nix
+: 1654785671:0;mkdir zsh
+: 1654785680:0;rmdir zsh
+: 1654785682:0;l
+: 1654787597:0;cd
+: 1654789405:0;rm zsh.nix
+: 1654789650:0;rebuild
+: 1654789681:0;nix-prefetch-git --help
+: 1654789848:0;nix-prefetch-git 817916dfa907d179f0d46d8de355e883cf67bd97
+: 1654790146:0;apply
+: 1654790406:0;apply
+: 1654790415:0;autoload -U promptinit; promptinit
+: 1654790417:0;prompt -l
+: 1654790589:0;apply
+: 1654790596:0;nix flake update
+: 1654790599:0;apply
+: 1654791142:0;l
+: 1654791146:0;cd discord
+: 1654791149:0;l
+: 1654791156:22;vim settings.json
+: 1654791617:3;apply
+: 1654791628:0;cd ~/.dotfiles
+: 1654791632:0;apply
+: 1654791988:0;apply
+: 1654792010:0;l
+: 1654792015:0;apply
+: 1654792763:0;apply
+: 1654792900:0;apply
+: 1654793055:0;apply
+: 1654793118:0;cd csci3081
+: 1654793185:0;apply
+: 1654793468:0;apple
+: 1654793470:0;apply
+: 1654793565:0;apply
+: 1654795160:0;apply
+: 1654795212:0;prompt -l
+: 1654795587:0;apply
+: 1654795822:0;apply
+: 1654795984:0;apply
+: 1654796944:0;applt
+: 1654796946:0;apply
+: 1654797563:0;applt
+: 1654797565:0;apply
+: 1654797779:0;apply
+: 1654798249:0;apply
+: 1654803431:0;apply
+: 1654803511:0;nix flake update
+: 1654803527:0;apply
+: 1654803854:0;apply
+: 1654804044:0;cd .dotfiles
+: 1654804045:0;cd
+: 1654804055:0;apply
+: 1654804069:0;clear
+: 1654804380:0;pwd
+: 1654804383:0;apply
+: 1654804900:0;cd
+: 1654805416:0;apply
+: 1654805756:0;man man
+: 1654806035:0;apply
+: 1654806063:0;echo $fpath
+: 1654806224:0;apply
+: 1654806247:0;appj
+: 1654806259:0;cd ..
+: 1654806442:0;apply
+: 1654808533:0;compinit
+: 1654808554:0;zsytle 
+: 1654808559:0;zmodload
+: 1654808578:0;zmodload zsh/complist
+: 1654808580:0;zmodload
+: 1654808587:0;compinit
+: 1654808596:0;c
+: 1654808611:0;_comp_options+=(globdots)
+: 1654808710:0;apply
+: 1654808751:0;clear
+: 1654808822:0;one very long command more command
+: 1654808893:0;apply
+: 1654809013:0;man zle
+: 1654809021:0;zle --help
+: 1654809024:0;zle -h
+: 1654809028:0;zle
+: 1654809764:0;echo $TERM
+: 1654809866:0;apply
+: 1654809947:0;cd /share
+: 1654809959:0;rebuild
+: 1654810074:0;nix-collect-garbage
+: 1654810257:0;nixos-rebuild switch -h
+: 1654810261:0;nixos-rebuild -h
+: 1654810266:0;man nixos-rebuild
+: 1654810341:0;apply
+: 1654810353:0;rebuild
+: 1654810383:0;rebuild -vv
+: 1654810410:0;c
+: 1654810413:0;apply
+: 1654810449:0;clear
+: 1654810623:0;apply
+: 1654810636:0;ls -la
+: 1654810656:0;ls -l
+: 1654810670:0;ls -la
+: 1654810672:0;l
+: 1654810722:0;apply
+: 1654810729:0;ls -l
+: 1654810844:0;apply
+: 1654810881:0;ls -l
+: 1654810883:0;apply
+: 1654810885:0;clear
+: 1654810920:0;ls -clear
+: 1654810921:0;clear
+: 1654810942:0;c;ear
+: 1654810943:0;clear
+: 1654811024:0;apply
+: 1654811094:0;zmodload zsh/complist
+: 1654811101:0;clear
+: 1654811114:0;compinit
+: 1654811132:0;apply
+: 1654811147:0;clear
+: 1654811299:0;apply
+: 1654811433:0;git init
+: 1654811497:0;git remote add origin hit@github.com:Softsun2/dotfiles-NixOS.git
+: 1654811513:0;git branch -M main
+: 1654811532:0;git push -u origin main
+: 1654811565:0;git add -A
