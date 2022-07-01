@@ -1,0 +1,9 @@
+#!/bin/sh
+
+# $1 -- the audio url
+yt-dlp \
+  --extract-audio \
+  --audio-format mp3 \
+  --embed-thumbnail \
+  --output '~/music/%(uploader)s/%(title)s.%(ext)s' \
+  $1

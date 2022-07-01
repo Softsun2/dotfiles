@@ -6,18 +6,115 @@
 
   programs.home-manager.enable = true;
 
+  home.packages = [
+    pkgs.spotify
+    pkgs.yt-dlp
+    pkgs.zoom-us
+    # import ./modules/spotify-adblock.nix
+  ];
+
+  programs.vscode = {
+    enable = true;
+    extensions = with pkgs.vscode-extensions; [
+      vscodevim.vim
+      ms-python.python
+      ms-python.vscode-pylance
+      llvm-vs-code-extensions.vscode-clangd
+      ocamllabs.ocaml-platform
+      timonwong.shellcheck
+      zhuangtongfa.material-theme
+    ];
+    keybindings = [
+      # window movement
+      {
+          key = "ctrl+h";
+          command = "workbench.action.focusLeftGroup";
+      }
+      {
+          key = "ctrl+l";
+          command = "workbench.action.focusRightGroup";
+      }
+      {
+          key = "ctrl+j";
+          command = "workbench.action.focusBelowGroup";
+      }
+      {
+          key = "ctrl+k";
+          command = "workbench.action.focusAboveGroup";
+      }
+
+      # diagnostics (tbd)
+
+      # quick menu movement
+      {
+          key = "ctrl+j";
+          command = "workbench.action.quickOpenSelectNext";
+          when = "inQuickOpen";
+      }
+      {
+          key = "ctrl+k";
+          command = "workbench.action.quickOpenSelectPrevious";
+          when = "inQuickOpen";
+      }
+      {
+          key = "ctrl+c";
+          command = "workbench.action.closeQuickOpen";
+          when = "inQuickOpen";
+      }
+
+      # suggestions
+      {
+          key = "ctrl+y";
+          command = "acceptSelectedSuggestion";
+          when = "suggestWidgetVisible && textInputFocus";
+      }
+      {
+          key = "ctrl+space";
+          command = "toggleSuggestionDetails";
+          when = "editorTextFocus && suggestWidgetVisible";
+      }
+      {
+          key = "ctrl+j";
+          command = "selectNextSuggestion";
+          when = "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus";
+      }
+      {
+          key = "ctrl+k";
+          command = "selectPrevSuggestion";
+          when = "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus";
+      }
+      {
+          key = "ctrl+c";
+          command = "editor.action.inlineSuggest.hide";
+          when = "inlineSuggestionVisible";
+      }
+
+      # terminal
+      {
+          key = "ctrl+shift+j";
+          command = "workbench.action.terminal.toggleTerminal";
+          when = "terminal.active";
+      }
+    ];
+
+  };
+
   programs.zsh = {
     enable = true;
     dotDir = ".config/zsh";
 
     initExtra = ''
+      # shell scripts
+      export PATH=$HOME/.dotfiles/bin/:$PATH
+      # bar script
+      export PATH=$HOME/suckless/dwm/bar:$PATH
       # set vim as default editor
       EDITOR="vim"
       
       # Single line prompt
       AGKOZAK_MULTILINE=0
 
-      # Basic auto/tab complete:
+      # Basic auto/tab complete
       autoload -U compinit
       zstyle ':completion:*' menu select
       zmodload zsh/complist
@@ -29,7 +126,7 @@
       bindkey -v
       export KEYTIMEOUT=2
 
-      # Edit line in vim with ctrl-e:
+      # Edit line in $EDITOR with ctrl-e:
       autoload edit-command-line; zle -N edit-command-line
       bindkey '^e' edit-command-line
 
@@ -39,7 +136,7 @@
     history = {
       save = 1000;
       size = 1000;
-      path = ".cache/zsh_history";
+      path = "$HOME/.cache/zsh_history";
     };
 
     enableAutosuggestions = true;
@@ -107,7 +204,6 @@
   };
 
 
-  # Incase I switch back to kitty
   programs.kitty = {
     enable = true;
     settings = {
@@ -224,5 +320,6 @@
     ";
   };
 
+  programs.zathura.enable = true;
 
 }

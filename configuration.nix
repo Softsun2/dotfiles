@@ -55,6 +55,14 @@
   services.xserver.displayManager.startx.enable = true;
   services.xserver.windowManager.dwm.enable = true;
 
+  # FIXME: After I am satisfied with a working version of dwm
+  # make this overlay a flake input
+  nixpkgs.overlays = [
+    (final: prev: {
+      dwm = prev.dwm.overrideAttrs (old: { src = /home/softsun2/suckless/dwm; });
+    })
+  ];
+
   # Configure keymap in X11
   services.xserver.layout = "us";
   services.xserver.xkbOptions = "eurosign:e";
@@ -103,13 +111,11 @@
     # Apps
     firefox
     discord
-    spotify
     steam
 
-    # Development Apps
-    vscode   # ide
-
     # util
+    pulsemixer
+    shellcheck
     neovim   # text editor
     zsh      # z shell
     git
