@@ -30,9 +30,8 @@ I'm using a flake with currently two outputs to build just my nixos system (I pl
 
 Things I may or may not declare, keeping a list for future reference.
 
-* vscode is partially declared (user settings are imperative)
 * Home dir structure
-* vscode configurations, extensions and keymaps
+* vscode configurations
 * school repos
 * docker images/containers/daemon
 * steam games
