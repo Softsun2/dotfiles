@@ -5,6 +5,7 @@ Still a nix novice. Slowly building my system.
   To declare system and user configurations as minimally and consistently as possible. Building from this flake should result in a system identical to mine.
 
 ## TODO
+* Reorder usr vs sys packages & config
 * cleanup vscode settings OR switch to nvim
 * Manage/clean NixOS generations 
 * Bar is TERRIBLE (probably due to grep)

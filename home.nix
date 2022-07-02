@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, unFree-spotify-pkgs, ... }:
 {
 
   # home-manager configuration appendix:
@@ -7,7 +7,8 @@
   programs.home-manager.enable = true;
 
   home.packages = [
-    pkgs.spotify
+    unFree-spotify-pkgs.spotify
+    pkgs.rnix-lsp
     pkgs.yt-dlp
     pkgs.zoom-us
     # import ./modules/spotify-adblock.nix
@@ -23,6 +24,7 @@
       ocamllabs.ocaml-platform
       timonwong.shellcheck
       zhuangtongfa.material-theme
+      jnoortheen.nix-ide
     ];
     keybindings = [
       # window movement
