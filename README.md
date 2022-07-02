@@ -25,6 +25,8 @@ I'm using a flake with currently two outputs to build just my nixos system (I pl
 * themeing/dwm patching
 * switch to a different terminal emulator (maybe)
 * dmenu not displaying suggestions for usr prgrams
+* clean home dir
+* vscode open file abs path and not gui
 
 ## Imperative components
 

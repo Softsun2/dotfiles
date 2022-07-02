@@ -2,11 +2,6 @@
 
 NUM="${2:-5}"
 
-resetbar() {
-  pkill -x bar
-  ~/suckless/dwm/bar
-}
-
 case "$1" in
   toggle) pulsemixer --toggle-mute && resetbar ;;
   up) pulsemixer --change-volume +"$NUM" && resetbar ;;

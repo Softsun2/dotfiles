@@ -1,0 +1,7 @@
+#!/bin/sh
+
+# resets dwm bar
+resetbar() {
+  pkill -x bar
+  ~/suckless/dwm/bar
+}
