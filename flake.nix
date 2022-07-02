@@ -10,10 +10,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     
-    spotify-pkgs = {
-      url = "https://github.com/NixOS/nixpkgs/archive/2c162d49cd5b979eb66ff1653aecaeaa01690fcc.tar.gz";
-      flake = true;
-    };
+    # need this version of spotify for nixos
+    spotify-pkgs.url = "https://github.com/NixOS/nixpkgs/archive/2c162d49cd5b979eb66ff1653aecaeaa01690fcc.tar.gz";
 
   };
 

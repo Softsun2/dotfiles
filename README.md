@@ -10,11 +10,11 @@ Still a nix novice. Slowly building my system.
 * Manage/clean NixOS generations 
 * Bar is TERRIBLE (probably due to grep)
 * Doc ./bin/audiocontrol
-* Get overlay for working spotifyu version
 * Fix absolute path to bin in .zshrc
 * Fix apply alias (builds result in working dir and not in .dotfiles)
 * themeing/dwm patching
 * switch to a different terminal emulator (maybe)
+* dmenu not displaying suggestions for usr prgrams
 
 ## NOTES
 * vscode is partially declared (user settings are imperative)
