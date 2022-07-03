@@ -7,6 +7,7 @@
   programs.home-manager.enable = true;
 
   home.packages = [
+    pkgs.libreoffice
     unFree-spotify-pkgs.spotify
     pkgs.rnix-lsp
     pkgs.yt-dlp
