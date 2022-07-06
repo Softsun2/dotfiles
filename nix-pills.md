@@ -47,4 +47,56 @@ Nix falls short when working with dynamic composition at runtime and replacing l
 
 
 
-# Chapter 2. Install on Your Running System
+# Chapter 2. Install (Nix) on Your Running System
+
+Installing Nix is just like installing a package manager, it will not drastically change your system.
+
+Again note that all derivations in the Nix store refer to other derivations in the Nix store. The store is self-contained.
+
+Nix is obviously preinstalled on NixOS systems.
+
+
+# The beginnings of the Nix store
+
+Bootstrapping software will be copied to a fresh Nix store. You'll se bash, coreutils, the C compiler toolchain, Nix itself, and other software. You may notice that the Nix store can contain not only directories but also files (still in hash-name form).
+
+
+# The Nix database
+
+The Nix database is initialized after the Nix store is copied. The database lives in `/nix/var/nix/db`. The database uses sqlite to track dependencies between derivations.
+
+
+# The first profiles
+
+A profile in Nix is a concept for implementing rollbacks. Profiles compose components spread among multiple paths under a new unified path. Profiles are made up of versioned generations, when a profile is changed a new generation is created.
+
+Generations can be switched and rolled back automatically.
+
+Taking a closer look at a profile:
+```nix
+$ ls -l ~/.nix-profile/
+bin -> /nix/store/ig31y9gfpp8pf3szdd7d4sf29zr7igbr-nix-2.1.3/bin
+[...]
+manifest.nix -> /nix/store/q8b5238akq07lj9gfb3qb5ycq4dxxiwm-env-manifest.nix
+[...]
+share -> /nix/store/ig31y9gfpp8pf3szdd7d4sf29zr7igbr-nix-2.1.3/share
+```
+The process of "installing" the derivation in the profile basically reproduces the hierarchy of the derivation in the profile by means of symbolic links.
+
+TODO: sanity check this
+The `bin` directory only points to `nix-2.1.3` because only one program has been installed in this example.
+
+`~/.nix-profile` is a symbolic link to `/nix/var/nix/profiles/default` as well as a symbolic link to `/nix/var/nix/profiles/default/default-1-link` as this profile is the first generation of the `deafault` profile.
+
+`default-1-link` is a symbolic link to to the Nix store "user-enviroment" derivation, the unified path.
+
+
+# Nixpkgs expressions
+
+**Nix expressions** are used to describe packages and how to build them. `Nixpkgs` is the repository containing all of the expressions.
+
+A second profile is installed for **channels**. `~/.nix-defexpr/channels` points to `/nix/var/nix/profiles/per-user/nix/channels` which points to `channels-1-link` which points to a Nix store directory containing the downloaded Nix expressions.
+
+**Channels** are sets of packages and expressions available for download. Similar to Debian stable and unstable, there's a stable and unstable channel.
+
+Note: **Nix expressions** will be covered later.
