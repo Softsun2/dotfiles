@@ -1,4 +1,4 @@
-{ config, pkgs, unFree-spotify-pkgs, ... }:
+{ config, pkgs, unFree-spotify-pkgs, mypkgs, ... }:
 {
 
   # home-manager configuration appendix:
@@ -9,6 +9,7 @@
   home.packages = [
     pkgs.libreoffice
     unFree-spotify-pkgs.spotify
+    mypkgs.spotify-adblock
     pkgs.rnix-lsp
     pkgs.yt-dlp
     pkgs.zoom-us

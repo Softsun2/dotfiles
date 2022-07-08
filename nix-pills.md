@@ -1,3 +1,8 @@
+# Note
+
+I am summarizing these learning modules for reference as I learn Nix. I'll try to provide my own examples when I've used the following information first hand.
+
+
 # Chapter 1. Why You Should Give it a Try
 
 ## Introduction
@@ -7,7 +12,7 @@ Nix is a purely functional package manager and deployment system. NixOS is a rea
 
 ## Rationale (Nix Pills)
 
-Explain some of the Nix magic concisely. Complementary to the manuals and wiki. I (softsun2) am summarizing these learning modules for reference as I learn Nix.
+Explain some of the Nix magic concisely. Complementary to the manuals and wiki.
 
 
 ## Not being purely functional
@@ -102,7 +107,58 @@ A second profile is installed for **channels**. `~/.nix-defexpr/channels` points
 Note: **Nix expressions** will be covered later.
 
 
+# Chapter 12. Inputs Design Pattern
 
+What if we want to create a repository of multiple packages?
+
+## Repositories in Nix
+
+A repository of packages is the main usage for Nix, but not the only possibility. With the Nix language you can choose the format of your own repository. There a few useful patterns that are often resused by the community when packaging software.
+
+
+## The single repository pattern
+
+*This is a precursor to the "inputs" pattern.*
+
+Systems like Gentoo put all package descriptions in a single repository, in Nix the reference for packages is **nixpkgs**.
+
+The implementation of this technique is to create a top-level Nix expression, and one expression for each package. The top-level expression imports and combines all expressions in a giant attribute set with **name->package** pairs.
+
+Nix is a lazy language which is how Nix is able to handle such large attribute sets such as **nixpkgs**.
+
+
+## Example: packaging graphviz
+
+`graphiz.nix`:
+```nix
+let
+  pkgs = import <nixpkgs> {};
+  mkDerivation = import ./autotools.nix pkgs;
+in mkDerivation {
+  name = "graphviz";
+  src = "./graphviz-2.49.3.tar.gz";
+}
+```
+Which can be built with `nix-build graphiz.nix`. We can run the binary from `result/bin`. Note that we've reused `autotools.nix` from our packaging of `hello.nix` (chapter 8) to handle build dependencies.
+
+
+## Digression about wrappers
+
+Some packages will need to be wrapped in one way or another. In this situation we need to to educate **pkg-config** (if used as a build input) about the existence of libraries is the environment variable PKG_CONFIG_PATH. This can be acheived with a shell script.
+
+
+## The repository expression
+
+We need to import our repository and then pick derivations by accessing the attribute set, just as **nixpkgs** does.
+
+`default.nix`:
+```nix
+{
+  hello = import ./hello.nix;
+  graphviz = import ./graphviz.nix;
+}
+```
+To use just import or build `default.nix`.
 
 
 # Chapter 13. Callpackage Design Pattern

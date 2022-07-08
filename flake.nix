@@ -9,7 +9,7 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    
+
     # need this version of spotify for nixos
     spotify-pkgs.url = "https://github.com/NixOS/nixpkgs/archive/2c162d49cd5b979eb66ff1653aecaeaa01690fcc.tar.gz";
 
@@ -19,14 +19,18 @@
     let
       system = "x86_64-linux";
 
+      # nixpkgs
       pkgs = import nixpkgs {
         inherit system;
         config.allowUnfree = true;
       };
+      # contains unix friendly spotify package
       unFree-spotify-pkgs = import spotify-pkgs {
         inherit system;
         config.allowUnfree = true;
       };
+      # my packages
+      mypkgs = import ./pkgs pkgs.callPackage {};
 
       lib = nixpkgs.lib;
     in {
@@ -34,7 +38,10 @@
       homeManagerConfigurations = {
         softsun2 = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
-          extraSpecialArgs = { inherit unFree-spotify-pkgs; };
+          extraSpecialArgs = {
+            inherit unFree-spotify-pkgs;
+            inherit mypkgs;
+          };
           modules = [
             ./home.nix
             {
