@@ -32,6 +32,8 @@ I'm using a flake with currently two outputs to build just my nixos system (I pl
 
 Things I may or may not declare, keeping a list for future reference.
 
+* discord disable tray & launch on startup
+* ssh keys
 * Home dir structure
 * vscode configurations
 * school repos

@@ -9,7 +9,7 @@
   home.packages = [
     pkgs.libreoffice
     unFree-spotify-pkgs.spotify
-    mypkgs.spotify-adblock
+    # mypkgs.spotify-adblock
     pkgs.rnix-lsp
     pkgs.yt-dlp
     pkgs.zoom-us
@@ -201,7 +201,7 @@
   programs.git = {
     enable = true;
     userName = "softsun2";
-    userEmail = "notyep37@gmail.com";
+    userEmail = "peyton.okubo13@gmail.com";
     extraConfig = {
       init = { defaultBranch = "main"; };
     };

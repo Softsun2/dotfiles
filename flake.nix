@@ -40,7 +40,7 @@
           inherit pkgs;
           extraSpecialArgs = {
             inherit unFree-spotify-pkgs;
-            inherit mypkgs;
+            # inherit mypkgs;
           };
           modules = [
             ./home.nix
