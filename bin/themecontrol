@@ -1,0 +1,35 @@
+#!/bin/sh
+
+# Controls system wide themes
+# I use dwm to trigger theme loading with a bind
+
+THEME_PATH="$HOME"/.dotfiles/theme/
+
+loadtheme() {
+  CURRENT_THEME=$(cat "$THEME_PATH"/.current-theme)
+
+  # dwm colors
+  xrdb "$THEME_PATH"/"$CURRENT_THEME"/"$CURRENT_THEME"-dwm
+}
+
+nexttheme() {
+  echo "set the next theme"
+}
+
+settheme() {
+  # check if theme is available
+  echo "checking if valid theme"
+  # set theme
+  echo "set theme: $1"
+}
+
+usage() {
+  echo "usage:"
+}
+
+case "$1" in
+  load) loadtheme ;;
+  next) nexttheme ;;
+  set) settheme "$2";;
+  *) usage ;;
+esac

@@ -314,6 +314,9 @@
       # background
       feh --bg-tile $HOME/Pictures/tarko2.jpg &
 
+      # X Colors
+      xrdb $HOME/.dotfiles/theme/testTheme
+
       # status bar
       $HOME/suckless/dwm/bar &
 

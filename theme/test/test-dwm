@@ -1,0 +1,10 @@
+! Comments
+! dwm.normbordercolor
+! dwm.normbgcolor
+! dwm.normfgcolor
+! dwm.selbordercolor
+! dwm.selbgcolor
+! dwm.selfgcolor
+
+dwm.normbgcolor: #9a70a9
+! dwm.normbgcolor: #555555
