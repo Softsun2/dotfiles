@@ -37,8 +37,10 @@ nexttheme() {
 }
 
 settheme() {
-  echo "checking if valid theme"
-  echo "set theme: $1"
+  # will probably want to check subdir structure
+  test -d "$THEME_PATH/$1" &&
+  echo "$1" > "$THEME_PATH/.current-theme" ||
+  echo "Theme \"$1\" not found."
 }
 
 usage() {
@@ -48,6 +50,6 @@ usage() {
 case "$1" in
   load) loadtheme ;;
   next) nexttheme ;;
-  set) settheme "$2";;
+  set) settheme "$2" ;;
   *) usage ;;
 esac

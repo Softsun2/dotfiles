@@ -1,0 +1,15 @@
+! dwm.normbordercolor
+! dwm.normbgcolor
+! dwm.normfgcolor
+! dwm.selbordercolor
+! dwm.selbgcolor
+! dwm.selfgcolor
+
+dwm.normbordercolor: #151527
+dwm.normbgcolor: #151527
+
+dwm.normfgcolor: #d1d2e6
+dwm.selfgcolor: #151527
+
+dwm.selbordercolor: #5460ad
+dwm.selbgcolor: #5460ad
