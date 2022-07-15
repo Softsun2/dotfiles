@@ -312,7 +312,7 @@
       #!/bin/sh
       
       # background
-      feh --bg-tile $HOME/Pictures/tarko2.jpg &
+      feh --bg-fill $HOME/Pictures/red-buck.jpg &
 
       # X Colors
       xrdb $HOME/.dotfiles/theme/testTheme

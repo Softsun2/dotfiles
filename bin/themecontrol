@@ -3,13 +3,33 @@
 # Controls system wide themes
 # I use dwm to trigger theme loading with a bind
 
-THEME_PATH="$HOME"/.dotfiles/theme/
+THEME_PATH="$HOME"/.dotfiles/theme
 
 loadtheme() {
   CURRENT_THEME=$(cat "$THEME_PATH"/.current-theme)
 
+  # bg
+  if [ -d "$THEME_PATH"/"$CURRENT_THEME"/bg ]
+  then
+    RANDOM_BG=$(
+      ls "$THEME_PATH"/"$CURRENT_THEME"/bg | 
+      shuf |
+      head -n1 |
+      awk '{print $1}'
+    )
+    feh --bg-fill --no-fehbg "$THEME_PATH"/"$CURRENT_THEME"/bg/"$RANDOM_BG"
+  fi
+
   # dwm colors
   xrdb "$THEME_PATH"/"$CURRENT_THEME"/"$CURRENT_THEME"-dwm
+
+  # vscode
+
+  # nvim
+
+  # firefox
+
+  # ... 
 }
 
 nexttheme() {
@@ -17,9 +37,7 @@ nexttheme() {
 }
 
 settheme() {
-  # check if theme is available
   echo "checking if valid theme"
-  # set theme
   echo "set theme: $1"
 }
 

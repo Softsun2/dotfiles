@@ -10,7 +10,21 @@ I'm using a flake with currently two outputs to build just my nixos system (I pl
 
 ## Goal
 
-  To declare system and user configurations as minimally and consistently as possible. Building from this flake should result in a system identical to mine.
+To declare system and user configurations as minimally and consistently as possible. Building from this flake should result in a system identical to mine.
+
+## Themeing
+
+Since ![dwm](https://github.com/Softsun2/dwm) is responsible for my keybinds, I trigger theme loading with dwm. I manage my themes with ![this in progress script](https://github.com/Softsun2/dotfiles-NixOS/blob/main/bin/themecontrol) and a improvised directory structure.
+```
+softsun2 ~/.dotfiles % tree -a theme
+theme
+├── .current-theme
+└── theme-name
+    ├── bg
+    │   └── some-background.jpg
+    └── theme-name-dwm
+```
+Where `.current-theme` stores the name of the current theme. Theme names are the names of their associated theme directory. Theme dirs may have a set of backgrounds, backgrounds are choosen randomly when the theme is loaded (provided there are multiple backgrounds). For now I'm only applying colors to dwm via `xrdb`. The schema for defining xcolors (`theme-name-dwm`) is going to change.
 
 
 ## TODO
@@ -26,7 +40,6 @@ I'm using a flake with currently two outputs to build just my nixos system (I pl
 * switch to a different terminal emulator (maybe)
 * dmenu not displaying suggestions for usr prgrams
 * clean home dir
-* vscode open file abs path and not gui
 
 ## Imperative components
 

@@ -120,6 +120,7 @@
     zsh      # z shell
     git
     wget
+    tree
     exa      # better ls
     fzf      # fuzzy finder
     docker
