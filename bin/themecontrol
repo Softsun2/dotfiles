@@ -20,8 +20,10 @@ loadtheme() {
     feh --bg-fill --no-fehbg "$THEME_PATH"/"$CURRENT_THEME"/bg/"$RANDOM_BG"
   fi
 
-  # dwm colors
-  xrdb "$THEME_PATH"/"$CURRENT_THEME"/"$CURRENT_THEME"-dwm
+  # xcolors
+  xrdb "$THEME_PATH"/"$CURRENT_THEME"/xcolors
+
+  # kitty
 
   # vscode
 
@@ -51,5 +53,6 @@ case "$1" in
   load) loadtheme ;;
   next) nexttheme ;;
   set) settheme "$2" ;;
+  list) ls ~/.dotfiles/theme ;;
   *) usage ;;
 esac

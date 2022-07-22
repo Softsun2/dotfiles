@@ -10,6 +10,7 @@
     pkgs.libreoffice
     unFree-spotify-pkgs.spotify
     # mypkgs.spotify-adblock
+    pkgs.minecraft
     pkgs.rnix-lsp
     pkgs.yt-dlp
     pkgs.zoom-us

@@ -37,7 +37,8 @@ Where `.current-theme` stores the name of the current theme. Theme names are the
 * Fix absolute path to bin in .zshrc
 * Fix apply alias (builds result in working dir and not in .dotfiles)
 * themeing/dwm patching
-* switch to a different terminal emulator (maybe)
+* switch to st
+* fix themes
 * dmenu not displaying suggestions for usr prgrams
 * clean home dir
 
