@@ -152,6 +152,7 @@
       ll  = "ls -la";
       c   = "clear";
 
+      shell = "nix-shell";
       home = "vim $HOME/.dotfiles/home.nix";
       apply = ''
         nix build $HOME/.dotfiles/.#homeManagerConfigurations.softsun2.activationPackage && \

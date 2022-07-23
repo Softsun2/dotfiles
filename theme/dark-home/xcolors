@@ -1,0 +1,27 @@
+#define BASE00 #151515
+#define BASE01 #282828
+#define BASE02 #3c3c3c
+#define BASE03 #4f4f4f
+#define BASE04 #b2b2b2
+#define BASE05 #c5c5c5
+#define BASE06 #d9d9d9
+#define BASE07 #ececec
+#define BASE08 #ff8988
+#define BASE09 #ffc488
+#define BASE0A #ffff88
+#define BASE0B #c4ff88
+#define BASE0C #9fc4e8
+#define BASE0D #9697f1
+#define BASE0E #d9b69c
+#define BASE0F #ffa588
+
+
+dwm.normbgcolor: BASE00
+dwm.selbgcolor: BASE03
+
+dwm.normfgcolor: BASE07
+dwm.selfgcolor: BASE07
+
+dwm.normbordercolor: BASE00
+dwm.selbordercolor: BASE03
+
