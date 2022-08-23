@@ -7,6 +7,9 @@
   programs.home-manager.enable = true;
 
   home.packages = [
+    pkgs.tldr
+    pkgs.kazam
+    pkgs.teams
     pkgs.libreoffice
     unFree-spotify-pkgs.spotify
     # mypkgs.spotify-adblock
@@ -136,6 +139,7 @@
       bindkey '^e' edit-command-line
 
       bindkey '^y' autosuggest-accept
+      bindkey -s '^f' 'f\n'
     '';
 
     history = {
@@ -151,13 +155,11 @@
       l   = "ls -l";
       ll  = "ls -la";
       c   = "clear";
+      f   = "cd $(find . -type d | fzf)";
 
       shell = "nix-shell";
       home = "vim $HOME/.dotfiles/home.nix";
-      apply = ''
-        nix build $HOME/.dotfiles/.#homeManagerConfigurations.softsun2.activationPackage && \
-        $HOME/.dotfiles/result/activate
-      '';
+      build-home= "nix build -o ~/.dotfiles/result ~/.dotfiles/.#homeManagerConfigurations.softsun2.activationPackage && ~/.dotfiles/result/activate";
       flake = "vim $HOME/.dotfiles/flake.nix";
       config = "vim $HOME/.dotfiles/configuration.nix";
       rebuild = "nixos-rebuild switch --use-remote-sudo --flake $HOME/.dotfiles/.#";
@@ -210,61 +212,53 @@
   };
 
 
+  programs.tmux = {
+    enable = true;
+    prefix = "C-a";
+    plugins = with pkgs; [
+      tmuxPlugins.cpu
+      {
+        plugin = tmuxPlugins.resurrect;
+        extraConfig = "set -g @resurrect-strategy-nvim 'session'";
+      }
+      {
+        plugin = tmuxPlugins.continuum;
+        extraConfig = ''
+          set -g @continuum-restore 'on'
+          set -g @continuum-save-interval '15' #minutes
+        '';
+      }
+    ];
+  };
+
+
   programs.kitty = {
     enable = true;
     settings = {
       cursor = "none";
       # shell_integration = "no-cursor";
-      font_family = "JetBrains Mono";
-      font_size = 14;
+      font_family = "Jetbrains Mono";
+      font_size = 12;
       scrollback_lines = 5000;
       wheel_scroll_multiplier = 3;
       window_padding_width = 5;
+      confirm_os_window_close = 0;
+      enable_audio_bell = 0;
     };
-    # temp colorscheme
     extraConfig = ''
-      # Base16 rug-pup - kitty color config
-      # Scheme by softsun2
-      background #172A25
-      foreground #b7d8cf
-      selection_background #b7d8cf
-      selection_foreground #172A25
-      url_color #d0e5e0
-      active_border_color #417668
-      inactive_border_color #25433b
-      active_tab_background #172A25
-      active_tab_foreground #b7d8cf
-      inactive_tab_background #25433b
-      inactive_tab_foreground #d0e5e0
-      tab_bar_background #25433b
+      # runtime colors
+      include ~/.dotfiles/kitty/theme.conf
 
-      # normal
-      color0 #172A25
-      color1 #B55168
-      color2 #98CC92
-      color3 #DCDF8E
-      color4 #5E8389
-      color5 #757784
-      color6 #689295
-      color7 #b7d8cf
+      # minimize functionality (using tmux instead)
+      clear_all_shortcuts yes
+      clear_all_mouse_actions yes
 
-      # bright
-      color8 #417668
-      color9 #B55168
-      color10 #98CC92
-      color11 #DCDF8E
-      color12 #5E8389
-      color13 #757784
-      color14 #689295
-      color15 #84bcad
-
-      # extended base16 colors
-      color16 #C28160
-      color17 #C27D61
-      color18 #25433b
-      color19 #335d52
-      color20 #d0e5e0
-      color21 #9ecabe
+      # the few shortcuts I actually want
+      map ctrl+equal change_font_size all +2.0
+      map ctrl+minus change_font_size all -2.0
+      map ctrl+shift+c copy_to_clipboard
+      map ctrl+shift+v paste_from_clipoard
+      # be able to interact with links in some way
     '';
   };
 

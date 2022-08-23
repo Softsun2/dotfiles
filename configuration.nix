@@ -1,5 +1,4 @@
 { config, pkgs, ... }:
-
 {
 
   nix.package = pkgs.nixFlakes;
@@ -10,10 +9,10 @@
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config.allowBroken = true;
 
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -85,10 +84,12 @@
   };
 
   fonts.fonts = with pkgs; [
+    unifont
     jetbrains-mono
     roboto
     meslo-lg
     (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
+    terminus_font
   ];
 
   # goofy steam support
@@ -99,37 +100,41 @@
 
   environment.pathsToLink = [ "/share/zsh" ];
 
+
+
   # List packages installed in system profile. To search, run:
-  environment.systemPackages = with pkgs; [
+  environment.systemPackages = [
 
     # Desktop 
-    dwm      # window manager
-    kitty    # terminal emulator
-    dmenu    # dynamic menu and program launcher
-    feh      # image viewer
+    pkgs.dwm      # window manager
+    pkgs.kitty    # terminal emulator
+    pkgs.dmenu    # dynamic menu and program launcher
+    pkgs.feh      # image viewer
 
     # Apps
-    firefox
-    discord
-    steam
+    pkgs.firefox
+    pkgs.discord
+    pkgs.steam
 
     # util
-    pulsemixer
-    shellcheck
-    neovim   # text editor
-    zsh      # z shell
-    git
-    wget
-    tree
-    exa      # better ls
-    fzf      # fuzzy finder
-    docker
+    pkgs.pulsemixer
+    pkgs.shellcheck
+    pkgs.neovim   # text editor
+    pkgs.zsh      # z shell
+    pkgs.git
+    pkgs.wget
+    pkgs.tree
+    pkgs.exa      # better ls
+    pkgs.fzf      # fuzzy finder
+    pkgs.docker
+    config.boot.kernelPackages.perf
+    pkgs.lshw
 
     # lsps, not sure if I want to install these per env or globally yet
-    sumneko-lua-language-server
+    pkgs.sumneko-lua-language-server
 
     # nix
-    nix-prefetch-git
+    pkgs.nix-prefetch-git
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

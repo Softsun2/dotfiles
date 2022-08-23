@@ -22,5 +22,5 @@ dwm.selbgcolor: BASE0C
 dwm.normfgcolor: BASE00
 dwm.selfgcolor: BASE07
 
-dwm.normbordercolor: BASE00
+dwm.normbordercolor: BASE07
 dwm.selbordercolor: BASE0D

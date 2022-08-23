@@ -46,6 +46,7 @@ Where `.current-theme` stores the name of the current theme. Theme names are the
 
 Things I may or may not declare, keeping a list for future reference.
 
+* kazam config
 * discord disable tray & launch on startup
 * ssh keys
 * Home dir structure

@@ -15,7 +15,12 @@
 
   };
 
-  outputs = inputs @ { nixpkgs, home-manager, spotify-pkgs, ... }:
+  outputs = inputs @ {
+    nixpkgs,
+    home-manager,
+    spotify-pkgs,
+    ...
+  }:
     let
       system = "x86_64-linux";
 
@@ -31,7 +36,7 @@
       };
       # my packages
       mypkgs = import ./pkgs pkgs.callPackage {};
-
+      
       lib = nixpkgs.lib;
     in {
       # could wrap this later
