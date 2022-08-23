@@ -29,24 +29,19 @@ Where `.current-theme` stores the name of the current theme. Theme names are the
 
 ## TODO
 
+* Flake lock file branch
 * Reorder usr vs sys packages & config
 * switch back to nvim
 * Manage/clean NixOS generations 
 * Bar is TERRIBLE (probably due to grep)
-* Doc ./bin/audiocontrol
-* Fix absolute path to bin in .zshrc
-* Fix apply alias (builds result in working dir and not in .dotfiles)
 * themeing/dwm patching
-* switch to st
 * fix themes
-* dmenu not displaying suggestions for usr prgrams
 * clean home dir
 
 ## Imperative components
 
 Things I may or may not declare, keeping a list for future reference.
 
-* kazam config
 * discord disable tray & launch on startup
 * ssh keys
 * Home dir structure

@@ -8,7 +8,6 @@
 
   home.packages = [
     pkgs.tldr
-    pkgs.kazam
     pkgs.teams
     pkgs.libreoffice
     unFree-spotify-pkgs.spotify
