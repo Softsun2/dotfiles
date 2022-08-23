@@ -24,6 +24,11 @@ loadtheme() {
   xrdb "$THEME_PATH"/"$CURRENT_THEME"/xcolors
 
   # kitty
+  if [ -f "$THEME_PATH"/"$CURRENT_THEME"/kitty-theme.conf ]
+  then
+    cp "$THEME_PATH"/"$CURRENT_THEME"/kitty-theme.conf "$HOME"/.dotfiles/kitty/theme.conf
+    # can't figure out remote control atm, will just have to reload kitty for the time being
+  fi
 
   # vscode
 
@@ -32,6 +37,8 @@ loadtheme() {
   # firefox
 
   # ... 
+
+  echo "done"
 }
 
 nexttheme() {

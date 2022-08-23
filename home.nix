@@ -234,6 +234,7 @@
   programs.kitty = {
     enable = true;
     settings = {
+      allow_remote_control = "yes";
       cursor = "none";
       # shell_integration = "no-cursor";
       font_family = "Jetbrains Mono";

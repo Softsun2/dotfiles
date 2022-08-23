@@ -35,6 +35,8 @@ Where `.current-theme` stores the name of the current theme. Theme names are the
 * Manage/clean NixOS generations 
 * Bar is TERRIBLE (probably due to grep)
 * themeing/dwm patching
+  * Look into a nix-y way of using flavours w/ bgs
+  * Or find a way to generate config files w/ a base16 input list
 * fix themes
 * clean home dir
 
