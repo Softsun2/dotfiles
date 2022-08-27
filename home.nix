@@ -11,11 +11,13 @@
     pkgs.teams
     pkgs.libreoffice
     unFree-spotify-pkgs.spotify
-    # mypkgs.spotify-adblock
     pkgs.minecraft
     pkgs.rnix-lsp
     pkgs.yt-dlp
     pkgs.zoom-us
+    pkgs.zathura
+    pkgs.sumneko-lua-language-server
+    # mypkgs.spotify-adblock
     # import ./modules/spotify-adblock.nix
   ];
 
@@ -214,6 +216,11 @@
   programs.tmux = {
     enable = true;
     prefix = "C-a";
+    escapeTime = 50;
+    terminal = "screen-256color";
+    extraConfig = ''
+      set-option -g status-position top
+    '';
     plugins = with pkgs; [
       tmuxPlugins.cpu
       {
@@ -237,7 +244,8 @@
       allow_remote_control = "yes";
       cursor = "none";
       # shell_integration = "no-cursor";
-      font_family = "Jetbrains Mono";
+      font_family = "JetBrains Mono";
+      # adjust_column_width = -8;
       font_size = 12;
       scrollback_lines = 5000;
       wheel_scroll_multiplier = 3;
@@ -247,61 +255,45 @@
     };
     extraConfig = ''
       # runtime colors
-      include ~/.dotfiles/kitty/theme.conf
+      include ~/.dotfiles/config/kitty/theme.conf
 
       # minimize functionality (using tmux instead)
       clear_all_shortcuts yes
       clear_all_mouse_actions yes
 
       # the few shortcuts I actually want
-      map ctrl+equal change_font_size all +2.0
-      map ctrl+minus change_font_size all -2.0
+      map ctrl+equal change_font_size all +1.0
+      map ctrl+minus change_font_size all -1.0
       map ctrl+shift+c copy_to_clipboard
       map ctrl+shift+v paste_from_clipoard
       # be able to interact with links in some way
     '';
   };
 
-
   programs.neovim = {
     enable = true;
     vimAlias = true;
+
+    # written in vim script
+    extraConfig = ''
+      luafile $HOME/.dotfiles/config/nvim/lua/settings.lua
+      luafile $HOME/.dotfiles/config/nvim/lua/keybinds.lua
+      luafile $HOME/.dotfiles/config/nvim/lua/plugins.lua
+      luafile $HOME/.dotfiles/config/nvim/lua/colors.lua
+    '';
+
     plugins = with pkgs.vimPlugins; [
-      # find a way to get these
-        # alpha-nvim
-
-      # ui
-      vim-airline
-      vim-airline-themes
+      # file tree
       nvim-web-devicons
+      nvim-tree-lua
 
-      # languages
-      vim-nix
-
+      # lsp
       nvim-lspconfig
 
-      telescope-nvim
-      telescope-fzf-native-nvim
-      nvim-treesitter
-
-      # lspkind-nvim
-
-      # nvim-cmp
-      # cmp-buffer
-      # cmp-path
-      # cmp-nvim-lua
-      # cmp-nvim-lsp
-      # cmp-cmdline
-      # luaSnip
-      # cmp_luasnip
-
-    ];
-    # written in vimscript
-    extraConfig = ''
-      luafile $HOME/.dotfiles/nvim/init.lua
-    '';
+      # nix
+      vim-nix
+    ]; 
   };
-
 
   home.file.".xinitrc" = {
     text = "
@@ -322,7 +314,5 @@
       done
     ";
   };
-
-  programs.zathura.enable = true;
 
 }

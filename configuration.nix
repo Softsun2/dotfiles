@@ -107,7 +107,6 @@
 
     # Desktop 
     pkgs.dwm      # window manager
-    pkgs.kitty    # terminal emulator
     pkgs.dmenu    # dynamic menu and program launcher
     pkgs.feh      # image viewer
 
@@ -118,8 +117,7 @@
 
     # util
     pkgs.pulsemixer
-    pkgs.shellcheck
-    pkgs.neovim   # text editor
+    pkgs.vim      # text editor
     pkgs.zsh      # z shell
     pkgs.git
     pkgs.wget
@@ -129,9 +127,6 @@
     pkgs.docker
     config.boot.kernelPackages.perf
     pkgs.lshw
-
-    # lsps, not sure if I want to install these per env or globally yet
-    pkgs.sumneko-lua-language-server
 
     # nix
     pkgs.nix-prefetch-git

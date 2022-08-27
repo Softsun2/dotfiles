@@ -8,6 +8,8 @@ THEME_PATH="$HOME"/.dotfiles/theme
 loadtheme() {
   CURRENT_THEME=$(cat "$THEME_PATH"/.current-theme)
 
+softsun2
+
   # bg
   if [ -d "$THEME_PATH"/"$CURRENT_THEME"/bg ]
   then
@@ -26,7 +28,7 @@ loadtheme() {
   # kitty
   if [ -f "$THEME_PATH"/"$CURRENT_THEME"/kitty-theme.conf ]
   then
-    cp "$THEME_PATH"/"$CURRENT_THEME"/kitty-theme.conf "$HOME"/.dotfiles/kitty/theme.conf
+    cp "$THEME_PATH"/"$CURRENT_THEME"/kitty-theme.conf "$HOME"/.dotfiles/config/kitty/theme.conf
     # can't figure out remote control atm, will just have to reload kitty for the time being
   fi
 
