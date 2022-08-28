@@ -283,15 +283,12 @@
     '';
 
     plugins = with pkgs.vimPlugins; [
-      # file tree
-      nvim-web-devicons
-      nvim-tree-lua
-
-      # lsp
-      nvim-lspconfig
-
-      # nix
-      vim-nix
+      nvim-treesitter         # better highlighting, indentation, and folding
+      nvim-lspconfig          # lsp
+      nvim-tree-lua           # file tree
+      nvim-web-devicons       # dev icons
+      indent-blankline-nvim   # indent lines
+      vim-nix                 # nix
     ]; 
   };
 

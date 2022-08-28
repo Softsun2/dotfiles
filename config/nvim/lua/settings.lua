@@ -21,6 +21,10 @@ opt.tabstop = 2                 -- number of spaces a tab when tabbing
 opt.shiftwidth = 2              -- denotes width of a level of indentation
 opt.expandtab = true            -- tab with spaces
 
+-- folding
+opt.foldenable = false          -- open all folds upon entering a file
+opt.foldlevel = 20              -- when folding, fold at the current fold level
+
 -- Misc
 opt.ignorecase = true           -- ignore case when searching
 opt.smartcase = true            -- only ignore case if all lowercase
