@@ -16,5 +16,3 @@ nkeymap('<c-j>', '<c-w>j')
 nkeymap('<c-k>', '<c-w>k')
 nkeymap('<c-l>', '<c-w>l')
 
--- eol yank
-nkeymap('Y', 'y$')

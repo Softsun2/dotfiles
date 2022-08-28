@@ -1,6 +1,5 @@
 { config, pkgs, unFree-spotify-pkgs, mypkgs, ... }:
 {
-
   # home-manager configuration appendix:
   # https://rycee.gitlab.io/home-manager/options.html
 
@@ -12,11 +11,14 @@
     pkgs.libreoffice
     unFree-spotify-pkgs.spotify
     pkgs.minecraft
-    pkgs.rnix-lsp
     pkgs.yt-dlp
     pkgs.zoom-us
     pkgs.zathura
+
+    # language servers
+    pkgs.rnix-lsp
     pkgs.sumneko-lua-language-server
+
     # mypkgs.spotify-adblock
     # import ./modules/spotify-adblock.nix
   ];
@@ -280,6 +282,7 @@
       luafile $HOME/.dotfiles/config/nvim/lua/keybinds.lua
       luafile $HOME/.dotfiles/config/nvim/lua/plugins.lua
       luafile $HOME/.dotfiles/config/nvim/lua/colors.lua
+      luafile $HOME/.dotfiles/config/nvim/lua/lsp.lua
     '';
 
     plugins = with pkgs.vimPlugins; [
