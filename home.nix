@@ -15,9 +15,6 @@
     pkgs.zoom-us
     pkgs.zathura
 
-    # language servers
-    pkgs.rnix-lsp
-    pkgs.sumneko-lua-language-server
 
     # mypkgs.spotify-adblock
     # import ./modules/spotify-adblock.nix
@@ -289,10 +286,31 @@
       nvim-treesitter         # better highlighting, indentation, and folding
       nvim-lspconfig          # lsp
       nvim-tree-lua           # file tree
+
       nvim-web-devicons       # dev icons
       indent-blankline-nvim   # indent lines
       vim-nix                 # nix
+
+      luasnip                 # snippets
+
+      nvim-cmp                # completions
+      cmp-buffer              # completion source: buffer
+      cmp-path                # completion source: file path
+      cmp-nvim-lua            # completion source: nvim config aware lua
+      cmp-nvim-lsp            # completion source: lsp
+      cmp-cmdline             # completion source: cmdline
+      cmp_luasnip             # completion source: luasnip snippets
+      lspkind-nvim            # pictograms for completion suggestions
     ]; 
+
+    extraPackages = with pkgs; [
+      # lsp parser compiler
+      gcc
+
+      # language servers
+      rnix-lsp
+      sumneko-lua-language-server
+    ];
   };
 
   home.file.".xinitrc" = {

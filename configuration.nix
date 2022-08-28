@@ -130,10 +130,6 @@
 
     # nix
     pkgs.nix-prefetch-git
-
-    # langs
-    pkgs.lua
-    pkgs.gcc
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
