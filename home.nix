@@ -275,11 +275,7 @@
 
     # written in vim script
     extraConfig = ''
-      luafile $HOME/.dotfiles/config/nvim/lua/settings.lua
-      luafile $HOME/.dotfiles/config/nvim/lua/keybinds.lua
-      luafile $HOME/.dotfiles/config/nvim/lua/plugins.lua
-      luafile $HOME/.dotfiles/config/nvim/lua/colors.lua
-      luafile $HOME/.dotfiles/config/nvim/lua/lsp.lua
+      luafile $HOME/.dotfiles/config/nvim/lua/init.lua
     '';
 
     plugins = with pkgs.vimPlugins; [
@@ -288,7 +284,7 @@
       nvim-tree-lua           # file tree
 
       nvim-web-devicons       # dev icons
-      indent-blankline-nvim   # indent lines
+      # indent-blankline-nvim   # indent lines
       vim-nix                 # nix
 
       luasnip                 # snippets

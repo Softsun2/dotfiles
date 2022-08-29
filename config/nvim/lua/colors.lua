@@ -1,7 +1,5 @@
--- vim.cmd('hi LineNr guibg=NONE')
 vim.cmd('hi SignColumn ctermbg=NONE')
 vim.cmd('hi StatusLineNC cterm=NONE')
 vim.cmd('hi StatusLine cterm=bold,underline')
 vim.cmd('hi VertSplit cterm=NONE')
 vim.cmd('hi Folded ctermbg=NONE')
--- vim.cmd('hi EndOfBuffer guibg=bg')

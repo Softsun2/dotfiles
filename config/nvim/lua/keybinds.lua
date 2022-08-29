@@ -10,6 +10,9 @@ end
 -- set leader key to space
 vim.g.mapleader = ' '
 
+-- source nvim config
+nkeymap('<leader><leader>s', '<cmd>source ~/.dotfiles/config/nvim/lua/init.lua<CR>')
+
 -- split navigation
 nkeymap('<c-h>', '<c-w>h')
 nkeymap('<c-j>', '<c-w>j')
