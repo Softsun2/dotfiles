@@ -1,10 +1,10 @@
--- completions
 local cmp = require("cmp")
 local function contextIsComment()
   return
     require"cmp.config.context".in_treesitter_capture("comment")==true or
     require"cmp.config.context".in_syntax_group("Comment")
 end
+
 
 cmp.setup {
 
@@ -45,11 +45,11 @@ cmp.setup {
   },
 
   sources = cmp.config.sources {
-    { name = "nvim_lua", keyword_length = 3 },
+    { name = "nvim_lua", keyword_length = 2 },
     { name = "nvim_lsp", keyword_length = 2 },
     { name = "luasnip", keyword_length = 2 },
     { name = "buffer", keyword_length = 4 },
-    { name = "path", keyword_length = 3 },
+    { name = "path", keyword_length = 2 },
   },
 
   experimental = {
