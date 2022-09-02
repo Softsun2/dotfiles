@@ -19,3 +19,6 @@ nkeymap('<c-j>', '<c-w>j')
 nkeymap('<c-k>', '<c-w>k')
 nkeymap('<c-l>', '<c-w>l')
 
+-- comfy move to top/bottom
+nkeymap('zt', 'ztkkk3j')
+nkeymap('zb', 'zbjjj3k')

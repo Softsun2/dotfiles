@@ -1,4 +1,7 @@
--- ~/.dotfiles/home.nix for installed lsps
+-- Lsp configuratons:
+-- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
+
+
 local lspconfig = require("lspconfig")
 local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
@@ -35,6 +38,9 @@ lspconfig.sumneko_lua.setup {
 
 
 -- python
+lspconfig.pyright.setup {
+  capabilities = capabilities,
+}
 
 
 -- html ?

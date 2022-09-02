@@ -140,6 +140,9 @@
 
       bindkey '^y' autosuggest-accept
       bindkey -s '^f' 'f\n'
+
+      # auto attacth to tmux session
+      tmux a
     '';
 
     history = {
@@ -257,14 +260,14 @@
       include ~/.dotfiles/config/kitty/theme.conf
 
       # minimize functionality (using tmux instead)
-      clear_all_shortcuts yes
-      clear_all_mouse_actions yes
+      # clear_all_shortcuts yes
+      # clear_all_mouse_actions yes
 
       # the few shortcuts I actually want
-      map ctrl+equal change_font_size all +1.0
-      map ctrl+minus change_font_size all -1.0
-      map ctrl+shift+c copy_to_clipboard
-      map ctrl+shift+v paste_from_clipoard
+      # map ctrl+equal change_font_size all +1.0
+      # map ctrl+minus change_font_size all -1.0
+      # map ctrl+shift+c copy_to_clipboard
+      # map ctrl+shift+v paste_from_clipoard
       # be able to interact with links in some way
     '';
   };
@@ -281,6 +284,12 @@
     plugins = with pkgs.vimPlugins; [
       nvim-treesitter         # better highlighting, indentation, and folding
       nvim-lspconfig          # lsp
+
+      telescope-nvim          # integrated fuzzy finder
+      telescope-fzf-native-nvim
+      plenary-nvim
+
+      harpoon
       nvim-tree-lua           # file tree
 
       nvim-web-devicons       # dev icons
@@ -306,6 +315,10 @@
       # language servers
       rnix-lsp
       sumneko-lua-language-server
+      nodePackages.pyright
+
+      # telescope depency
+      ripgrep
     ];
   };
 
