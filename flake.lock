@@ -21,6 +21,22 @@
         "type": "github"
       }
     },
+    "mynixpkgs": {
+      "locked": {
+        "lastModified": 1662440804,
+        "narHash": "sha256-cGWWpjPwhCDK5uauNwDqbuSCGDmAyTyZ2SWCdkAziyE=",
+        "owner": "Softsun2",
+        "repo": "nixpkgs",
+        "rev": "f862a0c47ae60d957864bd1116a4f27c80caccb1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Softsun2",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1656372800,
@@ -39,6 +55,7 @@
     "root": {
       "inputs": {
         "home-manager": "home-manager",
+        "mynixpkgs": "mynixpkgs",
         "nixpkgs": "nixpkgs",
         "spotify-pkgs": "spotify-pkgs"
       }

@@ -5,6 +5,8 @@
     
     nixpkgs.url = "nixpkgs/nixos-unstable";
 
+    mynixpkgs.url = "github:Softsun2/nixpkgs/nixos-unstable";
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -17,6 +19,7 @@
 
   outputs = inputs @ {
     nixpkgs,
+    mynixpkgs,
     home-manager,
     spotify-pkgs,
     ...
@@ -29,14 +32,19 @@
         inherit system;
         config.allowUnfree = true;
       };
+
+      # mynixpkgs
+      mypkgs = import mynixpkgs {
+        inherit system;
+        config.allowUnfree = true;
+      };
+
       # contains unix friendly spotify package
       unFree-spotify-pkgs = import spotify-pkgs {
         inherit system;
         config.allowUnfree = true;
       };
-      # my packages
-      mypkgs = import ./pkgs pkgs.callPackage {};
-      
+
       lib = nixpkgs.lib;
     in {
       # could wrap this later
@@ -45,7 +53,7 @@
           inherit pkgs;
           extraSpecialArgs = {
             inherit unFree-spotify-pkgs;
-            # inherit mypkgs;
+            inherit mypkgs;
           };
           modules = [
             ./home.nix

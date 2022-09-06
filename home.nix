@@ -1,4 +1,11 @@
-{ config, pkgs, unFree-spotify-pkgs, mypkgs, ... }:
+{
+  config,
+  pkgs,
+  mypkgs,
+  unFree-spotify-pkgs,
+  ...
+}:
+
 {
   # home-manager configuration appendix:
   # https://rycee.gitlab.io/home-manager/options.html
@@ -233,7 +240,7 @@
         plugin = tmuxPlugins.continuum;
         extraConfig = ''
           set -g @continuum-restore 'on'
-          set -g @continuum-save-interval '15' #minutes
+          set -g @continuum-save-interval '10' #minutes
         '';
       }
     ];
@@ -269,6 +276,21 @@
     '';
   };
 
+  services.picom = {
+    enable = true;
+    activeOpacity = "0.95";
+    inactiveOpacity = "0.8";
+    fade = true;
+    shadow = true;
+    # settings = {
+    #   blur = {
+    #     method = "gaussian";
+    #     size = 10;
+    #     deviation = 5.0;
+    #   };
+    # };
+  };
+
   programs.neovim = {
     enable = true;
     vimAlias = true;
@@ -278,32 +300,34 @@
       luafile $HOME/.dotfiles/config/nvim/lua/init.lua
     '';
 
-    plugins = with pkgs.vimPlugins; [
-      nvim-treesitter         # better highlighting, indentation, and folding
-      nvim-lspconfig          # lsp
+    plugins = [
+      pkgs.vimPlugins.nvim-treesitter         # better highlighting, indentation, and folding
+      pkgs.vimPlugins.nvim-lspconfig          # lsp
 
-      telescope-nvim          # integrated fuzzy finder
-      telescope-fzf-native-nvim
-      plenary-nvim
+      pkgs.vimPlugins.telescope-nvim          # integrated fuzzy finder
+      pkgs.vimPlugins.telescope-fzf-native-nvim
+      pkgs.vimPlugins.plenary-nvim
 
-      harpoon
-      nvim-tree-lua           # file tree
+      pkgs.vimPlugins.harpoon
+      pkgs.vimPlugins.nvim-tree-lua           # file tree
 
-      nvim-web-devicons       # dev icons
-      indent-blankline-nvim   # indent lines
-      vim-nix                 # nix
-      colorizer
+      pkgs.vimPlugins.nvim-web-devicons       # dev icons
+      pkgs.vimPlugins.indent-blankline-nvim   # indent lines
+      pkgs.vimPlugins.vim-nix                 # nix
+      pkgs.vimPlugins.colorizer
 
-      luasnip                 # snippets
+      pkgs.vimPlugins.luasnip                 # snippets
 
-      nvim-cmp                # completions
-      cmp-buffer              # completion source: buffer
-      cmp-path                # completion source: file path
-      cmp-nvim-lua            # completion source: nvim config aware lua
-      cmp-nvim-lsp            # completion source: lsp
-      cmp-cmdline             # completion source: cmdline
-      cmp_luasnip             # completion source: luasnip snippets
-      lspkind-nvim            # pictograms for completion suggestions
+      pkgs.vimPlugins.nvim-cmp                # completions
+      pkgs.vimPlugins.cmp-buffer              # completion source: buffer
+      pkgs.vimPlugins.cmp-path                # completion source: file path
+      pkgs.vimPlugins.cmp-nvim-lua            # completion source: nvim config aware lua
+      pkgs.vimPlugins.cmp-nvim-lsp            # completion source: lsp
+      pkgs.vimPlugins.cmp-cmdline             # completion source: cmdline
+      pkgs.vimPlugins.cmp_luasnip             # completion source: luasnip snippets
+      pkgs.vimPlugins.lspkind-nvim            # pictograms for completion suggestions
+
+      mypkgs.vimPlugins.candle-grey           # candle-grey colorscheme
     ]; 
 
     extraPackages = with pkgs; [

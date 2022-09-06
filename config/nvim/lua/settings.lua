@@ -1,7 +1,6 @@
 local opt = vim.opt
 local wo = vim.wo
 local g = vim.g
-local o = vim.o
 
 -- Ui
 wo.number = true                -- line numbers
