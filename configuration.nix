@@ -48,7 +48,7 @@
   services.xserver.videoDrivers = [ "nvidia" ];
   # monitor options, derived from the nvidia-settings tool
   services.xserver.screenSection = ''
-    Option         "metamodes" "DP-0: 1920x1080_144 +1920+0 {ForceCompositionPipeline=On, ForceFullCompositionPipeline=On}, DVI-D-0: 1920x1080_60 +0+0 {ForceCompositionPipeline=On, ForceFullCompositionPipeline=On}"
+    Option         "metamodes" "DP-0: 1920x1080_144 +0+0 {ForceCompositionPipeline=On, ForceFullCompositionPipeline=On}, DVI-D-0: 1024x768 +1920+0 {viewportin=1024x853, ForceCompositionPipeline=On, ForceFullCompositionPipeline=On}"
   '';
 
   services.xserver.displayManager.startx.enable = true;

@@ -1,29 +1,39 @@
-local function getHiGuiAttr(group, attr)
-  return vim.fn.synIDattr(vim.fn.hlID(group), attr, "cterm")
+local o = vim.opt
+
+-- Use or don't use terminal colors, depends on theme
+o.termguicolors = false
+
+-- disable dianostic column bg
+vim.cmd('hi SignColumn ctermbg=NONE')
+
+-- bold & underline status line for active pane
+vim.cmd('hi StatusLine cterm=bold,underline')
+
+-- disable status line for inactive panes
+vim.cmd('hi StatusLineNC cterm=NONE')
+
+-- disable inverse vertsplit bar bg
+vim.cmd('hi VertSplit cterm=NONE')
+
+-- disable folded indicator bg
+vim.cmd('hi Folded ctermbg=NONE')
+
+-- disable line number column bg
+vim.cmd('hi LineNr ctermbg=NONE')
+
+-- set minimal cursor line
+vim.cmd('hi CursorLine ctermfg=NONE cterm=underline guibg=NONE')
+
+-- set indent line color
+-- vim.cmd('hi IndentBlankLineChar cterm=bold ctermfg=236')
+
+-- disable end of buffer tildas
+if o.termguicolors then
+  vim.cmd('hi EndOfBuffer gui=NONE')
 end
 
-vim.cmd('hi SignColumn ctermbg=NONE')
-vim.cmd('hi StatusLineNC cterm=NONE')
-vim.cmd('hi StatusLine cterm=bold,underline')
-vim.cmd('hi VertSplit cterm=NONE')
-vim.cmd('hi Folded ctermbg=NONE')
-vim.cmd('hi Pmenu ctermbg=NONE')
+-- disable match paren bg
+vim.cmd('hi MatchParen ctermbg=NONE')
 
--- cmp suggestion colors
-local cmpItemAbbr =  -- color of unfinished portion of suggestion
-  string.format("hi CmpItemAbbr ctermfg=%s", getHiGuiAttr("Comment", "fg"))
-local cmpItemAbbrDeprecated =  -- color of deprecated suggestions
-  string.format("hi CmpItemAbbrDeprecated ctermfg=%s", getHiGuiAttr("ErrorMsg", "fg"))
-local cmpItemAbbrMatchFuzzy =  -- color of characters used in fuzzy suggestion
-  string.format("hi CmpItemAbbrMatchFuzzy cterm=italic,bold ctermfg=%s", getHiGuiAttr("Comment", "fg"))
-local cmpItemKind =  -- color of kind of suggestion
-  string.format("hi CmpItemKind ctermfg=%s", getHiGuiAttr("Special", "fg"))
-local cmpItemMenu =  -- color of suggestion source
-  string.format("hi CmpItemAbbr ctermfg=%s", getHiGuiAttr("NonText", "fg"))
-
-vim.cmd(cmpItemAbbr)
-vim.cmd(cmpItemAbbrDeprecated)
-vim.cmd(cmpItemAbbrMatchFuzzy)
-vim.cmd(cmpItemKind)
-vim.cmd(cmpItemMenu)
-
+-- set NonText characters to a less noticable color
+vim.cmd('hi NonText ctermfg=DarkGrey')

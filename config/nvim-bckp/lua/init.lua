@@ -1,9 +1,9 @@
 -- source all configurations from one file
-nvimLuaConfigPrefix = '~/.dotfiles/config/nvim/lua/'
+NvimLuaConfigPrefix = '~/.dotfiles/config/nvim/lua/'
 
 -- sources a file in this dir
 local function source(src)
-  vim.cmd('source ' .. nvimLuaConfigPrefix .. src)
+  vim.cmd('source ' .. NvimLuaConfigPrefix .. src)
 end
 
 source('settings.lua')
@@ -22,3 +22,7 @@ source('colors.lua')
 -- lsp diagnostic interaction/code actions
 -- mv plugin settings to their own files
 -- mv all keymaps to keymaps.lua
+-- lsp saga
+-- autopairs
+-- git indicators
+-- highlight devicons nicely

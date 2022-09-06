@@ -140,9 +140,6 @@
 
       bindkey '^y' autosuggest-accept
       bindkey -s '^f' 'f\n'
-
-      # auto attacth to tmux session
-      tmux a
     '';
 
     history = {
@@ -159,6 +156,7 @@
       ll  = "ls -la";
       c   = "clear";
       f   = "cd $(find . -type d | fzf)";
+      gd  = "cd $(git rev-parse --show-toplevel)";
 
       shell = "nix-shell";
       home = "vim $HOME/.dotfiles/home.nix";
@@ -221,7 +219,9 @@
     escapeTime = 50;
     terminal = "screen-256color";
     extraConfig = ''
-      set-option -g status-position top
+      set-option -g status-position bottom
+      set -g status-bg black 
+      set -g status-fg blue
     '';
     plugins = with pkgs; [
       tmuxPlugins.cpu
@@ -243,17 +243,14 @@
   programs.kitty = {
     enable = true;
     settings = {
-      allow_remote_control = "yes";
       cursor = "none";
-      # shell_integration = "no-cursor";
       font_family = "JetBrains Mono";
-      # adjust_column_width = -8;
       font_size = 12;
       scrollback_lines = 5000;
       wheel_scroll_multiplier = 3;
-      window_padding_width = 5;
+      window_padding_width = 10;
       confirm_os_window_close = 0;
-      enable_audio_bell = 0;
+      enable_audio_bell = "no";
     };
     extraConfig = ''
       # runtime colors
@@ -293,8 +290,9 @@
       nvim-tree-lua           # file tree
 
       nvim-web-devicons       # dev icons
-      # indent-blankline-nvim   # indent lines
+      indent-blankline-nvim   # indent lines
       vim-nix                 # nix
+      colorizer
 
       luasnip                 # snippets
 
