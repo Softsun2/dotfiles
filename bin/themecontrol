@@ -8,13 +8,11 @@ THEME_PATH="$HOME"/.dotfiles/theme
 loadtheme() {
   CURRENT_THEME=$(cat "$THEME_PATH"/.current-theme)
 
-softsun2
-
   # bg
   if [ -d "$THEME_PATH"/"$CURRENT_THEME"/bg ]
   then
     RANDOM_BG=$(
-      ls "$THEME_PATH"/"$CURRENT_THEME"/bg | 
+      ls "$THEME_PATH"/"$CURRENT_THEME"/bg |
       shuf |
       head -n1 |
       awk '{print $1}'

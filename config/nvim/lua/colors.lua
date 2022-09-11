@@ -1,9 +1,7 @@
 local o = vim.opt
 
-vim.cmd [[ colorscheme candle-grey ]]
-
 -- Use or don't use terminal colors, depends on theme
-o.termguicolors = true
+o.termguicolors = false
 
 -- disable dianostic column bg
 vim.cmd('hi SignColumn ctermbg=NONE guibg=NONE')
@@ -26,17 +24,16 @@ vim.cmd('hi LineNr ctermbg=NONE guibg=NONE')
 -- set minimal cursor line
 vim.cmd('hi CursorLine ctermfg=NONE cterm=bold,underline guifg=NONE gui=bold,underline')
 
--- set indent line color
-vim.cmd('hi clear IndentBlankLineChar')
-vim.cmd('hi link IndentBlankLineChar Comment')
-
 -- disable end of buffer tildas
 vim.cmd('hi clear EndOfBuffer')
-vim.cmd('hi link EndOfBuffer ColorColumn')
+-- vim.cmd('hi link EndOfBuffer ColorColumn')
 
 -- disable match paren bg
 vim.cmd('hi MatchParen ctermbg=NONE guibg=NONE')
 
 -- set NonText characters to a less noticable color
-vim.cmd('hi clear NonText')
-vim.cmd('hi link NonText Comment')
+vim.cmd('hi NonText ctermfg=DarkGrey')
+
+-- set indent line color
+vim.cmd('hi clear IndentBlankLineChar')
+vim.cmd('hi link IndentBlankLineChar NonText')

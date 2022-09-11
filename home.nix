@@ -21,7 +21,7 @@
     pkgs.yt-dlp
     pkgs.zoom-us
     pkgs.zathura
-
+    mypkgs.flavours
 
     # mypkgs.spotify-adblock
     # import ./modules/spotify-adblock.nix
@@ -145,8 +145,16 @@
       autoload edit-command-line; zle -N edit-command-line
       bindkey '^e' edit-command-line
 
+      # falvours config location
+      export FLAVOURS_CONFIG_FILE=$HOME/.dotfiles/config/flavours/config.toml
+
       bindkey '^y' autosuggest-accept
       bindkey -s '^f' 'f\n'
+
+      # gd funciton
+      gd () {
+        cd "$(git rev-parse --show-toplevel)"/"$1"
+      }
     '';
 
     history = {
@@ -163,7 +171,6 @@
       ll  = "ls -la";
       c   = "clear";
       f   = "cd $(find . -type d | fzf)";
-      gd  = "cd $(git rev-parse --show-toplevel)";
 
       shell = "nix-shell";
       home = "vim $HOME/.dotfiles/home.nix";
@@ -251,17 +258,18 @@
     enable = true;
     settings = {
       cursor = "none";
+      allow_remote_control = true;
       font_family = "JetBrains Mono";
       font_size = 12;
       scrollback_lines = 5000;
       wheel_scroll_multiplier = 3;
       window_padding_width = 10;
       confirm_os_window_close = 0;
-      enable_audio_bell = "no";
+      enable_audio_bell = false;
     };
     extraConfig = ''
       # runtime colors
-      include ~/.dotfiles/config/kitty/theme.conf
+      include ~/.dotfiles/theme/kitty/theme.conf
 
       # minimize functionality (using tmux instead)
       # clear_all_shortcuts yes
@@ -274,21 +282,6 @@
       # map ctrl+shift+v paste_from_clipoard
       # be able to interact with links in some way
     '';
-  };
-
-  services.picom = {
-    enable = true;
-    activeOpacity = "0.95";
-    inactiveOpacity = "0.8";
-    fade = true;
-    shadow = true;
-    # settings = {
-    #   blur = {
-    #     method = "gaussian";
-    #     size = 10;
-    #     deviation = 5.0;
-    #   };
-    # };
   };
 
   programs.neovim = {
@@ -326,8 +319,6 @@
       pkgs.vimPlugins.cmp-cmdline             # completion source: cmdline
       pkgs.vimPlugins.cmp_luasnip             # completion source: luasnip snippets
       pkgs.vimPlugins.lspkind-nvim            # pictograms for completion suggestions
-
-      mypkgs.vimPlugins.candle-grey           # candle-grey colorscheme
     ]; 
 
     extraPackages = with pkgs; [

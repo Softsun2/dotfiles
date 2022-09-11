@@ -23,11 +23,11 @@
     },
     "mynixpkgs": {
       "locked": {
-        "lastModified": 1662440804,
-        "narHash": "sha256-cGWWpjPwhCDK5uauNwDqbuSCGDmAyTyZ2SWCdkAziyE=",
+        "lastModified": 1662854949,
+        "narHash": "sha256-QihmqT0/Q2qaSB3hxD+MBsTklWEacVfY8ehuzeW+UQ0=",
         "owner": "Softsun2",
         "repo": "nixpkgs",
-        "rev": "f862a0c47ae60d957864bd1116a4f27c80caccb1",
+        "rev": "70d42dc35338a525f1c1a62a1bd40f3ff7741a21",
         "type": "github"
       },
       "original": {
