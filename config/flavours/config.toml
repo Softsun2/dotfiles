@@ -1,0 +1,37 @@
+schemes = "https://github.com/Softsun2/base16-schemes-source"
+# templates = "my-templates"
+
+[[extra_scheme]]
+name = "tarko"
+source = "https://github.com/Softsun2/base16-tarko-scheme"
+
+[[extra_template]]
+name = "dwm-xrdb"
+source = "https://github.com/Softsun2/base16-dwm-xrdb"
+
+# dwm
+[[item]]
+file = "$HOME/.dotfiles/theme/xcolors-dwm"
+template = "dwm-xrdb"
+start = "! start flavours"
+end = "! end flavours"
+# if there's a way to trigger dwm to reload xcolors do it here
+hook = "xrdb load $HOME/.dotfiles/theme/xcolors-dwm"
+
+# kitty
+[[item]]
+file = '$HOME/.dotfiles/theme/kitty/theme.conf'
+template = 'kitty'
+subtemplate = 'default-256'
+hook = 'kitty @ set-colors -a -c $HOME/.dotfiles/theme/kitty/theme.conf'
+
+# 
+# # neovim
+# [[item]]
+# file = '$HOME/.dotfiles/config/nvim/lua/colors.lua'
+# template = 'vim'
+# subtemplate = 'nvim'
+# start = '-- start flavours'
+# end = '-- end flavours'
+# # hook = ...
+# # ...

@@ -1,0 +1,36 @@
+! start flavours
+! Base16 Generated
+! Scheme: Flavours
+
+#define base00 #23272b
+#define base01 #44484e
+#define base02 #656a70
+#define base03 #868b93
+#define base04 #a7adb5
+#define base05 #c8ced8
+#define base06 #d0d6de
+#define base07 #d8dde3
+#define base08 #5b7d8f
+#define base09 #867473
+#define base0A #647d7a
+#define base0B #7a7878
+#define base0C #717a7b
+#define base0D #697b82
+#define base0E #737887
+#define base0F #7c777c
+
+#ifdef background_opacity
+dwm.normbgcolor:        [background_opacity]base00
+#else
+dwm.normbgcolor:        base00
+#endif
+dwm.selbgcolor:         base03
+
+dwm.normbordercolor:    base00
+dwm.selbordercolor:     base03
+
+dwm.selfgcolor:         base00
+dwm.normfgcolor:        base07
+
+! end flavours
+
