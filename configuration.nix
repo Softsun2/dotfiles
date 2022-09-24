@@ -15,8 +15,15 @@
   ];
 
   # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  # grub support
+  # make sure you give grub the highest boot priority in your BIOS
+  boot.loader.grub = {
+    enable = true;
+    devices = [ "nodev" ];
+    efiSupport = true;
+    useOSProber = true;
+  };
 
   networking.hostName = "buffalo"; # Define your hostname.
   networking.networkmanager.enable = true;
