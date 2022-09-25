@@ -12,6 +12,8 @@
 
   programs.home-manager.enable = true;
 
+  programs.autorandr.enable = false;
+
   home.packages = [
     pkgs.tldr
     pkgs.teams
@@ -171,6 +173,7 @@
       ll  = "ls -la";
       c   = "clear";
       f   = "cd $(find . -type d | fzf)";
+      s   = "kitty +kitten ssh";
 
       shell = "nix-shell";
       home = "vim $HOME/.dotfiles/home.nix";
@@ -216,7 +219,6 @@
     ];
   };
 
-
   programs.git = {
     enable = true;
     userName = "softsun2";
@@ -225,7 +227,6 @@
       init = { defaultBranch = "main"; };
     };
   };
-
 
   programs.tmux = {
     enable = true;
@@ -237,22 +238,21 @@
       set -g status-bg black 
       set -g status-fg blue
     '';
-    plugins = with pkgs; [
-      tmuxPlugins.cpu
-      {
-        plugin = tmuxPlugins.resurrect;
-        extraConfig = "set -g @resurrect-strategy-nvim 'session'";
-      }
-      {
-        plugin = tmuxPlugins.continuum;
-        extraConfig = ''
-          set -g @continuum-restore 'on'
-          set -g @continuum-save-interval '10' #minutes
-        '';
-      }
-    ];
+    # plugins = with pkgs; [
+    #   tmuxPlugins.cpu
+    #   {
+    #     plugin = tmuxPlugins.resurrect;
+    #     extraConfig = "set -g @resurrect-strategy-nvim 'session'";
+    #   }
+    #   {
+    #     plugin = tmuxPlugins.continuum;
+    #     extraConfig = ''
+    #       set -g @continuum-restore 'on'
+    #       set -g @continuum-save-interval '10' #minutes
+    #     '';
+    #   }
+    # ];
   };
-
 
   programs.kitty = {
     enable = true;
@@ -338,6 +338,10 @@
   home.file.".xinitrc" = {
     text = "
       #!/bin/sh
+
+      # screens
+      xrandr --output DP-0 --primary --mode 1920x1080 --rate 144
+      xrandr --output DVI-D-1 --mode 1024x768 --rate 85 --right-of DP-0
       
       # background
       feh --bg-fill $HOME/Pictures/red-buck.jpg &

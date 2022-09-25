@@ -49,17 +49,15 @@
     keyMap = "us";
   };
 
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-
-  services.xserver.videoDrivers = [ "nvidia" ];
-  # monitor options, derived from the nvidia-settings tool
-  services.xserver.screenSection = ''
-    Option         "metamodes" "DP-0: 1920x1080_144 +0+0 {ForceCompositionPipeline=On, ForceFullCompositionPipeline=On}, DVI-D-0: 1024x768_85 +1920+0 {ForceCompositionPipeline=On, ForceFullCompositionPipeline=On}"
-  '';
-
-  services.xserver.displayManager.startx.enable = true;
-  services.xserver.windowManager.dwm.enable = true;
+  services.xserver = {
+    enable = true;
+    videoDrivers = [ "nvidia" ];
+    screenSection = ''
+      Option         "metamodes" "nvidia-auto-select +0+0 {ForceFullCompositionPipeline=On}"
+    '';
+    displayManager.startx.enable = true;
+    windowManager.dwm.enable = true;
+  };
 
   # FIXME: After I am satisfied with a working version of dwm
   # make this overlay a flake input
