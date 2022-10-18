@@ -14,41 +14,40 @@ To declare system and user configurations as minimally and consistently as possi
 
 ## Themeing
 
-Since ![dwm](https://github.com/Softsun2/dwm) is responsible for my keybinds, I trigger theme loading with dwm. I manage my themes with ![this in progress script](https://github.com/Softsun2/dotfiles-NixOS/blob/main/bin/themecontrol) and a improvised directory structure.
-```
-softsun2 ~/.dotfiles % tree -a theme
-theme
-├── .current-theme
-└── theme-name
-    ├── bg
-    │   └── some-background.jpg
-    └── theme-name-dwm
-```
-Where `.current-theme` stores the name of the current theme. Theme names are the names of their associated theme directory. Theme dirs may have a set of backgrounds, backgrounds are choosen randomly when the theme is loaded (provided there are multiple backgrounds). For now I'm only applying colors to dwm via `xrdb`. The schema for defining xcolors (`theme-name-dwm`) is going to change.
+I now use flavours. This is temporary as it sort of goes against nix philosophy for applications that cannot be configured with multiple config files. Flavours should not be managing any configuration settings for applications, just color settings.
 
+Apps I still need to theme/flavour:
+  1. firefox
+  2. spotify?
+  3. exa
+  4. vim (base16 plugin) (is there treesitter support for this??)
+  5. zathura
 
 ## TODO
-
+* return to just one package repository
+* Determine why system is crashing/freezing
 * Flake lock file branch
 * Reorder usr vs sys packages & config
-* switch back to nvim
+* Make neovim more usable
 * Manage/clean NixOS generations 
 * Bar is TERRIBLE (probably due to grep)
-* themeing/dwm patching
+* Getting tired of dwm look into switching
+* Themeing/dwm patching
   * Look into a nix-y way of using flavours w/ bgs
   * Or find a way to generate config files w/ a base16 input list
-* fix themes
-* clean home dir
+* Make a handful of decent themes then never theme again (at least for awhile)
+* Clean home dir
+* Setup ssh server
 
 ## Imperative components
 
 Things I may or may not declare, keeping a list for future reference.
 
-* discord disable tray & launch on startup
-* ssh keys
+* Discord disable tray & launch on startup
+* Ssh keys
 * Home dir structure
-* vscode configurations
-* school repos
-* docker images/containers/daemon
-* steam games
-* spotify local file src (probably won't be able to declare this)
+* Vscode configurations
+* School repos
+* Docker images/containers/daemon
+* Steam games
+* Spotify local file src (probably won't be able to declare this)
