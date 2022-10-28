@@ -1,11 +1,13 @@
 local opt = vim.opt
 local wo = vim.wo
 local g = vim.g
+local o = vim.o
 
 -- Ui
 wo.number = true                -- line numbers
 wo.relativenumber = true        -- relative line numbers
 wo.wrap = false                 -- no wrap
+o.termguicolors = true          -- use terminal colors
 opt.cursorline = true
 
 -- History

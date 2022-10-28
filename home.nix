@@ -5,16 +5,26 @@
   unFree-spotify-pkgs,
   ...
 }:
-
+let
+  typescript-language-server-fixed = pkgs.symlinkJoin {
+    name = "typescript-language-server";
+    paths = [ pkgs.nodePackages.typescript-language-server ];
+    buildInputs = [ pkgs.makeWrapper ];
+    postBuild = ''
+      wrapProgram $out/bin/typescript-language-server \
+        --add-flags --tsserver-path=${pkgs.nodePackages.typescript}/lib/node_modules/typescript/lib/
+    '';
+  };
+in
 {
   # home-manager configuration appendix:
   # https://rycee.gitlab.io/home-manager/options.html
 
   programs.home-manager.enable = true;
 
-  programs.autorandr.enable = false;
-
   home.packages = [
+    pkgs.flameshot
+    pkgs.cmatrix
     pkgs.tldr
     pkgs.teams
     pkgs.libreoffice
@@ -24,97 +34,20 @@
     pkgs.zoom-us
     pkgs.zathura
     mypkgs.flavours
+    pkgs.zip
+    pkgs.unzip
+
+    # node packages
+    pkgs.nodejs
+    pkgs.nodePackages.live-server
+
+    # ocaml
+    pkgs.ocaml
+    pkgs.ocamlPackages.utop
 
     # mypkgs.spotify-adblock
     # import ./modules/spotify-adblock.nix
   ];
-
-  programs.vscode = {
-    enable = true;
-    extensions = with pkgs.vscode-extensions; [
-      vscodevim.vim
-      ms-python.python
-      ms-python.vscode-pylance
-      llvm-vs-code-extensions.vscode-clangd
-      ocamllabs.ocaml-platform
-      timonwong.shellcheck
-      zhuangtongfa.material-theme
-      jnoortheen.nix-ide
-    ];
-    keybindings = [
-      # window movement
-      {
-          key = "ctrl+h";
-          command = "workbench.action.focusLeftGroup";
-      }
-      {
-          key = "ctrl+l";
-          command = "workbench.action.focusRightGroup";
-      }
-      {
-          key = "ctrl+j";
-          command = "workbench.action.focusBelowGroup";
-      }
-      {
-          key = "ctrl+k";
-          command = "workbench.action.focusAboveGroup";
-      }
-
-      # diagnostics (tbd)
-
-      # quick menu movement
-      {
-          key = "ctrl+j";
-          command = "workbench.action.quickOpenSelectNext";
-          when = "inQuickOpen";
-      }
-      {
-          key = "ctrl+k";
-          command = "workbench.action.quickOpenSelectPrevious";
-          when = "inQuickOpen";
-      }
-      {
-          key = "ctrl+c";
-          command = "workbench.action.closeQuickOpen";
-          when = "inQuickOpen";
-      }
-
-      # suggestions
-      {
-          key = "ctrl+y";
-          command = "acceptSelectedSuggestion";
-          when = "suggestWidgetVisible && textInputFocus";
-      }
-      {
-          key = "ctrl+space";
-          command = "toggleSuggestionDetails";
-          when = "editorTextFocus && suggestWidgetVisible";
-      }
-      {
-          key = "ctrl+j";
-          command = "selectNextSuggestion";
-          when = "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus";
-      }
-      {
-          key = "ctrl+k";
-          command = "selectPrevSuggestion";
-          when = "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus";
-      }
-      {
-          key = "ctrl+c";
-          command = "editor.action.inlineSuggest.hide";
-          when = "inlineSuggestionVisible";
-      }
-
-      # terminal
-      {
-          key = "ctrl+shift+j";
-          command = "workbench.action.terminal.toggleTerminal";
-          when = "terminal.active";
-      }
-    ];
-
-  };
 
   programs.zsh = {
     enable = true;
@@ -129,7 +62,7 @@
       EDITOR="vim"
       
       # Single line prompt
-      AGKOZAK_MULTILINE=0
+      # AGKOZAK_MULTILINE=0
 
       # Basic auto/tab complete
       autoload -U compinit
@@ -157,6 +90,8 @@
       gd () {
         cd "$(git rev-parse --show-toplevel)"/"$1"
       }
+
+      solar-system
     '';
 
     history = {
@@ -174,6 +109,8 @@
       c   = "clear";
       f   = "cd $(find . -type d | fzf)";
       s   = "kitty +kitten ssh";
+      dotfiles = "cd ~/.dotfiles";
+      school = "cd ~/school";
 
       shell = "nix-shell";
       home = "vim $HOME/.dotfiles/home.nix";
@@ -293,45 +230,66 @@
       luafile $HOME/.dotfiles/config/nvim/lua/init.lua
     '';
 
-    plugins = [
-      pkgs.vimPlugins.nvim-treesitter         # better highlighting, indentation, and folding
-      pkgs.vimPlugins.nvim-lspconfig          # lsp
+    plugins = with pkgs.vimPlugins; [
+      ( nvim-treesitter.withPlugins (
+        plugins: with plugins; [
+          tree-sitter-nix
+          tree-sitter-lua
+          tree-sitter-bash
+          tree-sitter-c
+          tree-sitter-cpp
+          tree-sitter-make
+          tree-sitter-python
+          tree-sitter-html
+          tree-sitter-css
+          tree-sitter-json
+          tree-sitter-ocaml
+        ]
+      ))
 
-      pkgs.vimPlugins.telescope-nvim          # integrated fuzzy finder
-      pkgs.vimPlugins.telescope-fzf-native-nvim
-      pkgs.vimPlugins.plenary-nvim
+      nvim-lspconfig          # lsp
 
-      pkgs.vimPlugins.harpoon
-      pkgs.vimPlugins.nvim-tree-lua           # file tree
+      telescope-nvim          # integrated fuzzy finder
+      telescope-fzf-native-nvim # idek
+      plenary-nvim            # idek
 
-      pkgs.vimPlugins.nvim-web-devicons       # dev icons
-      pkgs.vimPlugins.indent-blankline-nvim   # indent lines
-      pkgs.vimPlugins.vim-nix                 # nix
-      pkgs.vimPlugins.colorizer
+      harpoon
+      nvim-tree-lua           # file tree
+      vim-floaterm            # floating terminal
 
-      pkgs.vimPlugins.luasnip                 # snippets
+      nvim-web-devicons       # dev icons
+      indent-blankline-nvim   # indent lines
+      vim-nix                 # nix
+      colorizer
 
-      pkgs.vimPlugins.nvim-cmp                # completions
-      pkgs.vimPlugins.cmp-buffer              # completion source: buffer
-      pkgs.vimPlugins.cmp-path                # completion source: file path
-      pkgs.vimPlugins.cmp-nvim-lua            # completion source: nvim config aware lua
-      pkgs.vimPlugins.cmp-nvim-lsp            # completion source: lsp
-      pkgs.vimPlugins.cmp-cmdline             # completion source: cmdline
-      pkgs.vimPlugins.cmp_luasnip             # completion source: luasnip snippets
-      pkgs.vimPlugins.lspkind-nvim            # pictograms for completion suggestions
+      luasnip                 # snippet engine
+      friendly-snippets       # more snippets!!
+
+      nvim-base16             # base16 color schemes w/ lsp & treesitter support
+
+      nvim-cmp                # completions
+      cmp-buffer              # completion source: buffer
+      cmp-path                # completion source: file path
+      cmp-nvim-lua            # completion source: nvim config aware lua
+      cmp-nvim-lsp            # completion source: lsp
+      cmp-cmdline             # completion source: cmdline
+      cmp_luasnip             # completion source: luasnip snippets
+      lspkind-nvim            # pictograms for completion suggestions
     ]; 
 
     extraPackages = with pkgs; [
-      # lsp parser compiler
-      gcc
+      # language servers: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
+      rnix-lsp                                      # nix
+      sumneko-lua-language-server                   # lua
+      nodePackages.pyright                          # python
+      nodePackages.vscode-langservers-extracted     # ...
+      typescript-language-server-fixed              # typescript/javascript
+      ocamlPackages.ocaml-lsp                       # ocaml
+      ccls                                          # c/c++
 
-      # language servers
-      rnix-lsp
-      sumneko-lua-language-server
-      nodePackages.pyright
-
-      # telescope depency
+      # dependencies
       ripgrep
+      nodePackages.typescript
     ];
   };
 

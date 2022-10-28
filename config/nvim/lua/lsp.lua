@@ -11,7 +11,6 @@ lspconfig.rnix.setup {
   capabilities = capabilities,
 }
 
-
 -- lua
 lspconfig.sumneko_lua.setup {
   capabilities = capabilities,
@@ -30,12 +29,10 @@ lspconfig.sumneko_lua.setup {
   },
 }
 
-
--- c
-
-
--- cpp
-
+-- c/cpp
+lspconfig.ccls.setup {
+  capabilities = capabilities,
+}
 
 -- python
 lspconfig.pyright.setup {
@@ -43,10 +40,24 @@ lspconfig.pyright.setup {
 }
 
 
--- html ?
+-- html
+lspconfig.html.setup {
+  capabilities = capabilities,
+}
 
+-- css
+lspconfig.cssls.setup {
+  capabilities = capabilities,
+}
 
--- css ?
+-- js/ts
+-- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#tsserver
+lspconfig.tsserver.setup {
+  capabilities = capabilities,
+}
 
+-- ocaml
+lspconfig.ocamllsp.setup {
+  capabilities = capabilities,
+}
 
--- js

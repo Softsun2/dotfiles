@@ -5,7 +5,6 @@ local function contextIsComment()
     require"cmp.config.context".in_syntax_group("Comment")
 end
 
-
 cmp.setup {
 
   enabled = function ()
