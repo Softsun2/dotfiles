@@ -1,9 +1,4 @@
-{
-  config,
-  pkgs,
-  mypkgs,
-  ...
-}:
+{ config, pkgs, ... }:
 let
   typescript-language-server-fixed = pkgs.symlinkJoin {
     name = "typescript-language-server";
@@ -22,6 +17,9 @@ in
   programs.home-manager.enable = true;
   manual.manpages.enable = false;
 
+  home.stateVersion = "23.05";
+  home.username = "softsun2";
+  home.homeDirectory = /home/softsun2;
   home.packages = [
     pkgs.gephi
     pkgs.python3
@@ -39,7 +37,6 @@ in
     pkgs.yt-dlp
     pkgs.zoom-us
     pkgs.zathura
-    mypkgs.flavours
     pkgs.zip
     pkgs.unzip
 
@@ -50,9 +47,6 @@ in
     # ocaml
     pkgs.ocaml
     pkgs.ocamlPackages.utop
-
-    # mypkgs.spotify-adblock
-    # import ./modules/spotify-adblock.nix
   ];
 
   programs.zsh = {
@@ -70,28 +64,6 @@ in
       # Single line prompt
       # AGKOZAK_MULTILINE=0
 
-      # Basic auto/tab complete
-      autoload -U compinit
-      zstyle ':completion:*' menu select
-      zmodload zsh/complist
-      compinit
-      #include hidden files in completions
-      _comp_options+=(globdots)
-
-      # vi mode
-      bindkey -v
-      export KEYTIMEOUT=2
-
-      # Edit line in $EDITOR with ctrl-e:
-      autoload edit-command-line; zle -N edit-command-line
-      bindkey '^e' edit-command-line
-
-      # falvours config location
-      export FLAVOURS_CONFIG_FILE=$HOME/.dotfiles/config/flavours/config.toml
-
-      bindkey '^y' autosuggest-accept
-      bindkey -s '^f' 'f\n'
-
       # gd funciton
       gd () {
         cd "$(git rev-parse --show-toplevel)"/"$1"
@@ -100,16 +72,7 @@ in
       solar-system
     '';
 
-    history = {
-      save = 1000;
-      size = 1000;
-      path = "$HOME/.cache/zsh_history";
-    };
-
-    enableAutosuggestions = true;
-
     shellAliases = {
-      ls  = "exa --icons";
       l   = "ls -l";
       ll  = "ls -la";
       c   = "clear";
@@ -119,12 +82,9 @@ in
       school = "cd ~/school";
       "nix-search" = "firefox --new-tab 'https://search.nixos.org/packages?channel=unstable' &";
 
-      shell = "nix-shell";
-      hoe = "vim $HOME/.dotfiles/home.nix";
-      build-home= "nix build -o ~/.dotfiles/result ~/.dotfiles/.#homeManagerConfigurations.softsun2.activationPackage && ~/.dotfiles/result/activate";
+      home = "vim $HOME/.dotfiles/home.nix";
       flake = "vim $HOME/.dotfiles/flake.nix";
       config = "vim $HOME/.dotfiles/configuration.nix";
-      rebuild = "nixos-rebuild switch --use-remote-sudo --flake $HOME/.dotfiles/.#";
     };
 
     plugins = [
@@ -182,20 +142,6 @@ in
       set -g status-bg black 
       set -g status-fg blue
     '';
-    # plugins = with pkgs; [
-    #   tmuxPlugins.cpu
-    #   {
-    #     plugin = tmuxPlugins.resurrect;
-    #     extraConfig = "set -g @resurrect-strategy-nvim 'session'";
-    #   }
-    #   {
-    #     plugin = tmuxPlugins.continuum;
-    #     extraConfig = ''
-    #       set -g @continuum-restore 'on'
-    #       set -g @continuum-save-interval '10' #minutes
-    #     '';
-    #   }
-    # ];
   };
 
   programs.kitty = {
@@ -256,17 +202,8 @@ in
         ]
       ))
 
-      pkgs.vimPlugins.zen-mode-nvim
-      pkgs.vimPlugins.nvim-ts-rainbow
       pkgs.vimPlugins.lualine-nvim
-
-      pkgs.vimPlugins.nvim-base16
-      pkgs.vimPlugins.vim-pug
-
-      pkgs.vimPlugins.vim-clang-format
-
       pkgs.vimPlugins.gitsigns-nvim
-
       pkgs.vimPlugins.vim-illuminate
 
       pkgs.vimPlugins.nvim-lspconfig          # lsp
@@ -276,10 +213,7 @@ in
       pkgs.vimPlugins.plenary-nvim
 
       pkgs.vimPlugins.harpoon                 # Tagged files
-      pkgs.vimPlugins.nvim-tree-lua           # file tree
-      pkgs.vimPlugins.vim-floaterm            # floating terminal
 
-      pkgs.vimPlugins.nvim-web-devicons       # dev icons
       pkgs.vimPlugins.indent-blankline-nvim
       pkgs.vimPlugins.vim-nix                 # nix
 
@@ -291,9 +225,6 @@ in
 
       pkgs.vimPlugins.luasnip                 # snippet engine
       pkgs.vimPlugins.friendly-snippets       # more snippets
-
-      pkgs.vimPlugins.kanagawa-nvim
-      pkgs.vimPlugins.rose-pine
 
       pkgs.vimPlugins.nvim-cmp                # completions
       pkgs.vimPlugins.cmp-buffer              # completion source: buffer

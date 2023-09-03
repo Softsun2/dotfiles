@@ -37,7 +37,6 @@
 
       lib = nixpkgs.lib;
     in {
-      # could wrap this later
       homeManagerConfigurations = {
         softsun2 = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
@@ -55,6 +54,12 @@
             }
           ];
         };
+      };
+
+      homeConfigurations.softsun2 = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+        lib = pkgs.lib;
+        modules = [ ./home.nix ];
       };
       
       nixosConfigurations = {
