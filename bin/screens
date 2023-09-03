@@ -1,4 +1,13 @@
 #!/bin/sh
 
+# if [ "$(xrandr --query | grep ' connected' | wc -l)" -eq 1 ]
+# then
+#   xrandr --output DVI-D-0 --mode 1024x768 --rate 85
+# else
+#   xrandr --output DP-0 --primary --mode 1920x1080 --rate 144
+#   xrandr --output DVI-D-1 --mode 1024x768 --rate 85 --right-of DP-0
+# fi
+
 xrandr --output DP-0 --primary --mode 1920x1080 --rate 144
-xrandr --output DVI-D-1 --mode 1024x768 --rate 85 --right-of DP-0
+xrandr --output DVI-D-0 --mode 1024x768 --rate 85 --left-of DP-0
+

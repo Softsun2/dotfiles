@@ -2,7 +2,6 @@
   config,
   pkgs,
   mypkgs,
-  unFree-spotify-pkgs,
   ...
 }:
 let
@@ -21,15 +20,22 @@ in
   # https://rycee.gitlab.io/home-manager/options.html
 
   programs.home-manager.enable = true;
+  manual.manpages.enable = false;
 
   home.packages = [
+    pkgs.gephi
+    pkgs.python3
+    pkgs.cider
+    pkgs.vscodium
+    pkgs.obs-studio
     pkgs.flameshot
     pkgs.cmatrix
     pkgs.tldr
     pkgs.teams
     pkgs.libreoffice
-    unFree-spotify-pkgs.spotify
-    pkgs.minecraft
+    pkgs.spotify
+    pkgs.optifine
+    pkgs.prismlauncher    # minecraft
     pkgs.yt-dlp
     pkgs.zoom-us
     pkgs.zathura
@@ -111,9 +117,10 @@ in
       s   = "kitty +kitten ssh";
       dotfiles = "cd ~/.dotfiles";
       school = "cd ~/school";
+      "nix-search" = "firefox --new-tab 'https://search.nixos.org/packages?channel=unstable' &";
 
       shell = "nix-shell";
-      home = "vim $HOME/.dotfiles/home.nix";
+      hoe = "vim $HOME/.dotfiles/home.nix";
       build-home= "nix build -o ~/.dotfiles/result ~/.dotfiles/.#homeManagerConfigurations.softsun2.activationPackage && ~/.dotfiles/result/activate";
       flake = "vim $HOME/.dotfiles/flake.nix";
       config = "vim $HOME/.dotfiles/configuration.nix";
@@ -196,8 +203,8 @@ in
     settings = {
       cursor = "none";
       allow_remote_control = true;
-      font_family = "JetBrains Mono";
-      font_size = 12;
+      font_family = "Meslo";
+      font_size = 10;
       scrollback_lines = 5000;
       wheel_scroll_multiplier = 3;
       window_padding_width = 10;
@@ -230,8 +237,9 @@ in
       luafile $HOME/.dotfiles/config/nvim/lua/init.lua
     '';
 
-    plugins = with pkgs.vimPlugins; [
-      ( nvim-treesitter.withPlugins (
+  plugins = [
+
+      ( pkgs.vimPlugins.nvim-treesitter.withPlugins (
         plugins: with plugins; [
           tree-sitter-nix
           tree-sitter-lua
@@ -244,52 +252,76 @@ in
           tree-sitter-css
           tree-sitter-json
           tree-sitter-ocaml
+          tree-sitter-javascript
         ]
       ))
 
-      nvim-lspconfig          # lsp
+      pkgs.vimPlugins.zen-mode-nvim
+      pkgs.vimPlugins.nvim-ts-rainbow
+      pkgs.vimPlugins.lualine-nvim
 
-      telescope-nvim          # integrated fuzzy finder
-      telescope-fzf-native-nvim # idek
-      plenary-nvim            # idek
+      pkgs.vimPlugins.nvim-base16
+      pkgs.vimPlugins.vim-pug
 
-      harpoon
-      nvim-tree-lua           # file tree
-      vim-floaterm            # floating terminal
+      pkgs.vimPlugins.vim-clang-format
 
-      nvim-web-devicons       # dev icons
-      indent-blankline-nvim   # indent lines
-      vim-nix                 # nix
-      colorizer
+      pkgs.vimPlugins.gitsigns-nvim
 
-      luasnip                 # snippet engine
-      friendly-snippets       # more snippets!!
+      pkgs.vimPlugins.vim-illuminate
 
-      nvim-base16             # base16 color schemes w/ lsp & treesitter support
+      pkgs.vimPlugins.nvim-lspconfig          # lsp
+      pkgs.vimPlugins.lspsaga-nvim            # better lsp ui
 
-      nvim-cmp                # completions
-      cmp-buffer              # completion source: buffer
-      cmp-path                # completion source: file path
-      cmp-nvim-lua            # completion source: nvim config aware lua
-      cmp-nvim-lsp            # completion source: lsp
-      cmp-cmdline             # completion source: cmdline
-      cmp_luasnip             # completion source: luasnip snippets
-      lspkind-nvim            # pictograms for completion suggestions
-    ]; 
+      pkgs.vimPlugins.telescope-nvim          # integrated fuzzy finder
+      pkgs.vimPlugins.plenary-nvim
+
+      pkgs.vimPlugins.harpoon                 # Tagged files
+      pkgs.vimPlugins.nvim-tree-lua           # file tree
+      pkgs.vimPlugins.vim-floaterm            # floating terminal
+
+      pkgs.vimPlugins.nvim-web-devicons       # dev icons
+      pkgs.vimPlugins.indent-blankline-nvim
+      pkgs.vimPlugins.vim-nix                 # nix
+
+      pkgs.vimPlugins.nvim-navic
+
+      pkgs.vimPlugins.nvim-autopairs
+      pkgs.vimPlugins.nvim-ts-autotag
+      pkgs.vimPlugins.vim-prettier
+
+      pkgs.vimPlugins.luasnip                 # snippet engine
+      pkgs.vimPlugins.friendly-snippets       # more snippets
+
+      pkgs.vimPlugins.kanagawa-nvim
+      pkgs.vimPlugins.rose-pine
+
+      pkgs.vimPlugins.nvim-cmp                # completions
+      pkgs.vimPlugins.cmp-buffer              # completion source: buffer
+      pkgs.vimPlugins.cmp-path                # completion source: file path
+      pkgs.vimPlugins.cmp-nvim-lua            # completion source: nvim config aware lua
+      pkgs.vimPlugins.cmp-nvim-lsp            # completion source: lsp
+      pkgs.vimPlugins.cmp-cmdline             # completion source: cmdline
+      pkgs.vimPlugins.cmp_luasnip             # completion source: luasnip snippets
+      pkgs.vimPlugins.lspkind-nvim            # pictograms for completion suggestions
+      pkgs.vimPlugins.colorizer               # color name highlighter
+    ];
 
     extraPackages = with pkgs; [
-      # language servers: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
-      rnix-lsp                                      # nix
-      sumneko-lua-language-server                   # lua
-      nodePackages.pyright                          # python
-      nodePackages.vscode-langservers-extracted     # ...
-      typescript-language-server-fixed              # typescript/javascript
-      ocamlPackages.ocaml-lsp                       # ocaml
-      ccls                                          # c/c++
-
-      # dependencies
-      ripgrep
+      # language servers
+      rnix-lsp
+      sumneko-lua-language-server
+      nodePackages.pyright
+      nodePackages.vscode-langservers-extracted
       nodePackages.typescript
+      nodePackages.eslint
+      typescript-language-server-fixed
+      # ocamlPackages.ocaml-lsp
+      rPackages.languageserver
+      ccls
+      ltex-ls
+
+      # telescope depency
+      ripgrep
     ];
   };
 
@@ -298,14 +330,13 @@ in
       #!/bin/sh
 
       # screens
-      xrandr --output DP-0 --primary --mode 1920x1080 --rate 144
-      xrandr --output DVI-D-1 --mode 1024x768 --rate 85 --right-of DP-0
-      
+      screens &
+
       # background
-      feh --bg-fill $HOME/Pictures/red-buck.jpg &
+      feh --bg-fill $HOME/Pictures/1.JPG &
 
       # X Colors
-      xrdb $HOME/.dotfiles/theme/testTheme
+      xrdb $HOME/.dotfiles/theme/xcolors-dwm &
 
       # status bar
       $HOME/suckless/dwm/bar &

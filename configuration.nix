@@ -77,15 +77,24 @@
   # Enable sound.
   sound.enable = true;
   hardware.pulseaudio.enable = true;
+  hardware.pulseaudio.extraConfig = ''
+    unload-module module-bluetooth-policy
+    unload-module module-bluetooth-discover
+  '';
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
+
+  programs.zsh.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.softsun2 = {
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" "docker" ]; # Enable ‘sudo’ for the user.
     shell = pkgs.zsh;
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIfXndMyPax5eVS+kPXBbjC3mChBLiD/kQATMxu1QXlh peyton.okubo13@gmail.com"
+    ];
   };
 
   fonts.fonts = with pkgs; [
@@ -93,8 +102,7 @@
     jetbrains-mono
     roboto
     meslo-lg
-    (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
-    terminus_font
+    (nerdfonts.override { fonts = [ "JetBrainsMono" "Gohu" "Terminus" ]; })
   ];
 
   # goofy steam support
@@ -123,18 +131,16 @@
     # util
     pkgs.pulsemixer
     pkgs.vim      # text editor
+    pkgs.emacs
     pkgs.zsh      # z shell
     pkgs.git
     pkgs.wget
     pkgs.tree
-    pkgs.exa      # better ls
     pkgs.fzf      # fuzzy finder
     pkgs.docker
-    config.boot.kernelPackages.perf
     pkgs.lshw
-
-    # nix
-    pkgs.nix-prefetch-git
+    pkgs.dmidecode
+    pkgs.xclip
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -148,7 +154,11 @@
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
+  services.openssh = {
+    enable = true;
+    settings.PasswordAuthentication = false;
+    settings.KbdInteractiveAuthentication = false;
+  };
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];

@@ -17,6 +17,10 @@ source = "https://github.com/Softsun2/base16-dwm-xrdb"
 name = "nvim-base16"
 source = "https://github.com/Softsun2/base16-nvim-base16"
 
+[[extra_scheme]]
+name = "everforest"
+source = "https://github.com/Softsun2/base16-everforest"
+
 # dwm
 [[item]]
 file = "$HOME/.dotfiles/theme/xcolors-dwm"
@@ -40,3 +44,9 @@ start = '-- start flavours'
 end = '-- end flavours'
 # hook = ...
 
+# zathura
+[[item]]
+file = '$HOME/.dotfiles/config/nvim/lua/colors.lua'
+template = 'nvim-base16'
+start = '-- start flavours'
+end = '-- end flavours'

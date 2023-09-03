@@ -22,6 +22,7 @@ Apps I still need to theme/flavour:
   3. exa
   4. vim (base16 plugin) (is there treesitter support for this??)
   5. zathura
+  6. discord
 
 ## TODO
 * return to just one package repository

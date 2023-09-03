@@ -9,12 +9,11 @@ wo.relativenumber = true        -- relative line numbers
 wo.wrap = false                 -- no wrap
 o.termguicolors = false         -- use terminal colors
 opt.cursorline = true
-opt.colorcolumn = "80"
 
 -- History
-opt.swapfile = false
+g.noswapfile = true
 opt.undofile = true
-opt.undodir = "/home/softsun2/.cache/"
+opt.undodir = "/Users/softsun2/.cache/"
 
 -- Indentation
 opt.autoindent = true           -- copy current indent level when starting a new line
@@ -24,16 +23,12 @@ opt.expandtab = true            -- tab with spaces
 
 -- folding
 opt.foldenable = false          -- open all folds upon entering a file
-
--- splitting
-o.splitright = true
-o.splitbelow = true
+opt.foldlevel = 20              -- when folding, fold at the current fold level
 
 -- Misc
 opt.ignorecase = true           -- ignore case when searching
 opt.smartcase = true            -- only ignore case if all lowercase
 opt.autoread = true             -- reread file if external changes are made to such file
 opt.incsearch = true            -- on by default, make sure it's on, search matches what's been typed so far
+opt.shortmess = "aI"
 
--- DISABLE OMNI SQL KEYMAPS HOLY FUCK IS THIS ANNOYING
-g.omni_sql_no_default_maps = 1
