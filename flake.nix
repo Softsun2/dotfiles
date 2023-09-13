@@ -1,60 +1,28 @@
 {
-  description = "NixOS System Configurations";
+  description = "NixOS and User Configurations";
 
   inputs = {
     
-    nixpkgs.url = "nixpkgs/nixos-unstable";
-
-    mynixpkgs.url = "github:Softsun2/nixpkgs/nixos-unstable";
+    nixpkgs.url = github:nixos/nixpkgs/nixos-23.05;
 
     home-manager = {
-      url = "github:nix-community/home-manager";
+      url = github:nix-community/home-manager/release-23.05;
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
   };
 
-  outputs = inputs @ {
-    nixpkgs,
-    mynixpkgs,
-    home-manager,
-    ...
-  }:
-    let
-      system = "x86_64-linux";
+  outputs = inputs @ { self, nixpkgs, home-manager, ... }:
+  let
 
-      # nixpkgs
-      pkgs = import nixpkgs {
-        inherit system;
-        config.allowUnfree = true;
-      };
+    system = "x86_64-linux";
+    # nixpkgs
+    pkgs = import nixpkgs {
+      inherit system;
+      config.allowUnfree = true;
+    };
 
-      # mynixpkgs
-      mypkgs = import mynixpkgs {
-        inherit system;
-        config.allowUnfree = true;
-      };
-
-      lib = nixpkgs.lib;
-    in {
-      homeManagerConfigurations = {
-        softsun2 = home-manager.lib.homeManagerConfiguration {
-          inherit pkgs;
-          extraSpecialArgs = {
-            inherit mypkgs;
-          };
-          modules = [
-            ./home.nix
-            {
-              home = {
-                username = "softsun2";
-                homeDirectory = "/home/softsun2";
-                stateVersion = "22.11";
-              };
-            }
-          ];
-        };
-      };
+  in {
 
       homeConfigurations.softsun2 = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
@@ -65,12 +33,9 @@
       nixosConfigurations = {
         buffalo = nixpkgs.lib.nixosSystem {
           inherit system;
-          specialArgs = inputs;
-          modules = [
-            ./configuration.nix
-          ];
+          modules = [ ./configuration.nix ];
         };
       };
 
-    };
+  };
 }

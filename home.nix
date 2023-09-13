@@ -14,6 +14,11 @@ in
   # home-manager configuration appendix:
   # https://rycee.gitlab.io/home-manager/options.html
 
+
+  imports = [ ./modules/services/steamcmd.nix ];
+  services.steamcmd.enable = true;
+
+
   programs.home-manager.enable = true;
   manual.manpages.enable = false;
 
@@ -94,22 +99,6 @@ in
         src = builtins.fetchGit {
           url = "https://github.com/agkozak/agkozak-zsh-prompt";
           rev = "1906ad8ef2b4019ae8a1c04d539d7a3c4bde77cb";
-        };
-      }
-      {
-        name = "zsh-syntax-highlighting";
-        file = "zsh-syntax-highlighting.zsh";
-        src = builtins.fetchGit {
-          url = "https://github.com/zsh-users/zsh-syntax-highlighting";
-          rev = "caa749d030d22168445c4cb97befd406d2828db0";
-        };
-      }
-      {
-        name = "zsh-you-should-use";
-        file = "you-should-use.plugin.zsh";
-        src = builtins.fetchGit {
-          url = "https://github.com/MichaelAquilina/zsh-you-should-use";
-          rev = "773ae5f414b296b4100f1ab6668ecffdab795128";
         };
       }
       {
@@ -214,7 +203,6 @@ in
 
       pkgs.vimPlugins.harpoon                 # Tagged files
 
-      pkgs.vimPlugins.indent-blankline-nvim
       pkgs.vimPlugins.vim-nix                 # nix
 
       pkgs.vimPlugins.nvim-navic
