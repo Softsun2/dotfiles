@@ -105,9 +105,6 @@
     (nerdfonts.override { fonts = [ "JetBrainsMono" "Gohu" "Terminus" ]; })
   ];
 
-  # goofy steam support
-  programs.steam.enable = true;
-
   # docker daemon
   virtualisation.docker.enable = true;
 
@@ -126,7 +123,6 @@
     # Apps
     pkgs.firefox
     pkgs.discord
-    pkgs.steam
 
     # util
     pkgs.pulsemixer
@@ -173,7 +169,7 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
 
-  system.stateVersion = "21.11"; # Did you read the comment?
+  system.stateVersion = "23.05"; # Did you read the comment?
 
 }
 

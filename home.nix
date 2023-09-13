@@ -16,8 +16,18 @@ in
 
 
   imports = [ ./modules/services/steamcmd.nix ];
-  services.steamcmd.enable = true;
 
+  services.steamcmd = {
+    enable = true;
+
+    dedicatedServers = {
+      "kz_bhop_badg3s" = {
+        appId = 740;
+        validate = true;
+      };
+    };
+
+  };
 
   programs.home-manager.enable = true;
   manual.manpages.enable = false;
@@ -26,32 +36,8 @@ in
   home.username = "softsun2";
   home.homeDirectory = /home/softsun2;
   home.packages = [
-    pkgs.gephi
     pkgs.python3
-    pkgs.cider
-    pkgs.vscodium
-    pkgs.obs-studio
-    pkgs.flameshot
-    pkgs.cmatrix
     pkgs.tldr
-    pkgs.teams
-    pkgs.libreoffice
-    pkgs.spotify
-    pkgs.optifine
-    pkgs.prismlauncher    # minecraft
-    pkgs.yt-dlp
-    pkgs.zoom-us
-    pkgs.zathura
-    pkgs.zip
-    pkgs.unzip
-
-    # node packages
-    pkgs.nodejs
-    pkgs.nodePackages.live-server
-
-    # ocaml
-    pkgs.ocaml
-    pkgs.ocamlPackages.utop
   ];
 
   programs.zsh = {
@@ -130,36 +116,6 @@ in
       set-option -g status-position bottom
       set -g status-bg black 
       set -g status-fg blue
-    '';
-  };
-
-  programs.kitty = {
-    enable = true;
-    settings = {
-      cursor = "none";
-      allow_remote_control = true;
-      font_family = "Meslo";
-      font_size = 10;
-      scrollback_lines = 5000;
-      wheel_scroll_multiplier = 3;
-      window_padding_width = 10;
-      confirm_os_window_close = 0;
-      enable_audio_bell = false;
-    };
-    extraConfig = ''
-      # runtime colors
-      include ~/.dotfiles/theme/kitty/theme.conf
-
-      # minimize functionality (using tmux instead)
-      # clear_all_shortcuts yes
-      # clear_all_mouse_actions yes
-
-      # the few shortcuts I actually want
-      # map ctrl+equal change_font_size all +1.0
-      # map ctrl+minus change_font_size all -1.0
-      # map ctrl+shift+c copy_to_clipboard
-      # map ctrl+shift+v paste_from_clipoard
-      # be able to interact with links in some way
     '';
   };
 
