@@ -17,27 +17,17 @@ in
 
   imports = [ ./modules/services/steamcmd.nix ];
 
-  services.steamcmd = {
-    enable = true;
-
-    dedicatedServers = {
-      "kz_bhop_badg3s" = {
-        appId = 740;
-        validate = true;
-      };
-    };
-
-  };
-
   programs.home-manager.enable = true;
   manual.manpages.enable = false;
 
   home.stateVersion = "23.05";
   home.username = "softsun2";
   home.homeDirectory = /home/softsun2;
-  home.packages = [
-    pkgs.python3
-    pkgs.tldr
+  home.packages = with pkgs; [
+    python3
+    tldr
+    steamcmd
+    steam-run
   ];
 
   programs.zsh = {
