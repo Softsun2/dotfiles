@@ -97,6 +97,15 @@
     ];
   };
 
+  users.users.steam = {
+    isNormalUser = true;
+    shell = pkgs.zsh;
+    extraGroups = [ "wheel" ];
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIfXndMyPax5eVS+kPXBbjC3mChBLiD/kQATMxu1QXlh peyton.okubo13@gmail.com"
+    ];
+  };
+
   fonts.fonts = with pkgs; [
     unifont
     jetbrains-mono

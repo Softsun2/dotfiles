@@ -15,8 +15,6 @@ in
   # https://rycee.gitlab.io/home-manager/options.html
 
 
-  imports = [ ./modules/services/steamcmd.nix ];
-
   programs.home-manager.enable = true;
   manual.manpages.enable = false;
 
@@ -26,8 +24,6 @@ in
   home.packages = with pkgs; [
     python3
     tldr
-    steamcmd
-    steam-run
   ];
 
   programs.zsh = {
