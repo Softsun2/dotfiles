@@ -1,57 +1,62 @@
 ;;; Emacs Appearance
 
+;;; Font
+;; (set-frame-font "Cousine Nerd Font") ; default font
+(set-face-attribute 'default nil :height 120) ; font size = 10 * px
 
-;;; Variables
-
-(defvar ss2-light-theme nil "Ss2's light theme.")
-(defvar ss2-dark-theme nil "Ss2's dark theme.")
-
-;;; Functions
-
-(defun ns-system-appearance-change-load-ss2-theme (appearance)
+;;; Theme
+(defvar ss2-light-theme 'modus-operandi
+  "Ss2's light theme.")
+(defvar ss2-dark-theme 'modus-vivendi
+  "Ss2's dark theme.")
+(defun ss2-ns-system-appearance-change-load-theme (appearance)
   "Load appropriate light/dark theme when ns-system-appearance changes."
   (if (eq appearance 'dark)
       (when ss2-dark-theme
         (load-theme ss2-dark-theme :no-confirm))
     (when ss2-light-theme
       (load-theme ss2-light-theme :no-confirm))))
+(setq-default ns-system-appearance-change-functions
+			  '(ss2-ns-system-appearance-change-load-theme))
 
-;;; Font
+(load-theme ss2-dark-theme :no-confirm)
 
-;;; (add-to-list 'default-frame-alist '(font . "Hasklug Nerd Font"))
+;;; Darwin Frame
+;; (setf (alist-get 'undecorated-round default-frame-alist) nil
+;;       (alist-get 'internal-border-width default-frame-alist) 0
+;;       (alist-get 'left-fringe default-frame-alist) 24
+;;       (alist-get 'right-fringe default-frame-alist) 24)
+;; (custom-set-faces
+;;  '(fringe ((t (:background unspecified)))))
 
-;;; Theme
+;;; unix frame
+(setf ;; (alist-get 'undecorated default-frame-alist) t
+      (alist-get 'internal-border-width default-frame-alist) 0
+      ;; (alist-get 'left-fringe default-frame-alist) 24
+      ;; (alist-get 'right-fringe default-frame-alist) 24
+      (alist-get 'tool-bar-lines default-frame-alist) 0)
+(custom-set-faces
+ '(fringe ((t (:background unspecified)))))
+;; (custom-set-faces
+;;  '(header-line ((t (:background unspecified)))))
 
-(use-package ef-themes
-  :ensure nil
-  :init
-  (setq ss2-light-theme 'ef-day)
-  (setq ss2-dark-theme 'ef-autumn)
-  :custom
-  (ef-themes-to-toggle '(ef-day ef-autumn))
-  :bind
-  (("<f5>" . ef-themes-toggle)))
+;;; Window
+;; (setq-default header-line-format "")
 
+;;; Startup
+(setq-default
+ inhibit-startup-screen t
+ initial-buffer-choice t)
 
-;;; Visual Settigns
-
-;; "enable" my ns-system-appearance change function
-(setq ns-system-appearance-change-functions
-      '(ns-system-appearance-change-load-ss2-theme))
-
-;; enable modes
-(column-number-mode 1)
-
-;; disable modes
-(scroll-bar-mode -1)    ; disable scroll bar
-(tool-bar-mode -1)      ; disable tool bar
-
-;; enable line numbers where appropriate
-(add-hook 'prog-mode-hook 'display-line-numbers-mode)
-(add-hook 'text-mode-hook 'display-line-numbers-mode)
-
-;; set global text scale
-(set-face-attribute 'default nil :height 170)
+;;; Misc.
+;; (setq-default frame-resize-pixelwise t)
+(menu-bar-mode -1)
+(tool-bar-mode -1)
+(scroll-bar-mode -1)
+(setq-default truncate-lines t) ; may only want this when editing text
+(defun ss2-show-trailing-whitespace () (setq show-trailing-whitespace t))
+(add-hook 'prog-mode-hook 'ss2-show-trailing-whitespace)
+(add-hook 'text-mode-hook 'ss2-show-trailing-whitespace)
 
 ;;; Provide
 (provide 'ss2-appearance)

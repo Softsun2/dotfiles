@@ -193,3 +193,4 @@ index 82fe58e90e..f132a9591d 100644
    EmacsView *view = (EmacsView *)FRAME_NS_VIEW (f);
 -- 
 2.36.1
+

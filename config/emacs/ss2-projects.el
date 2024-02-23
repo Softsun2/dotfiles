@@ -1,12 +1,10 @@
-;; Project initialization commands
-
-(defvar ss2-projects
-  ("vmae")
-  ("dotfiles"))
-
-(defun ss2-vmae ()
-  "Opens ss2's vmae project."
+(defun ss2-projects-save-desktop ()
   (interactive)
-  (find-file "~/softsun2/dev/personal/vmae/"))
+  (let ((path (read-file-name "Desktop dir: ")))
+    (desktop-save path)))
 
-(provide ss2-projects)
+(defun ss2-projects-vmae ()
+  "load vmae desktop"
+  (desktop-read "~/softsun2/git/personal/vmae"))
+
+(provide 'ss2-projects)
