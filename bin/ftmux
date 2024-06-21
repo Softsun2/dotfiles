@@ -1,4 +1,0 @@
-#!/bin/sh
-
-SELECTED=$(find . -type d | fzf)
-tmux new -s $(basename "$SELECTED") -c "$SELECTED"
