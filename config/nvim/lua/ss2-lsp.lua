@@ -32,6 +32,11 @@ Ss2.useModule({
         lspconfig.hls.setup({
             cmd = { "haskell-language-server-wrapper", "--lsp", "-l", "/tmp/hls.out" },
             on_attach = supportLspOverloads,
+            settings = {
+                haskell = {
+                    formattingProvider = "floskell"
+                }
+            }
         })
         lspconfig.ccls.setup({
             on_attach = supportLspOverloads,
