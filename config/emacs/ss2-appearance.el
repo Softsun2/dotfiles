@@ -18,17 +18,15 @@
 
 ;;; Font
 
-;;; (add-to-list 'default-frame-alist '(font . "Hasklug Nerd Font"))
+;; (add-to-list 'default-frame-alist '(font . "Hasklug Nerd Font"))
 
 ;;; Theme
 
 (use-package ef-themes
   :ensure nil
   :init
-  (setq ss2-light-theme 'ef-day)
+  (setq ss2-light-theme 'ef-cyprus)
   (setq ss2-dark-theme 'ef-autumn)
-  :custom
-  (ef-themes-to-toggle '(ef-day ef-autumn))
   :bind
   (("<f5>" . ef-themes-toggle)))
 
@@ -51,7 +49,7 @@
 (add-hook 'text-mode-hook 'display-line-numbers-mode)
 
 ;; set global text scale
-(set-face-attribute 'default nil :height 170)
+(set-face-attribute 'default nil :height 140)
 
 ;;; Provide
 (provide 'ss2-appearance)
