@@ -66,7 +66,7 @@
 
   finder = {
     AppleShowAllExtensions = true;   # show all file extensions
-    AppleShowAllFiles = false;       # don't show hidden files
+    AppleShowAllFiles = true;        # show hidden files
     QuitMenuItem = true;             # enable quitting finder
     _FXShowPosixPathInTitle = true;  # show the full POSIX filepath in the window title
     FXPreferredViewStyle = "clmv";   # set the default view to column view
