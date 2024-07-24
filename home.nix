@@ -1,9 +1,9 @@
 { config, pkgs, lib, ... }:
 {
-  nix = {
-    package = pkgs.nix;
-    settings.experimental-features = [ "nix-command" "flakes" ];
-  };
+  # nix = {
+  #   package = pkgs.nix;
+  #   settings.experimental-features = [ "nix-command" "flakes" ];
+  # };
 
   programs.home-manager.enable = true;
 
@@ -15,11 +15,6 @@
   home.packages = with pkgs; [
     # dev tools
     tldr tree
-  ];
-
-  # added to .profile
-  home.sessionPath = [
-    "${config.home.homeDirectory}/.dotfiles/bin"
   ];
 
   home.shellAliases = {
@@ -43,15 +38,11 @@
       }
     '';
     sessionVariables = {
-      SHELL = "/run/current-system/sw/bin/bash";
       PROMPT_COMMAND = "ss2-prompt";
     };
     shellAliases = {
       dot = "cd ${config.home.homeDirectory}/.dotfiles";
       home-switch = "home-manager switch --flake ${config.home.homeDirectory}/.dotfiles";
-      # window role patch support
-      # https://nixos.wiki/wiki/Emacs#Window_manager_integration
-      emacs = "${config.programs.emacs.finalPackage}/Applications/Emacs.app/Contents/MacOS/Emacs";
     };
   };
 
@@ -59,7 +50,6 @@
     enable = true;
     vimAlias = true;
     vimdiffAlias = true;
-    defaultEditor = true;
     extraLuaConfig = ''
       -- source my config
       vim.opt.runtimepath:prepend("${config.home.homeDirectory}/.dotfiles/config/nvim")
@@ -126,12 +116,6 @@
     extraConfig = ''
       setw -g mode-keys vi
     '';
-  };
-
-  programs.fzf = {
-    enable = true;
-    enableZshIntegration = true;
-    defaultOptions = [ "--color=16" ];
   };
 
 }
