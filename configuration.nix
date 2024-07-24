@@ -5,9 +5,9 @@
   # system packages
   environment.systemPackages = with pkgs; [ vim git ];
 
-  # enable flakes
   nix.extraOptions = ''
     experimental-features = nix-command flakes
+    extra-platforms = aarch64-darwin x86_64-darwin
   '';
 
   # Auto upgrade nix package and the daemon service.
@@ -78,13 +78,15 @@
       "homebrew/cask-versions"
     ];
     casks = [
+      "wireshark"
+      "discord"
+      "vial"
       "alacritty"
       "docker"
-      "via"
       "firefox"
-      "discord"
       "olive"
       "vlc"
+      "gimp"
     ];
   };
 

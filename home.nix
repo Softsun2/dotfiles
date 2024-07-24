@@ -1,31 +1,35 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, rosetta-pkgs, lib, ... }:
 {
   manual.manpages.enable = false;
   programs.home-manager.enable = true;
 
   # pin home manager modules/packages to the latest nix-stable channel
-  home.stateVersion = "23.11";
-  
-  home.username = "softsun2";
+  home.stateVersion = "24.05";
+
+ home.username = "softsun2";
   home.homeDirectory = /Users/softsun2;
   fonts.fontconfig.enable = true;
   home.packages = with pkgs; [
     (nerdfonts.override { fonts = [ "Hasklig" ]; })
 
     # media
-    ffmpeg yt-dlp
+    ffmpeg
+    yt-dlp
 
     # dev tools
-    tldr tree plistwatch jq
+    tldr
+    tree
+    plistwatch
+    jq
 
     # emacs extra packages
-    # rnix-lsp pyright nixfmt
+    nixfmt
   ];
 
   # TODO: use a list or something
-  home.file."${config.home.username}/agenda/.keep".text = "";
+  home.file."${config.home.username}/org/.keep".text = "";
   home.file."${config.home.username}/archive/.keep".text = "";
-  home.file."${config.home.username}/dev/.keep".text = "";
+  home.file."${config.home.username}/git/.keep".text = "";
   home.file."${config.home.username}/documents/.keep".text = "";
   home.file."${config.home.username}/literature/.keep".text = "";
   home.file."${config.home.username}/music/.keep".text = "";
@@ -50,6 +54,10 @@
     l = "ls -l";
     ll = "ls -al";
     ".." = "cd ..";
+    fss2 = ''
+      dest=$(find -d ${config.home.homeDirectory}/${config.home.username} | fzf) \
+      && cd "$dest"
+    '';
   };
 
   programs.bash = {
@@ -58,11 +66,7 @@
     initExtra = ''
       ${config.home.homeDirectory}/.dotfiles/bin/solar-system
       ss2-prompt () {
-          host="\e[2;37m\h\e[0m"
-          user="$(test -z $IN_NIX_SHELL && echo '\e[4;33m' || echo '\e[4;34m')\u\e[0m"
-          path="\e[0;33m$(basename $(pwd))\e[0m"
-          seperator="\e[2;37m¶\e[0m"
-          PS1="$host\e[2;37m(\e[0m$user\e[2;37m)\e[0m$seperator "
+          PS1="\h.\u$ "
       }
     '';
     sessionVariables = {
@@ -79,6 +83,11 @@
     };
   };
 
+  programs.direnv = { 
+    enable = true;
+    nix-direnv.enable = true;
+  };
+
   programs.neovim = {
     enable = true;
     vimAlias = true;
@@ -90,29 +99,36 @@
       require("ss2-init")
     '';
     plugins = with pkgs.vimPlugins; [
-      nvim-lspconfig          # community maintained lsp configurations
-      lspkind-nvim            # lsp suggestion pictograms
+      nvim-lspconfig # community maintained lsp configurations
+      lspkind-nvim # lsp suggestion pictograms
       lsp-overloads-nvim
 
-      nvim-cmp                # completion engine
-      cmp-nvim-lsp            # lsp completion source
-      cmp-path                # file system completion source
-      cmp-nvim-lua            # lua (for nvim) completion source
+      nvim-cmp # completion engine
+      cmp-nvim-lsp # lsp completion source
+      cmp-path # file system completion source
+      cmp-nvim-lua # lua (for nvim) completion source
       # cmp-spell/cmp-dictionary
       luasnip
 
       # treesitter with grammars
       (nvim-treesitter.withPlugins (g: with g; [
-        nix lua bash c cpp haskell markdown markdown-inline regex
+        nix
+        lua
+        bash
+        c
+        cpp
+        haskell
+        markdown
+        markdown-inline
+        regex
       ]))
 
-      vim-nix                 # nix
-      gitsigns-nvim           # gutter git info
-      telescope-nvim          # integrated fuzzy finder
-      vim-devicons            # stupid icon dependency
+      vim-nix # nix
+      gitsigns-nvim # gutter git info
+      telescope-nvim # integrated fuzzy finder
+      vim-devicons # stupid icon dependency
     ];
     extraPackages = with pkgs; [
-      rnix-lsp
       sumneko-lua-language-server
       ripgrep
     ];
@@ -133,7 +149,7 @@
       (load user-init-file)
     '';
     # declare emacs packages with nix
-    extraPackages = pkgs: with pkgs; [ 
+    extraPackages = pkgs: with pkgs; [
       use-package
       meow
       ef-themes
@@ -141,9 +157,11 @@
       company
       org-roam
       expand-region
+      direnv
 
       # language modes
       nix-mode
+      markdown-mode
       haskell-mode
       tuareg # ocaml mode
     ];

@@ -3,7 +3,7 @@
 
   inputs = {
 
-    nixpkgs.url = github:nixos/nixpkgs/nixpkgs-23.11-darwin;
+    nixpkgs.url = github:nixos/nixpkgs/nixpkgs-24.05-darwin;
     nixpkgs-unstable.url = github:nixos/nixpkgs/nixpkgs-unstable;
     
     darwin = {
@@ -11,7 +11,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     home-manager = {
-      url = github:nix-community/home-manager/release-23.11;
+      url = github:nix-community/home-manager/release-24.05;
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -20,7 +20,8 @@
   outputs = { self, nixpkgs, nixpkgs-unstable, darwin, home-manager, ... }:
     let
       
-      system = "aarch64-darwin";
+      system  = "aarch64-darwin";
+      rosetta = "x86_64-darwin";
       
       # yabai usually breaks every MacOS update; pull in yabai updates asap
       yabai-unstable-overlay = (_: _: {
@@ -33,21 +34,22 @@
         config.allowUnfree = true;
       };
 
+      rosetta-pkgs = nixpkgs.legacyPackages.${rosetta};
+
     in {
 
       homeConfigurations.softsun2 = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         lib = pkgs.lib;
         modules = [ ./home.nix ];
+        extraSpecialArgs = { inherit rosetta-pkgs; };
       };
 
       darwinConfigurations = {
         woollymammoth = darwin.lib.darwinSystem {
           inherit system;
           inherit pkgs;
-          modules = [
-            ./configuration.nix
-          ];
+          modules = [ ./configuration.nix ];
         };
       };
 
