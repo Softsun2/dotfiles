@@ -16,8 +16,14 @@
   (c++-mode . eglot-ensure)
   (haskell-mode . eglot-ensure)
   (tuareg-mode . eglot-ensure)
-  (fortran-mode . eglot-ensure)
-
+  :bind
+  ("C-c [ e" . flymake-goto-next-error)
+  ("C-c ] e" . flymake-goto-prev-error)
+  ("C-c q e" . flymake-show-project-diagnostics)
+  ("C-c l a" . eglot-code-actions)
+  ("C-c r" . eglot-rename)
+  ("C-c f" . eglot-format)
+  
   :config
   ;; explicitly declare which language servers to use
   ;; https://github.com/joaotavora/eglot/blob/master/eglot.el
@@ -40,8 +46,8 @@
 	       '(tuareg-mode . ("ocamllsp")))
 
   (add-to-list 'eglot-server-programs
-	       '((fortran-mode f90-mode) . ("fortls" "--notify_init"))))
+	       '((fortran-mode f90-mode) . ("fortls" "--notify_init")))
   
-
+  (setq eldoc-echo-area-use-multiline-p t))
 
 (provide 'ss2-lsp)

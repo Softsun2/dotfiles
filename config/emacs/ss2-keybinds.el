@@ -36,26 +36,26 @@
    '("2" . meow-expand-2)
    '("1" . meow-expand-1)
    '("-" . negative-argument)
-   '(";" . meow-reverse)
+   '(";" . meow-reverse)               ; exchange point and mark
    '("," . meow-inner-of-thing)
    '("." . meow-bounds-of-thing)
    '("[" . meow-beginning-of-thing)
    '("]" . meow-end-of-thing)
-   '("a" . meow-append)
+   '("a" . meow-append)                ; move to the end of selection and insert
    '("A" . meow-open-below)
    '("b" . meow-back-word)
    '("B" . meow-back-symbol)
-   '("c" . meow-change)
+   '("c" . meow-change)                ; kill selection and insert
    '("d" . meow-delete)
-   '("D" . meow-backward-delete)
+   '("D" . meow-backward-delete)       ; x with no yank
    '("e" . meow-next-word)
    '("E" . meow-next-symbol)
-   '("f" . meow-find)
+   '("f" . meow-find)                  ; find next char in minibuffer
    '("g" . meow-cancel-selection)
-   '("G" . meow-grab)
+   '("G" . meow-grab)                  ; create a secondary selection or a marker if no region is available
    '("h" . meow-left)
    '("H" . meow-left-expand)
-   '("i" . meow-insert)
+   '("i" . meow-insert)                ; move to the beginning of selection and insert
    '("I" . meow-open-above)
    '("j" . meow-next)
    '("J" . meow-next-expand)
@@ -63,29 +63,31 @@
    '("K" . meow-prev-expand)
    '("l" . meow-right)
    '("L" . meow-right-expand)
-   '("m" . meow-join)
-   '("n" . meow-search)
-   '("o" . meow-block)
+   '("m" . meow-join)                  ; similar to J in vim
+   '("n" . meow-search)                ; similar to * in vim
+   '("o" . meow-block)                 ; select or expand current block
    '("O" . meow-to-block)
-   '("p" . meow-yank)
+   '("p" . meow-yank)                  ; p in vim
    '("q" . meow-quit)
    '("Q" . meow-goto-line)
-   '("r" . meow-replace)
-   '("R" . meow-swap-grab)
+   '("r" . meow-replace)               ; replace selection with yank
+   '("R" . meow-swap-grab)             ; swap region and secondary selection
    '("s" . meow-kill)
    '("t" . meow-till)
    '("u" . meow-undo)
    '("U" . meow-undo-in-selection)
-   '("v" . meow-visit)
-   '("w" . meow-mark-word)
+   '("v" . meow-visit)                 ; / in vim
+   '("w" . meow-mark-word)             ; mark word under cursor
    '("W" . meow-mark-symbol)
    '("x" . meow-line)
    '("X" . meow-goto-line)
-   '("y" . meow-save)
-   '("Y" . meow-sync-grab)
+   '("y" . meow-save)                  ; copy
+   '("Y" . meow-sync-grab)             ; sync secondary selection with current region
    '("z" . meow-pop-selection)
    '("'" . repeat)
-   '("<escape>" . ignore)))
+   '("<escape>" . ignore))
+  (meow-define-keys 'insert
+    '("C-h" . completion-at-point)))
 
 ;; (use-package meow
 ;;   :ensure nil
