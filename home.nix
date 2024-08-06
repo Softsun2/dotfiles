@@ -1,20 +1,23 @@
-{ config, pkgs, rosetta-pkgs, lib, ... }:
+{ config, pkgs, lib, ... }:
 {
-  # nix = {
-  #   package = pkgs.nix;
-  #   settings.experimental-features = [ "nix-command" "flakes" ];
-  # };
+  nix = {
+    package = pkgs.nix;
+    settings.experimental-features = [ "nix-command" "flakes" ];
+  };
 
   programs.home-manager.enable = true;
 
   # pin home manager modules/packages to the latest nix-stable channel
   home.stateVersion = "24.05";
-  
+
   home.username = "pokubo";
   home.homeDirectory = /home/pokubo;
   home.packages = with pkgs; [
     # dev tools
-    tldr tree
+    tldr tree python3 st
+
+    # emacs extra packages
+    pyright
   ];
 
   home.shellAliases = {
@@ -22,10 +25,6 @@
     l = "ls -l";
     ll = "ls -al";
     ".." = "cd ..";
-    fss2 = ''
-      dest=$(find -d ${config.home.homeDirectory}/${config.home.username} | fzf) \
-      && cd "$dest"
-    '';
   };
 
   programs.bash = {
@@ -44,11 +43,6 @@
       dot = "cd ${config.home.homeDirectory}/.dotfiles";
       home-switch = "home-manager switch --flake ${config.home.homeDirectory}/.dotfiles";
     };
-  };
-
-  programs.direnv = { 
-    enable = true;
-    nix-direnv.enable = true;
   };
 
   programs.neovim = {

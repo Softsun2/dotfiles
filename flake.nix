@@ -18,15 +18,12 @@
         config.allowUnfree = true;
       };
 
-      rosetta-pkgs = nixpkgs.legacyPackages.${rosetta};
-
     in {
 
       homeConfigurations.pokubo = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         lib = pkgs.lib;
         modules = [ ./home.nix ];
-        extraSpecialArgs = { inherit rosetta-pkgs; };
       };
 
     };

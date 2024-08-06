@@ -1,6 +1,5 @@
 ;;; Emacs Appearance
 
-
 ;;; Variables
 
 (defvar ss2-light-theme nil "Ss2's light theme.")
@@ -30,12 +29,13 @@
   :bind
   (("<f5>" . ef-themes-toggle)))
 
-
 ;;; Visual Settigns
 
 ;; "enable" my ns-system-appearance change function
 (setq ns-system-appearance-change-functions
       '(ns-system-appearance-change-load-ss2-theme))
+
+(ns-system-appearance-change-load-ss2-theme 'dark)
 
 ;; enable modes
 (column-number-mode 1)
