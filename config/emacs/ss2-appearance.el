@@ -1,12 +1,7 @@
 ;;; Emacs Appearance
 
-
-;;; Variables
-
 (defvar ss2-light-theme nil "Ss2's light theme.")
 (defvar ss2-dark-theme nil "Ss2's dark theme.")
-
-;;; Functions
 
 (defun ns-system-appearance-change-load-ss2-theme (appearance)
   "Load appropriate light/dark theme when ns-system-appearance changes."
@@ -18,7 +13,8 @@
 
 ;;; Font
 
-;; (add-to-list 'default-frame-alist '(font . "Hasklug Nerd Font"))
+(set-frame-font "UbuntuMono Nerd Font") ; default font
+(set-face-attribute 'default nil :height 160) ; font size = 10 * px
 
 ;;; Theme
 
@@ -30,12 +26,17 @@
   :bind
   (("<f5>" . ef-themes-toggle)))
 
-
-;;; Visual Settigns
-
 ;; "enable" my ns-system-appearance change function
 (setq ns-system-appearance-change-functions
       '(ns-system-appearance-change-load-ss2-theme))
+
+;;; Frame
+
+;; disable top bar (MacOS, use 'undecorated otherwise)
+(set-frame-parameter nil 'undecorated-round t)
+(add-to-list 'default-frame-alist '(internal-border-width . 12)) ; set padding
+
+;;; Misc
 
 ;; enable modes
 (column-number-mode 1)
@@ -44,12 +45,9 @@
 (scroll-bar-mode -1)    ; disable scroll bar
 (tool-bar-mode -1)      ; disable tool bar
 
-;; enable line numbers where appropriate
+;; enable line numbers only when appropriate
 (add-hook 'prog-mode-hook 'display-line-numbers-mode)
 (add-hook 'text-mode-hook 'display-line-numbers-mode)
-
-;; set global text scale
-(set-face-attribute 'default nil :height 140)
 
 ;;; Provide
 (provide 'ss2-appearance)

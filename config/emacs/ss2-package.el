@@ -9,5 +9,6 @@
 (require 'ss2-company)
 ;; (require 'ss2-expand-region)
 (require 'ss2-direnv)
+(require 'ss2-magit)
 
 (provide 'ss2-package)

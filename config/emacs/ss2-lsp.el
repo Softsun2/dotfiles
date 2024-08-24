@@ -40,14 +40,12 @@
 	       '((c-mode c-ts-mode c++-mode c++-ts-mode) . ("ccls" "-log-file=/tmp/ccls.log" "-v=1")))
 
   (add-to-list 'eglot-server-programs
-	       '((haskell-mode) . ("haskell-language-server-wrapper" "lsp")))
+	       '((haskell-mode) . ("haskell-language-server-wrapper" "--lsp" "-l" "/tmp/hls.out" :initializationOptions (:haskell (:formattingProvider "floskell")))))
   
   (add-to-list 'eglot-server-programs
 	       '(tuareg-mode . ("ocamllsp")))
 
   (add-to-list 'eglot-server-programs
-	       '((fortran-mode f90-mode) . ("fortls" "--notify_init")))
-  
-  (setq eldoc-echo-area-use-multiline-p t))
+	       '((fortran-mode f90-mode) . ("fortls" "--notify_init"))))
 
 (provide 'ss2-lsp)

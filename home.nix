@@ -24,6 +24,7 @@
 
     # emacs extra packages
     nixfmt
+    graphviz
   ];
 
   # TODO: use a list or something
@@ -154,6 +155,7 @@
       meow
       ef-themes
       eglot
+      magit
       company
       org-roam
       expand-region

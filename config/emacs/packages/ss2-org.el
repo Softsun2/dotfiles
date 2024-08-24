@@ -34,7 +34,7 @@
         (todo   . " ")
         (tags   . " %i %-12:c")
         (search . " %i %-12:c")))
-  (org-todo-keywords '((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d)")))
+  (org-todo-keywords '((sequence "TODO(t)" "NEXT(n)" "PROG(p)" "|" "DONE(d)")))
   
   (org-refile-targets `(("projects.org"
 			 :regexp . ,(regexp-opt '("Tasks" "Notes")))
