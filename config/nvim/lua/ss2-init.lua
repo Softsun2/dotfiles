@@ -5,7 +5,7 @@ Ss2.safeLoadModule("ss2-settings")      -- neovim options
 Ss2.safeLoadModule("ss2-keybinds")      -- global keymaps
 Ss2.safeLoadModule("ss2-colors")        -- neovim colorscheme
 
-Ss2.safeLoadModule("ss2-lazy")          -- package manager
+-- Ss2.safeLoadModule("ss2-lazy")          -- package manager
 Ss2.safeLoadModule("ss2-lsp")           -- lsp
 Ss2.safeLoadModule("ss2-package")       -- packages
 

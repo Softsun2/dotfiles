@@ -17,7 +17,7 @@ vim.opt.rtp:append(lazypath)
 
 Ss2.useModule({
     name = "lazy",  -- lazy loading plugin manager
-    required = not Ss2.isNixUser(),
+    required = false,
     configure = function (lazy)
         local plugins = {
             { "neovim/nvim-lspconfig", tag = "v0.1.7", lazy = false },

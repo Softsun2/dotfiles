@@ -43,6 +43,7 @@
 ;; disable modes
 (scroll-bar-mode -1)    ; disable scroll bar
 (tool-bar-mode -1)      ; disable tool bar
+(menu-bar-mode -1)      ; file, edit, options... bar
 
 ;; enable line numbers where appropriate
 (add-hook 'prog-mode-hook 'display-line-numbers-mode)

@@ -14,7 +14,7 @@
   home.homeDirectory = /home/pokubo;
   home.packages = with pkgs; [
     # dev tools
-    tldr tree python3 st
+    tldr tree st
 
     # emacs extra packages
     pyright
@@ -30,19 +30,23 @@
   programs.bash = {
     enable = true;
     enableCompletion = true;
+
     initExtra = ''
       # ${config.home.homeDirectory}/.dotfiles/bin/solar-system
-      ss2-prompt () {
-          PS1="\h.\u$ "
-      }
+      # ss2-prompt () {
+      #     PS1="\h.\u$ "
+      # }
+      # dumb wsl login shell hack
+      source ~/.src
     '';
-    sessionVariables = {
-      PROMPT_COMMAND = "ss2-prompt";
-    };
+    # sessionVariables = {
+    #   PROMPT_COMMAND = "ss2-prompt";
+    # };
     shellAliases = {
       dot = "cd ${config.home.homeDirectory}/.dotfiles";
       home-switch = "home-manager switch --flake ${config.home.homeDirectory}/.dotfiles";
     };
+    shellOptions = [ "direxpand" ];
   };
 
   programs.neovim = {
@@ -99,6 +103,7 @@
     '';
     # declare emacs packages with nix
     extraPackages = pkgs: with pkgs; [
+      magit
       use-package
       meow
       ef-themes
@@ -107,6 +112,7 @@
       org-roam
       expand-region
       direnv
+      chess
 
       # language modes
       nix-mode
@@ -122,6 +128,7 @@
     escapeTime = 50;
     baseIndex = 1;
     terminal = "screen-256color";
+    historyLimit = 20000;
     extraConfig = ''
       setw -g mode-keys vi
     '';

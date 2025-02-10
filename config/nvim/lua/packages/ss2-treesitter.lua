@@ -4,7 +4,7 @@ Ss2.useModule({
   required = true,
   configure = function (nvimTreesitter)
     nvimTreesitter.setup({
-      ensure_installed = Ss2.isNixUser() and {} or { "lua" },
+      -- ensure_installed = Ss2.isNixUser() and {} or { "lua" },
       auto_install = false,
       highlight = { enable = true }
     })
