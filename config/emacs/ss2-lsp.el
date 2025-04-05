@@ -40,7 +40,9 @@
 	       '((c-mode c-ts-mode c++-mode c++-ts-mode) . ("ccls" "-log-file=/tmp/ccls.log" "-v=1")))
 
   (add-to-list 'eglot-server-programs
-	       '((haskell-mode) . ("haskell-language-server-wrapper" "--lsp" "-l" "/tmp/hls.out" :initializationOptions (:haskell (:formattingProvider "floskell")))))
+	       '((haskell-mode) .
+		 ("haskell-language-server-wrapper" "--lsp" "-l" "/tmp/hls.out"
+		  :initializationOptions (:haskell (:formattingProvider "floskell")))))
   
   (add-to-list 'eglot-server-programs
 	       '(tuareg-mode . ("ocamllsp")))

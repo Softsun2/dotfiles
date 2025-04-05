@@ -6,11 +6,8 @@
 (use-package org
   :ensure nil
   :config
-  (defun org-capture-inbox ()
-    (interactive)
-    (call-interactively 'org-store-link)
-    (org-capture nil "i"))
   :custom
+  (add-to-list 'org-modules 'org-habit)
   (org-directory "~/softsun2/org")
   
   (org-agenda-files (list "inbox.org"
@@ -46,7 +43,6 @@
   ;; date tree is helpful for journaling
   :bind
   ("C-c a" . 'org-agenda)
-  ("C-c c" . 'org-capture)
-  ("C-c i" . 'org-capture-inbox))
+  ("C-c c" . 'org-capture))
 
 (provide 'ss2-org)

@@ -46,13 +46,11 @@
     # re-disable window-shadow on dock restart
     # yabai -m signal --add event=dock_did_restart action="sleep 1 && yabai -m config window_shadow off"
 
-
     # enable debug output
     yabai -m config debug_output on
 
     yabai -m rule --add app="^System Preferences$" manage=off
-    yabai -m rule --add app="^zoom.us$" manage=off
-    yabai -m rule --add app="^Steam Helper$" manage=off
+    yabai -m rule --add app="^GIMP$" manage=off
   '';
 
 }

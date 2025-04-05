@@ -6,8 +6,6 @@ audio_dl() {
   yt-dlp \
     --extract-audio \
     --audio-format mp3 \
-    --xattrs \
-    --embed-thumbnail \
     --no-abort-on-error \
     --output "$OUTPUT" \
     $1

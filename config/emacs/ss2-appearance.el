@@ -13,18 +13,17 @@
 
 ;;; Font
 
-(set-frame-font "UbuntuMono Nerd Font") ; default font
-(set-face-attribute 'default nil :height 160) ; font size = 10 * px
+(set-frame-font "Cousine Nerd Font") ; default font
+(set-face-attribute 'default nil :height 200) ; font size = 10 * px
 
 ;;; Theme
 
-(use-package ef-themes
-  :ensure nil
-  :init
-  (setq ss2-light-theme 'ef-cyprus)
-  (setq ss2-dark-theme 'ef-autumn)
-  :bind
-  (("<f5>" . ef-themes-toggle)))
+(use-package ef-themes :ensure nil)
+
+;; (setq ss2-light-theme 'ef-day)
+;; (setq ss2-dark-theme 'ef-autumn)
+(setq ss2-light-theme 'modus-operandi)
+(setq ss2-dark-theme 'modus-vivendi)
 
 ;; "enable" my ns-system-appearance change function
 (setq ns-system-appearance-change-functions

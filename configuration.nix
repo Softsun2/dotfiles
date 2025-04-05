@@ -78,15 +78,14 @@
       "homebrew/cask-versions"
     ];
     casks = [
-      "wireshark"
       "discord"
+      "blender"
       "vial"
       "alacritty"
       "docker"
       "firefox"
+      "obs"
       "olive"
-      "vlc"
-      "gimp"
     ];
   };
 
