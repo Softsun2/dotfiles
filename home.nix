@@ -65,7 +65,6 @@
     enable = true;
     enableCompletion = true;
     initExtra = ''
-      ${config.home.homeDirectory}/.dotfiles/bin/solar-system
       ss2-prompt () {
           PS1="\h.\u$ "
       }
