@@ -79,10 +79,8 @@
     ];
     casks = [
       "discord"
-      "blender"
       "vial"
       "alacritty"
-      "docker"
       "firefox"
       "obs"
       "olive"
