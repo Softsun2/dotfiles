@@ -6,11 +6,14 @@
   # pin home manager modules/packages to the latest nix-stable channel
   home.stateVersion = "24.11";
 
- home.username = "softsun2";
+  home.username = "softsun2";
   home.homeDirectory = /Users/softsun2;
   fonts.fontconfig.enable = true;
   home.packages = with pkgs; [
     (nerdfonts.override { fonts = [ "Hasklig" ]; })
+
+    # networking
+    miniupnpc
 
     # media
     ffmpeg
@@ -151,8 +154,6 @@
     # declare emacs packages with nix
     extraPackages = pkgs: with pkgs; [
       use-package
-      meow
-      ef-themes
       eglot
       magit
       company
@@ -164,7 +165,6 @@
       nix-mode
       markdown-mode
       haskell-mode
-      tuareg # ocaml mode
     ];
   };
 
@@ -174,8 +174,9 @@
     escapeTime = 50;
     baseIndex = 1;
     terminal = "screen-256color";
+    keyMode = "vi";
     extraConfig = ''
-      setw -g mode-keys vi
+      set -g default-command  /run/current-system/sw/bin/bash
     '';
   };
 
