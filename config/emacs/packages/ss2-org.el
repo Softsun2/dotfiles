@@ -25,16 +25,15 @@
 	       "\n%?")
       :prepend t)))
   
-  (org-agenda-hide-tags-regexp ".")
   (org-agenda-prefix-format
       '((agenda . " %i %-12:c%?-12t% s")
         (todo   . " ")
         (tags   . " %i %-12:c")
         (search . " %i %-12:c")))
-  (org-todo-keywords '((sequence "TODO(t)" "NEXT(n)" "PROG(p)" "|" "DONE(d)")))
+  (org-todo-keywords '((sequence "TODO(t)" "PROG(p)" "|" "DONE(d)" "FAILED(f)")))
   
   (org-refile-targets `(("projects.org"
-			 :regexp . ,(regexp-opt '("Tasks" "Notes")))
+			 :regexp . ,(regexp-opt '("Tasks" "Notes" "Subtasks")))
 			("agenda.org" :maxlevel . 3)))
   
   (org-refile-use-outline-path 'file)
