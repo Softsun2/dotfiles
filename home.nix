@@ -1,4 +1,4 @@
-{ config, pkgs, rosetta-pkgs, lib, ... }:
+{ config, pkgs, lib, ... }:
 {
   manual.manpages.enable = false;
   programs.home-manager.enable = true;
@@ -26,7 +26,7 @@
     jq
 
     # emacs extra packages
-    nixfmt
+    nixfmt-classic
     graphviz
   ];
 

@@ -26,8 +26,6 @@
     options = "--delete-older-than 1w";
   };
 
-  programs.zsh.enable = true; # default shell on catalina
-
   # https://github.com/LnL7/nix-darwin/blob/master/modules/system/activation-scripts.nix:
   # A set of shell script fragments that are executed when a NixOS system configuration is activated.
   system.activationScripts.postActivation.text = ''

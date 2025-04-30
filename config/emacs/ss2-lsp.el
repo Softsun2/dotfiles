@@ -3,7 +3,7 @@
 ;;; Language Modes
 (use-package nix-mode :ensure nil :mode "\\.nix\\'")
 (use-package haskell-mode :ensure nil)
-(use-package tuareg :ensure nil)
+;; (use-package tuareg :ensure nil)
 
 
 ;;; LSP
@@ -15,7 +15,7 @@
   (c-mode . eglot-ensure)
   (c++-mode . eglot-ensure)
   (haskell-mode . eglot-ensure)
-  (tuareg-mode . eglot-ensure)
+  ;; (tuareg-mode . eglot-ensure)
   :bind
   ("C-c [ e" . flymake-goto-next-error)
   ("C-c ] e" . flymake-goto-prev-error)
@@ -44,8 +44,8 @@
 		 ("haskell-language-server-wrapper" "--lsp" "-l" "/tmp/hls.out"
 		  :initializationOptions (:haskell (:formattingProvider "floskell")))))
   
-  (add-to-list 'eglot-server-programs
-	       '(tuareg-mode . ("ocamllsp")))
+  ;; (add-to-list 'eglot-server-programs
+  ;; 	       '(tuareg-mode . ("ocamllsp")))
 
   (add-to-list 'eglot-server-programs
 	       '((fortran-mode f90-mode) . ("fortls" "--notify_init"))))

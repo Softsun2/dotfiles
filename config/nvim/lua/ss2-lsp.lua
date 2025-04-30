@@ -28,7 +28,7 @@ Ss2.useModule({
                 }
             }
         })
-        lspconfig.rnix.setup({})
+        -- lspconfig.rnix.setup({})
         lspconfig.hls.setup({
             cmd = { "haskell-language-server-wrapper", "--lsp", "-l", "/tmp/hls.out" },
             on_attach = supportLspOverloads,

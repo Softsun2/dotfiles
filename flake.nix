@@ -21,8 +21,7 @@
     let
       
       system  = "aarch64-darwin";
-      rosetta = "x86_64-darwin";
-      
+
       # yabai usually breaks every MacOS update; pull in yabai updates asap
       yabai-unstable-overlay = (_: _: {
         yabai = nixpkgs-unstable.legacyPackages.${system}.yabai;
@@ -33,18 +32,7 @@
         overlays = [ yabai-unstable-overlay ];
         config.allowUnfree = true;
       };
-
-      rosetta-pkgs = nixpkgs.legacyPackages.${rosetta};
-
     in {
-
-      homeConfigurations.softsun2 = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        lib = pkgs.lib;
-        modules = [ ./home.nix ];
-        extraSpecialArgs = { inherit rosetta-pkgs; };
-      };
-
       darwinConfigurations = {
         woollymammoth = darwin.lib.darwinSystem {
           inherit system;
@@ -52,6 +40,10 @@
           modules = [ ./configuration.nix ];
         };
       };
-
+      homeConfigurations.softsun2 = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+        lib = pkgs.lib;
+        modules = [ ./home.nix ];
+      };
     };
 }
