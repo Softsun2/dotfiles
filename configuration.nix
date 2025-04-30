@@ -26,6 +26,7 @@
 
   networking.hostName = "buffalo";
   networking.networkmanager.enable = true;
+  networking.firewall.enable = true;
   # The global useDHCP flag is deprecated, therefore explicitly set to false here.
   # Per-interface useDHCP will be mandatory in the future, so this generated config
   # replicates the default behaviour.
@@ -117,13 +118,11 @@
     pkgs.wget
   ];
 
-  # Enable the OpenSSH daemon.
   services.openssh = {
     enable = true;
     settings.PasswordAuthentication = false;
     settings.KbdInteractiveAuthentication = false;
   };
-  networking.firewall.enable = true;
 
   system.stateVersion = "24.11";
 }

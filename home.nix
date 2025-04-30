@@ -8,11 +8,13 @@
   home.username = "softsun2";
   home.homeDirectory = /home/softsun2;
   home.packages = with pkgs; [
+    openvpn tcpdump tailscale syncthing
+
     python3 tldr alacritty
 
     firefox discord
 
-    tree fzf docker lshw dmidecode xclip
+    jq tree fzf docker lshw dmidecode xclip
   ];
 
   home.file.".xinitrc" = {
@@ -77,6 +79,7 @@
     escapeTime = 50;
     terminal = "screen-256color";
     extraConfig = ''
+      setw -g mode-keys vi
       set-option -g status-position bottom
       set -g status-bg black 
       set -g status-fg blue

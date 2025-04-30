@@ -15,16 +15,16 @@
       config.allowUnfree = true;
     };
   in {
-      homeConfigurations.softsun2 = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        lib = pkgs.lib;
-        modules = [ ./home.nix ];
+    nixosConfigurations = {
+      buffalo = nixpkgs.lib.nixosSystem {
+        inherit system;
+        modules = [ ./configuration.nix ];
       };
-      nixosConfigurations = {
-        buffalo = nixpkgs.lib.nixosSystem {
-          inherit system;
-          modules = [ ./configuration.nix ];
-        };
-      };
+    };
+    homeConfigurations.softsun2 = home-manager.lib.homeManagerConfiguration {
+      inherit pkgs;
+      lib = pkgs.lib;
+      modules = [ ./home.nix ];
+    };
   };
 }
