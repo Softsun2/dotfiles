@@ -17,13 +17,9 @@
 (set-face-attribute 'default nil :height 200) ; font size = 10 * px
 
 ;;; Theme
-
-(use-package ef-themes :ensure nil)
-
-;; (setq ss2-light-theme 'ef-day)
-;; (setq ss2-dark-theme 'ef-autumn)
-(setq ss2-light-theme 'modus-operandi)
 (setq ss2-dark-theme 'modus-vivendi)
+(setq ss2-light-theme 'modus-operandi)
+(load-theme ss2-dark-theme :no-confirm)
 
 ;; "enable" my ns-system-appearance change function
 (setq ns-system-appearance-change-functions
@@ -32,7 +28,7 @@
 ;;; Frame
 
 ;; disable top bar (MacOS, use 'undecorated otherwise)
-(set-frame-parameter nil 'undecorated-round t)
+;; (set-frame-parameter nil 'undecorated-round t)
 (add-to-list 'default-frame-alist '(internal-border-width . 12)) ; set padding
 
 ;;; Misc

@@ -139,7 +139,7 @@
 
   programs.emacs = {
     enable = true;
-    package = pkgs.emacs29-pgtk.overrideAttrs (o: {
+    package = pkgs.emacs-macport.overrideAttrs (o: {
       patches = o.patches ++ [
         ./config/emacs/patches/fix-window-role.patch
         ./config/emacs/patches/round-undecorated-frame.patch
