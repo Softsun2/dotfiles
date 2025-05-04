@@ -10,7 +10,7 @@
   home.homeDirectory = /Users/softsun2;
   fonts.fontconfig.enable = true;
   home.packages = with pkgs; [
-    (nerdfonts.override { fonts = [ "Hasklig" ]; })
+    nerd-fonts.hasklug
 
     # networking
     miniupnpc
@@ -62,6 +62,24 @@
       dest=$(find -d ${config.home.homeDirectory}/${config.home.username} | fzf) \
       && cd "$dest"
     '';
+  };
+
+  services.syncthing = {
+    enable = true;
+    overrideDevices = true;
+    overrideFolders = true;
+    settings = {
+      options = {
+        relaysEnabled = false;
+        urAccepted = -1; # disable anonymous usage data collection
+      };
+      devices.buffalo.id = "P6J22ED-V6M3AGP-EOIS23R-QAW4NIF-PBY6J3O-QOB3J2U-BPJRDWI-R5XZWAI";
+      devices.cicada.id = "R5IMJUF-3UTE3HJ-DU5PMQO-GZZ5LX4-RGDBI5S-O7QD2UB-MJCZ5UZ-ZY33FAH";
+      folders.org = {
+        path = "${config.home.homeDirectory}/${config.home.username}/org";
+        devices = [ "buffalo" "cicada" ];
+      };
+    };
   };
 
   programs.bash = {
