@@ -8,7 +8,7 @@
   home.username = "softsun2";
   home.homeDirectory = /home/softsun2;
   home.packages = with pkgs; [
-    openvpn tcpdump tailscale syncthing
+    openvpn tcpdump
 
     python3 tldr alacritty
 

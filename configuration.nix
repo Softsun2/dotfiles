@@ -76,7 +76,12 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.softsun2 = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" "docker" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [
+      "wheel" # Enable ‘sudo’ for the user.
+      "networkmanager"
+      "docker"
+      "syncthing"
+    ];
     shell = pkgs.bash;
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIfXndMyPax5eVS+kPXBbjC3mChBLiD/kQATMxu1QXlh peyton.okubo13@gmail.com"
@@ -122,6 +127,22 @@
     enable = true;
     settings.PasswordAuthentication = false;
     settings.KbdInteractiveAuthentication = false;
+  };
+
+  services.syncthing = {
+    enable = true;
+    overrideDevices = true;
+    overrideFolders = true;
+    settings = {
+      options.relaysEnabled = true;
+      options.urAccepted = -1; # disable anonymous usage data collection
+      devices.woollymammoth.id = "AXQZZYW-NORHZHC-W4VEXSA-L7CNK2E-2FOUHCF-YHU6REP-34LXB4F-AI56WAF";
+      devices.cicada.id = "R5IMJUF-3UTE3HJ-DU5PMQO-GZZ5LX4-RGDBI5S-O7QD2UB-MJCZ5UZ-ZY33FAH";
+      folders.org = {
+        path = "${config.services.syncthing.dataDir}/org";
+        devices = [ "woollymammoth" "cicada" ];
+      };
+    };
   };
 
   system.stateVersion = "24.11";
