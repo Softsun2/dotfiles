@@ -26,9 +26,8 @@
       '(ns-system-appearance-change-load-ss2-theme))
 
 ;;; Frame
-
 ;; disable top bar (MacOS, use 'undecorated otherwise)
-;; (set-frame-parameter nil 'undecorated-round t)
+(set-frame-parameter nil 'undecorated-round t)
 (add-to-list 'default-frame-alist '(internal-border-width . 12)) ; set padding
 
 ;;; Misc
