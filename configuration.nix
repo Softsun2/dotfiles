@@ -75,14 +75,7 @@
     taps = [
       "homebrew/cask-versions"
     ];
-    casks = [
-      "discord"
-      "vial"
-      "alacritty"
-      "firefox"
-      "obs"
-      "olive"
-    ];
+    casks = [ "vial" "alacritty" "firefox" "obs" "olive" ];
   };
 
   # Used for backwards compatibility, please read the changelog before changing.
