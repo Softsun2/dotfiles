@@ -2,8 +2,7 @@
 {
   enable = enable;
   package = package;
-
-  enableScriptingAddition = true;
+  enableScriptingAddition = false;
 
   config = {
     # https://github.com/koekeishiya/yabai/blob/master/doc/yabai.asciidoc#config
@@ -36,21 +35,4 @@
     window_gap = 10;
 
   };
-
-  extraConfig = ''
-    # configure user to run yabai as root w/o password: https://github.com/koekeishiya/yabai/wiki/Installing-yabai-(latest-release)#configure-scripting-addition
-    # this will need to be done every macos update
-    # reload scripting additions on dock restart
-    yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
-
-    # re-disable window-shadow on dock restart
-    # yabai -m signal --add event=dock_did_restart action="sleep 1 && yabai -m config window_shadow off"
-
-    # enable debug output
-    yabai -m config debug_output on
-
-    yabai -m rule --add app="^System Preferences$" manage=off
-    yabai -m rule --add app="^GIMP$" manage=off
-  '';
-
 }

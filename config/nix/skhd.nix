@@ -3,9 +3,7 @@
   enable = enable;
   package = package;
   skhdConfig = ''
-    # These are bound to change, I want these to emulate dwm at some point
     # Alt corresponds to option
-
     # Emacs
     alt - e : open -a ~/.nix-profile/Applications/Emacs.app
 
@@ -57,32 +55,10 @@
     shift + alt - 8 : yabai -m window --space 8
     shift + alt - 9 : yabai -m window --space 9
 
-    # fast focus desktop
-    cmd - 0 : yabai -m space --focus recent
-
-    # send window to monitor and follow focus
-    shift + alt - n : yabai -m window --display next; yabai -m display --focus next
-    shift + alt - p : yabai -m window --display previous; yabai -m display --focus previous
-
-    # increase window size
+    #  window size
     shift + alt - w : yabai -m window --resize top:0:-20
-    shift + alt - d : yabai -m window --resize left:-20:0
-
-    # decrease window size
+    shift + alt - a : yabai -m window --resize left:-20:0
     shift + alt - s : yabai -m window --resize bottom:0:-20
-    shift + alt - a : yabai -m window --resize top:0:20
-
-    # toggle center window on screen in an orientation fit for reading/writing
-    alt - space : export CURRENT_SPACE=$(yabai -m query --spaces | jq -r '.[]|select(."has-focus" == true)') ; \
-                                 export INDEX=$(echo $CURRENT_SPACE | jq -r '.index') ; \
-                                 export DISPLAY=$(echo $CURRENT_SPACE | jq -r '.display') ; \
-                                 export PADDING=$(($(yabai -m query --displays --display $DISPLAY | jq -r '.frame.w') / 4)) ; \
-                                 if [[ "$(yabai -m config --space $INDEX left_padding)" != $PADDING ]]; then \
-                                   { yabai -m config --space $INDEX left_padding $PADDING && \
-                                     yabai -m config --space $INDEX right_padding $PADDING } \
-                                 else \
-                                   { yabai -m config --space $INDEX left_padding 10 &&  \
-                                     yabai -m config --space $INDEX right_padding 10  } \
-                                 fi
+    shift + alt - d : yabai -m window --resize top:0:20
   '';
 }
