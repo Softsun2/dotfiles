@@ -19,7 +19,6 @@
 ;;; Theme
 (setq ss2-dark-theme 'modus-vivendi)
 (setq ss2-light-theme 'modus-operandi)
-(load-theme ss2-dark-theme :no-confirm)
 
 ;; "enable" my ns-system-appearance change function
 (setq ns-system-appearance-change-functions
@@ -28,20 +27,29 @@
 ;;; Frame
 ;; disable top bar (MacOS, use 'undecorated otherwise)
 (set-frame-parameter nil 'undecorated-round t)
-(add-to-list 'default-frame-alist '(internal-border-width . 12)) ; set padding
+(setf (alist-get 'internal-border-width default-frame-alist) 0
+      (alist-get 'left-fringe default-frame-alist) 0
+      (alist-get 'right-fringe default-frame-alist) 0)
+
+;;; Window
+(setq-default header-line-format " ")
+
+(defun ss2-set-window-margins (&rest _)
+  "Set left and right margins for all windows."
+  (dolist (win (window-list))
+    (set-window-margins win 2 2)))
+(add-hook 'window-configuration-change-hook #'ss2-set-window-margins)
+
 
 ;;; Misc
-
-;; enable modes
-(column-number-mode 1)
 
 ;; disable modes
 (scroll-bar-mode -1)    ; disable scroll bar
 (tool-bar-mode -1)      ; disable tool bar
 
 ;; enable line numbers only when appropriate
-(add-hook 'prog-mode-hook 'display-line-numbers-mode)
-(add-hook 'text-mode-hook 'display-line-numbers-mode)
+;; (add-hook 'prog-mode-hook 'display-line-numbers-mode)
+;; (add-hook 'text-mode-hook 'display-line-numbers-mode)
 
 ;;; Provide
 (provide 'ss2-appearance)

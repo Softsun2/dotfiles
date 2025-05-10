@@ -19,14 +19,12 @@
 ;; paragraph filling
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
 ;; enable icomplete mode
-(fido-vertical-mode 1)
+;; (fido-vertical-mode 1)
 ;; disable auto-newline
 (setq c-auto-newline nil)
 ;; finer text scaling
 (setq text-scale-mode-step 1.05)
 ;; disable line wrap
-(setq truncate-lines t)
-
-
+(setq-default truncate-lines t)
 
 (provide 'ss2-settings)
