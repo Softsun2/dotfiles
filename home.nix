@@ -26,22 +26,16 @@
     text = "
       #!/bin/sh
 
-      # screens
-      screens &
-
       # background
-      feh --bg-max $HOME/Pictures/dark-bgs/IMG-5709.jpg &
-
-      # X Colors
-      xrdb $HOME/.Xresources &
+      feh --bg-max ${config.home.homeDirectory}/Pictures/dark-bgs/IMG-5709.jpg;
 
       # status bar
-      $HOME/suckless/dwm/bar &
+      ${config.home.homeDirectory}/.dotfiles/bin/bar;
 
-      # start loop
-      while true; do
-        dwm >/dev/null 2>&1
-      done
+      # X Colors
+      xrdb ${config.home.homeDirectory}/.Xresources;
+
+      exec dwm
     ";
   };
 

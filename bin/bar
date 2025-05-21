@@ -1,0 +1,35 @@
+#!/bin/sh
+
+# gets cpu usage
+cpu() {
+  read cpu a b c previdle rest < /proc/stat
+  prevtotal=$((a+b+c+previdle))
+  sleep 0.5
+  read cpu a b c idle rest < /proc/stat
+  total=$((a+b+c+idle))
+  cpu=$((100*( (total-prevtotal) - (idle-previdle) ) / (total-prevtotal) ))
+  echo -e "$cpu%"
+}
+
+# gets ram usage
+mem() {
+  MEM="$(free | grep Mem | awk '{printf "%.2f/%.2f Gb", $3/1000000, $2/1000000}')"
+  echo -e "$MEM"
+}
+
+# gets date
+dte() {
+  DATE="$(date +"%a, %B %d %l:%M%p"| sed 's/  / /g')"
+  echo -e "$DATE"
+}
+
+# gets weather
+weather() {
+  WEATHER=$(curl -s wttr.in/Minneapolis?format=%t)
+  echo -e "$WEATHER"
+}
+
+while true; do
+  xsetroot -name " $(cpu) | $(mem) | $(weather) | $(dte) "
+    sleep 5s
+done &
