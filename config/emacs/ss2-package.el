@@ -11,6 +11,7 @@
 (require 'ss2-org)
 (require 'ss2-org-roam)
 (require 'ss2-company)
+(require 'ss2-eww)
 ;; (require 'ss2-expand-region)
 (require 'ss2-direnv)
 (require 'ss2-magit)

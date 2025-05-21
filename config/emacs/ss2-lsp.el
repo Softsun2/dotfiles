@@ -23,7 +23,7 @@
   ("C-c l a" . eglot-code-actions)
   ("C-c r" . eglot-rename)
   ("C-c f" . eglot-format)
-  
+
   :config
   ;; explicitly declare which language servers to use
   ;; https://github.com/joaotavora/eglot/blob/master/eglot.el
@@ -31,19 +31,19 @@
 
   (add-to-list 'eglot-server-programs
 	       '(nix-mode . ("rnix-lsp")))
-  
+
   (add-to-list 'eglot-server-programs
 	       '((python-mode python-ts-mode) .
 		 ("pyright-langserver" "--stdio")))
-  
+
   (add-to-list 'eglot-server-programs
 	       '((c-mode c-ts-mode c++-mode c++-ts-mode) . ("ccls" "-log-file=/tmp/ccls.log" "-v=1")))
 
-  (add-to-list 'eglot-server-programs
-	       '((haskell-mode) .
-		 ("haskell-language-server-wrapper" "--lsp" "-l" "/tmp/hls.out"
-		  :initializationOptions (:haskell (:formattingProvider "floskell")))))
-  
+  ;; (add-to-list 'eglot-server-programs
+  ;; 	       '((haskell-mode) .
+  ;; 		 ("haskell-language-server-wrapper" "--lsp" "-l" "/tmp/hls.out"
+  ;; 		  :initializationOptions (:haskell (:formattingProvider "floskell")))))
+
   ;; (add-to-list 'eglot-server-programs
   ;; 	       '(tuareg-mode . ("ocamllsp")))
 
