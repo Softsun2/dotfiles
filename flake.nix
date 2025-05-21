@@ -2,15 +2,20 @@
   description = "NixOS and User Configurations";
   inputs = {
     nixpkgs.url = github:nixos/nixpkgs/nixos-24.11;
-    home-manager = {
-      url = github:nix-community/home-manager/release-24.11;
-      inputs.nixpkgs.follows = "nixpkgs";
+    nixpkgs-unstable.url = github:nixos/nixpkgs/nixpkgs-unstable;
+    hm-unstable = {
+      url = github:nix-community/home-manager/master;
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
   };
-  outputs = inputs @ { self, nixpkgs, home-manager, ... }:
+  outputs = inputs @ { self, nixpkgs, nixpkgs-unstable, hm-unstable, ... }:
   let
     system = "x86_64-linux";
     pkgs = import nixpkgs {
+      inherit system;
+      config.allowUnfree = true;
+    };
+    pkgs-unstable = import nixpkgs-unstable {
       inherit system;
       config.allowUnfree = true;
     };
@@ -21,9 +26,9 @@
         modules = [ ./configuration.nix ];
       };
     };
-    homeConfigurations.softsun2 = home-manager.lib.homeManagerConfiguration {
-      inherit pkgs;
-      lib = pkgs.lib;
+    homeConfigurations.softsun2 = hm-unstable.lib.homeManagerConfiguration {
+      pkgs = pkgs-unstable;
+      lib = pkgs-unstable.lib;
       modules = [ ./home.nix ];
     };
   };

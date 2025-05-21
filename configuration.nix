@@ -97,13 +97,13 @@
   #   ];
   # };
 
-  fonts.fonts = with pkgs; [
-    unifont
-    jetbrains-mono
-    roboto
-    meslo-lg
-    (nerdfonts.override { fonts = [ "JetBrainsMono" "Gohu" "Terminus" ]; })
-  ];
+  # fonts.fonts = with pkgs; [
+  #   unifont
+  #   jetbrains-mono
+  #   roboto
+  #   meslo-lg
+  #   (nerdfonts.override { fonts = [ "JetBrainsMono" "Gohu" "Terminus" ]; })
+  # ];
 
   # docker daemon
   # @todo: can this be moved to home manager?
@@ -112,7 +112,6 @@
   # @todo: move as much of this as possible to home.nix
   environment.systemPackages = with pkgs; [
     # @todo: can this be moved to home-manager?
-    pkgs.dwm      # window manager
     pkgs.dmenu    # dynamic menu and program launcher
     pkgs.feh      # image viewer
 
@@ -127,22 +126,6 @@
     enable = true;
     settings.PasswordAuthentication = false;
     settings.KbdInteractiveAuthentication = false;
-  };
-
-  services.syncthing = {
-    enable = true;
-    overrideDevices = true;
-    overrideFolders = true;
-    settings = {
-      options.relaysEnabled = true;
-      options.urAccepted = -1; # disable anonymous usage data collection
-      devices.woollymammoth.id = "AXQZZYW-NORHZHC-W4VEXSA-L7CNK2E-2FOUHCF-YHU6REP-34LXB4F-AI56WAF";
-      devices.cicada.id = "R5IMJUF-3UTE3HJ-DU5PMQO-GZZ5LX4-RGDBI5S-O7QD2UB-MJCZ5UZ-ZY33FAH";
-      folders.org = {
-        path = "${config.services.syncthing.dataDir}/org";
-        devices = [ "woollymammoth" "cicada" ];
-      };
-    };
   };
 
   system.stateVersion = "24.11";

@@ -8,14 +8,19 @@
   home.username = "softsun2";
   home.homeDirectory = /home/softsun2;
   home.packages = with pkgs; [
+    meslo-lg ubuntu-sans-mono
+
     openvpn tcpdump
 
-    python3 tldr alacritty
+    python3 tldr
 
     firefox discord
 
     jq tree fzf docker lshw dmidecode xclip
+
+    nixfmt-classic
   ];
+  fonts.fontconfig.enable = true;
 
   home.file.".xinitrc" = {
     text = "
@@ -25,10 +30,10 @@
       screens &
 
       # background
-      feh --bg-fill $HOME/Pictures/1.JPG &
+      feh --bg-max $HOME/Pictures/dark-bgs/IMG-5709.jpg &
 
       # X Colors
-      xrdb $HOME/.dotfiles/theme/xcolors-dwm &
+      xrdb $HOME/.Xresources &
 
       # status bar
       $HOME/suckless/dwm/bar &
@@ -40,10 +45,6 @@
     ";
   };
 
-  # @todo: config alacritty
-  home.file."${config.xdg.configHome}/alacritty.toml".text = ''
-  '';
-
   home.sessionPath = [
     "${config.home.homeDirectory}/.dotfiles/bin"
   ];
@@ -53,6 +54,22 @@
     l = "ls -l";
     ll = "ls -al";
     ".." = "cd ..";
+  };
+
+  services.syncthing = {
+    enable = true;
+    overrideDevices = true;
+    overrideFolders = true;
+    settings = {
+      options.relaysEnabled = true;
+      options.urAccepted = -1; # disable anonymous usage data collection
+      devices.woollymammoth.id = "AXQZZYW-NORHZHC-W4VEXSA-L7CNK2E-2FOUHCF-YHU6REP-34LXB4F-AI56WAF";
+      devices.cicada.id = "R5IMJUF-3UTE3HJ-DU5PMQO-GZZ5LX4-RGDBI5S-O7QD2UB-MJCZ5UZ-ZY33FAH";
+      folders.org = {
+        path = "${config.home.homeDirectory}/${config.home.username}/org";
+        devices = [ "woollymammoth" "cicada" ];
+      };
+    };
   };
 
   programs.bash = {
@@ -73,6 +90,28 @@
     };
   };
 
+  programs.emacs = {
+    enable = true;
+    extraConfig = ''
+      (setq user-init-file
+        "${config.home.homeDirectory}/.dotfiles/config/emacs/ss2-init.el")
+      (load user-init-file)
+    '';
+    # declare emacs packages with nix
+    extraPackages = pkgs: with pkgs; [
+      use-package
+      magit
+      company
+      expand-region
+      direnv
+
+      # language modes
+      nix-mode
+      markdown-mode
+      haskell-mode
+    ];
+  };
+
   programs.tmux = {
     enable = true;
     prefix = "C-a";
@@ -81,7 +120,7 @@
     extraConfig = ''
       setw -g mode-keys vi
       set-option -g status-position bottom
-      set -g status-bg black 
+      set -g status-bg black
       set -g status-fg blue
     '';
   };
