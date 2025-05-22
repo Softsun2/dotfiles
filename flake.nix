@@ -22,6 +22,7 @@
   in {
     nixosConfigurations = {
       buffalo = nixpkgs.lib.nixosSystem {
+        inherit pkgs;
         inherit system;
         modules = [ ./configuration.nix ];
       };

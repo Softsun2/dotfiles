@@ -42,10 +42,17 @@
     keyMap = "us";
   };
 
+  # nvidia
+  hardware.graphics.enable = true;
+  hardware.nvidia = {
+    modesetting.enable = true;
+    powerManagement.enable = true;
+    open = false;
+  };
   services.xserver = {
     enable = true;
     # @todo: fix nvidia drivers
-    # videoDrivers = [ "nvidia" ];
+    videoDrivers = [ "nvidia" ];
     # screenSection = ''
     #   Option         "metamodes" "nvidia-auto-select +0+0 {ForceFullCompositionPipeline=On}"
     # '';
@@ -62,8 +69,8 @@
   ];
 
   # Configure keymap in X11
-  services.xserver.layout = "us";
-  services.xserver.xkbOptions = "eurosign:e";
+  services.xserver.xkb.layout = "us";
+  services.xserver.xkb.options = "eurosign:e";
 
   # @todo: fix sound config after updating to nix 24.11
   # sound.enable = true;
