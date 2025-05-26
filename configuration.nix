@@ -1,5 +1,4 @@
-{ config, pkgs, ... }:
-{
+{ config, pkgs, ... }: {
   nix.package = pkgs.nixVersions.stable;
   nix.extraOptions = ''
     experimental-features = nix-command flakes
@@ -16,7 +15,8 @@
 
   # bootloader
   # Use the systemd-boot EFI boot loader.
-  boot.loader.efi.canTouchEfiVariables = true; # @todo: check if I can disable this
+  boot.loader.efi.canTouchEfiVariables =
+    true; # @todo: check if I can disable this
   boot.loader.grub = {
     enable = true;
     devices = [ "nodev" ];
@@ -32,7 +32,7 @@
   # replicates the default behaviour.
   networking.useDHCP = false;
   networking.interfaces.enp30s0.useDHCP = true;
-  networking.interfaces.wlp33s0f3u1.useDHCP = true;
+  # networking.interfaces.wlp33s0f3u1.useDHCP = true;
 
   # Select internationalisation properties.
   time.timeZone = "America/Chicago";
@@ -53,9 +53,12 @@
     enable = true;
     # @todo: fix nvidia drivers
     videoDrivers = [ "nvidia" ];
-    # screenSection = ''
-    #   Option         "metamodes" "nvidia-auto-select +0+0 {ForceFullCompositionPipeline=On}"
+    # services.xserver.screenSection = ''
+    #   Option         "metamodes" "DP-0: 1920x1080_144 +0+0 {ForceCompositionPipeline=On, ForceFullCompositionPipeline=On}, DVI-D-0: 1024x768_85 +1920+0 {ForceCompositionPipeline=On, ForceFullCompositionPipeline=On}"
     # '';
+    screenSection = ''
+      Option         "metamodes" "DVI-D-0: 1024x768_85 +0+0 {ForceFullCompositionPipeline=On}"
+    '';
     displayManager.startx.enable = true;
     windowManager.dwm.enable = true;
   };
@@ -64,7 +67,8 @@
   # make this overlay a flake input
   nixpkgs.overlays = [
     (final: prev: {
-      dwm = prev.dwm.overrideAttrs (old: { src = /home/softsun2/suckless/dwm; });
+      dwm =
+        prev.dwm.overrideAttrs (old: { src = /home/softsun2/suckless/dwm; });
     })
   ];
 
@@ -119,12 +123,12 @@
   # @todo: move as much of this as possible to home.nix
   environment.systemPackages = with pkgs; [
     # @todo: can this be moved to home-manager?
-    pkgs.dmenu    # dynamic menu and program launcher
-    pkgs.feh      # image viewer
+    pkgs.dmenu # dynamic menu and program launcher
+    pkgs.feh # image viewer
 
     # bootstrapping
     pkgs.pulsemixer
-    pkgs.vim      # text editor
+    pkgs.vim # text editor
     pkgs.git
     pkgs.wget
   ];

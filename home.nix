@@ -9,15 +9,9 @@
   home.homeDirectory = /home/softsun2;
   home.packages = with pkgs; [
     meslo-lg ubuntu-sans-mono
-
     openvpn tcpdump
-
     python3 tldr
-
-    firefox discord
-
-    jq tree fzf docker lshw dmidecode xclip
-
+    st jq tree fzf docker lshw dmidecode xclip
     nixfmt-classic
   ];
   fonts.fontconfig.enable = true;
@@ -106,6 +100,11 @@
     ];
   };
 
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
+  };
+
   programs.tmux = {
     enable = true;
     prefix = "C-a";
@@ -118,4 +117,5 @@
       set -g status-fg blue
     '';
   };
+
 }

@@ -1,8 +1,8 @@
 ;;; Emacs Appearance
 
 ;;; Font
-(set-frame-font "Meslo LG M") ; default font
-;; (set-face-attribute 'default nil :height 200) ; font size = 10 * px
+(set-frame-font "Ubuntu Sans Mono") ; default font
+(set-face-attribute 'default nil :height 120) ; font size = 10 * px
 
 ;;; Theme
 (defvar ss2-light-theme 'modus-operandi
