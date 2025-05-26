@@ -15,5 +15,6 @@
 ;; (require 'ss2-expand-region)
 (require 'ss2-direnv)
 (require 'ss2-magit)
+(require 'ss2-desktop)
 
 (provide 'ss2-package)
