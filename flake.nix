@@ -2,26 +2,21 @@
   description = "Nix Darwin Configurations";
 
   inputs = {
-    nixpkgs.url = github:nixos/nixpkgs/nixpkgs-24.11-darwin;
-    nixpkgs-unstable.url = github:nixos/nixpkgs/nixpkgs-unstable;
+    nixpkgs.url = github:nixos/nixpkgs/nixpkgs-25.05-darwin;
     darwin = {
-      url = github:lnl7/nix-darwin/nix-darwin-24.11;
+      url = github:lnl7/nix-darwin/nix-darwin-25.05;
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    hm-unstable = {
-      url = github:nix-community/home-manager/master;
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    hm = {
+      url = github:nix-community/home-manager/release-25.05;
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, darwin, hm-unstable, ... }:
+  outputs = { self, nixpkgs, darwin, hm, ... }:
     let
       system  = "aarch64-darwin";
       pkgs = import nixpkgs {
-        inherit system;
-        config.allowUnfree = true;
-      };
-      pkgs-unstable = import nixpkgs-unstable {
         inherit system;
         config.allowUnfree = true;
       };
@@ -33,9 +28,9 @@
           modules = [ ./configuration.nix ];
         };
       };
-      homeConfigurations.softsun2 = hm-unstable.lib.homeManagerConfiguration {
-        pkgs = pkgs-unstable;
-        lib = pkgs-unstable.lib;
+      homeConfigurations.softsun2 = hm.lib.homeManagerConfiguration {
+        inherit pkgs;
+        lib = pkgs.lib;
         modules = [ ./home.nix ];
       };
     };

@@ -4,7 +4,7 @@
   programs.home-manager.enable = true;
 
   # pin home manager modules/packages to the latest nix-stable channel
-  home.stateVersion = "24.11";
+  home.stateVersion = "25.05";
 
   home.username = "softsun2";
   home.homeDirectory = /Users/softsun2;
