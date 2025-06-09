@@ -26,8 +26,7 @@
     jq
 
     # emacs extra packages
-    nixfmt-classic
-    graphviz
+    nixfmt-classic graphviz ispell
   ];
 
   # TODO: use a list or something
@@ -180,9 +179,7 @@
       direnv
 
       # language modes
-      nix-mode
-      markdown-mode
-      haskell-mode
+      nix-mode markdown-mode haskell-mode
     ];
   };
 

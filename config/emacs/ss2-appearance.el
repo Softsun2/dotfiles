@@ -21,15 +21,15 @@
       '(ss2-ns-system-appearance-change-load-theme))
 
 ;;; Frame
-(setf (alist-get 'undecorated-round default-frame-alist) t
-      (alist-get 'internal-border-width default-frame-alist) 0
-      (alist-get 'left-fringe default-frame-alist) 24
-      (alist-get 'right-fringe default-frame-alist) 24)
-(custom-set-faces
- '(fringe ((t (:background unspecified)))))
+;; (setf (alist-get 'undecorated-round default-frame-alist) nil
+;;       (alist-get 'internal-border-width default-frame-alist) 0
+;;       (alist-get 'left-fringe default-frame-alist) 24
+;;       (alist-get 'right-fringe default-frame-alist) 24)
+;; (custom-set-faces
+;;  '(fringe ((t (:background unspecified)))))
 
 ;;; Window
-(setq-default header-line-format "")
+;; (setq-default header-line-format "")
 
 ;;; Startup
 (setq-default
