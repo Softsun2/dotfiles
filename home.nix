@@ -8,26 +8,23 @@
 
   home.username = "softsun2";
   home.homeDirectory = /Users/softsun2;
-  fonts.fontconfig.enable = true;
   home.packages = with pkgs; [
-    nerd-fonts.hasklug
+    # fonts
+    fontconfig ubuntu-sans ubuntu-sans-mono
 
     # networking
     miniupnpc
 
     # media
-    ffmpeg
-    yt-dlp
+    ffmpeg yt-dlp
 
     # dev tools
-    tldr
-    tree
-    plistwatch
-    jq
+    tldr tree plistwatch jq
 
     # emacs extra packages
     nixfmt-classic graphviz ispell
   ];
+  fonts.fontconfig.enable = true;
 
   # TODO: use a list or something
   home.file."${config.home.username}/org/.keep".text = "";
@@ -69,10 +66,10 @@
     overrideFolders = true;
     settings = {
       options = {
-        relaysEnabled = false;
+        relaysEnabled = true;
         urAccepted = -1; # disable anonymous usage data collection
       };
-      devices.buffalo.id = "P6J22ED-V6M3AGP-EOIS23R-QAW4NIF-PBY6J3O-QOB3J2U-BPJRDWI-R5XZWAI";
+      devices.buffalo.id = "DWIDPQK-OJP2OPA-DG2JHVQ-PXVK6PN-64AZ5RZ-LFN6YQJ-E4UTCFI-NRRGNQW";
       devices.cicada.id = "R5IMJUF-3UTE3HJ-DU5PMQO-GZZ5LX4-RGDBI5S-O7QD2UB-MJCZ5UZ-ZY33FAH";
       folders.org = {
         path = "${config.home.homeDirectory}/${config.home.username}/org";
@@ -103,7 +100,7 @@
     };
   };
 
-  programs.direnv = { 
+  programs.direnv = {
     enable = true;
     nix-direnv.enable = true;
   };
