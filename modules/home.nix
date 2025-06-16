@@ -155,9 +155,9 @@
     enable = true;
     package = pkgs.emacs-pgtk.overrideAttrs (o: {
       patches = o.patches ++ [
-        ./config/emacs/patches/fix-window-role.patch
-        ./config/emacs/patches/round-undecorated-frame.patch
-        ./config/emacs/patches/system-appearance.patch
+        ../config/emacs/patches/fix-window-role.patch
+        ../config/emacs/patches/round-undecorated-frame.patch
+        ../config/emacs/patches/system-appearance.patch
       ];
     });
     extraConfig = ''
