@@ -1,5 +1,4 @@
-{ config, pkgs, ... }:
-{
+{ config, pkgs, ... }: {
   # nix-darwin options: https://daiderd.com/nix-darwin/manual/index.html
   # https://github.com/LnL7/nix-darwin/blob/master/tests/system-defaults-write.nix
   # system packages
@@ -7,11 +6,9 @@
 
   nix.extraOptions = ''
     experimental-features = nix-command flakes
-    extra-platforms = aarch64-darwin x86_64-darwin
   '';
 
-  # Auto upgrade nix package and the daemon service.
-  services.nix-daemon.enable = true;
+  nix.enable = true;
 
   nix.gc = {
     automatic = true;
@@ -26,16 +23,7 @@
     options = "--delete-older-than 1w";
   };
 
-  # https://github.com/LnL7/nix-darwin/blob/master/modules/system/activation-scripts.nix:
-  # A set of shell script fragments that are executed when a NixOS system configuration is activated.
-  system.activationScripts.postActivation.text = ''
-    # same as "Prevent your Mac from automatically sleeping when the display is off"
-    # means that require password after sleep is not triggered
-    sudo pmset -c sleep 0
-    # disable reboot sound effect
-    sudo nvram SystemAudioVolume=" "
-  '';
-
+  system.primaryUser = "softsun2";
   system.defaults = import ../config/nix/defaults.nix;
 
   # https://developer.apple.com/library/archive/technotes/tn2450/_index.html#//apple_ref/doc/uid/DTS40017618-CH1-KEY_TABLE_USAGES
@@ -57,25 +45,14 @@
 
   # services
   services = {
-    skhd = import ../config/nix/skhd.nix { enable = true; package = pkgs.skhd; };
-    yabai = import ../config/nix/yabai.nix { enable = true; package = pkgs.yabai; };
-  };
-
-  homebrew = {
-    enable = true;
-    onActivation = {
-      autoUpdate = true;
-      upgrade = true;
-      cleanup = "zap";
+    skhd = import ../config/nix/skhd.nix {
+      enable = true;
+      package = pkgs.skhd;
     };
-    global = {
-      brewfile = true;
-      lockfiles = false;
+    yabai = import ../config/nix/yabai.nix {
+      enable = true;
+      package = pkgs.yabai;
     };
-    taps = [
-      "homebrew/cask-versions"
-    ];
-    casks = [ "vial" "alacritty" "firefox" "obs" "olive" ];
   };
 
   # Used for backwards compatibility, please read the changelog before changing.

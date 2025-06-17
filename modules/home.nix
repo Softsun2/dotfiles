@@ -105,6 +105,8 @@
     nix-direnv.enable = true;
   };
 
+  programs.firefox.enable = true;
+
   programs.neovim = {
     enable = true;
     vimAlias = true;
