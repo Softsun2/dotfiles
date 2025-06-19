@@ -25,7 +25,7 @@
       darwinConfigurations.woollymammoth = darwin.lib.darwinSystem {
         system = "aarch64-darwin";
         pkgs = nixpkgs.legacyPackages.aarch64-darwin;
-        modules = [ ./modules/configuration-darwin.nix ];
+        modules = [ ./modules/configuration-woollymammoth.nix ];
       };
       packages = genSystemAttrs (system: {
         homeConfigurations.softsun2 = hm.lib.homeManagerConfiguration rec {

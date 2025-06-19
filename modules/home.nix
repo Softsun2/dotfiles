@@ -1,16 +1,23 @@
 { config, pkgs, lib, ... }:
 {
-  manual.manpages.enable = false;
   programs.home-manager.enable = true;
+  manual.manpages.enable = false;
 
   # pin home manager modules/packages to the latest nix-stable channel
   home.stateVersion = "25.05";
 
   home.username = "softsun2";
-  home.homeDirectory = /Users/softsun2;
+  home.homeDirectory = /Users/softsun2; # @todo: system based
   home.packages = with pkgs; [
     # fonts
-    fontconfig ubuntu-sans ubuntu-sans-mono
+    fontconfig meslo-lg ubuntu-sans-mono
+
+    # dev
+    python3 tldr tree jq
+
+    # @todo: nixos pkgs
+    # st docker lshw dmidecode xclip
+    # qutebrowser
 
     # networking
     miniupnpc
@@ -26,6 +33,24 @@
   ];
   fonts.fontconfig.enable = true;
 
+  # @todo: system dependent
+  # home.file.".xinitrc" = {
+  #   text = "
+  #     #!/bin/sh
+  #
+  #     # background
+  #     feh --bg-max ${config.home.homeDirectory}/Pictures/dark-bgs/IMG-5709.jpg;
+  #
+  #     # status bar
+  #     ${config.home.homeDirectory}/.dotfiles/bin/bar;
+  #
+  #     # X Colors
+  #     xrdb ${config.home.homeDirectory}/.Xresources;
+  #
+  #     exec dwm &> ${config.home.homeDirectory}/.dwm-log.out
+  #   ";
+  # };
+
   # TODO: use a list or something
   home.file."${config.home.username}/org/.keep".text = "";
   home.file."${config.home.username}/archive/.keep".text = "";
@@ -38,28 +63,24 @@
   home.file."${config.home.username}/videos/.keep".text = "";
   home.file."${config.home.username}/writing/.keep".text = "";
 
-  home.file."${config.xdg.configHome}/alacritty.toml".text = ''
-    [terminal.shell]
-      program = "/run/current-system/sw/bin/bash"
-      args = ["--login"]
-  '';
-
   # added to .profile
   home.sessionPath = [
     "${config.home.homeDirectory}/.dotfiles/bin"
   ];
+
+  # @todo: don't really need this on darwin
+  home.sessionVariables = {
+    SS2_DARK_THEME = 1;
+  };
 
   home.shellAliases = {
     c = "clear";
     l = "ls -l";
     ll = "ls -al";
     ".." = "cd ..";
-    fss2 = ''
-      dest=$(find -d ${config.home.homeDirectory}/${config.home.username} | fzf) \
-      && cd "$dest"
-    '';
   };
 
+  # @todo: device dependent
   services.syncthing = {
     enable = true;
     overrideDevices = true;
@@ -74,6 +95,9 @@
       folders.org = {
         path = "${config.home.homeDirectory}/${config.home.username}/org";
         devices = [ "buffalo" "cicada" ];
+
+      # devices.woollymammoth.id = "AXQZZYW-NORHZHC-W4VEXSA-L7CNK2E-2FOUHCF-YHU6REP-34LXB4F-AI56WAF";
+        # devices = [ "woollymammoth" "cicada" ];
       };
     };
   };
@@ -81,19 +105,11 @@
   programs.bash = {
     enable = true;
     enableCompletion = true;
-    initExtra = ''
-      ss2-prompt () {
-          PS1="\h.\u$ "
-      }
-    '';
-    sessionVariables = {
-      SHELL = "/run/current-system/sw/bin/bash";
-      PROMPT_COMMAND = "ss2-prompt";
-    };
     shellAliases = {
-      dot = "cd ${config.home.homeDirectory}/.dotfiles";
       home-switch = "home-manager switch --flake ${config.home.homeDirectory}/.dotfiles";
       darwin-switch = "darwin-rebuild switch --flake ${config.home.homeDirectory}/.dotfiles";
+      # @todo: device dependent
+      # nixos-switch = "sudo nixos-rebuild switch --impure --flake ${config.home.homeDirectory}/.dotfiles";
       # window role patch support
       # https://nixos.wiki/wiki/Emacs#Window_manager_integration
       emacs = "${config.programs.emacs.finalPackage}/Applications/Emacs.app/Contents/MacOS/Emacs";
@@ -107,54 +123,9 @@
 
   programs.firefox.enable = true;
 
-  programs.neovim = {
-    enable = true;
-    vimAlias = true;
-    vimdiffAlias = true;
-    defaultEditor = true;
-    extraLuaConfig = ''
-      -- source my config
-      vim.opt.runtimepath:prepend("${config.home.homeDirectory}/.dotfiles/config/nvim")
-      require("ss2-init")
-    '';
-    plugins = with pkgs.vimPlugins; [
-      nvim-lspconfig # community maintained lsp configurations
-      lspkind-nvim # lsp suggestion pictograms
-      lsp-overloads-nvim
-
-      nvim-cmp # completion engine
-      cmp-nvim-lsp # lsp completion source
-      cmp-path # file system completion source
-      cmp-nvim-lua # lua (for nvim) completion source
-      # cmp-spell/cmp-dictionary
-      luasnip
-
-      # treesitter with grammars
-      (nvim-treesitter.withPlugins (g: with g; [
-        nix
-        lua
-        bash
-        c
-        cpp
-        haskell
-        markdown
-        markdown-inline
-        regex
-      ]))
-
-      vim-nix # nix
-      gitsigns-nvim # gutter git info
-      telescope-nvim # integrated fuzzy finder
-      vim-devicons # stupid icon dependency
-    ];
-    extraPackages = with pkgs; [
-      sumneko-lua-language-server
-      ripgrep
-    ];
-  };
-
   programs.emacs = {
     enable = true;
+    # @todo system dependent
     package = pkgs.emacs-pgtk.overrideAttrs (o: {
       patches = o.patches ++ [
         ../config/emacs/patches/fix-window-role.patch
@@ -170,10 +141,10 @@
     # declare emacs packages with nix
     extraPackages = pkgs: with pkgs; [
       use-package
-      eglot
       magit
       company
       org-roam
+
       expand-region
       direnv
 
@@ -201,12 +172,6 @@
     extraConfig = {
       init = { defaultBranch = "main"; };
     };
-  };
-
-  programs.fzf = {
-    enable = true;
-    enableZshIntegration = true;
-    defaultOptions = [ "--color=16" ];
   };
 
 }
