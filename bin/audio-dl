@@ -1,4 +1,5 @@
 #!/bin/sh
+
 OUTPUT="$HOME/softsun2/music/my-music/%(uploader)s/%(album)s/%(title)s.%(ext)s"
 
 # $1 -- the audio url

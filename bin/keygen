@@ -12,4 +12,3 @@ then
 else
   echo "Usage: keygen <identity-file> <email>"
 fi
-

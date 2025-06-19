@@ -1,0 +1,9 @@
+#!/bin/sh
+
+NUM="${2:-5}"
+
+case "$1" in
+  toggle) pulsemixer --toggle-mute && resetbar ;;
+  up) pulsemixer --change-volume +"$NUM" && resetbar ;;
+  down) pulsemixer --change-volume -"$NUM" && resetbar ;;
+esac

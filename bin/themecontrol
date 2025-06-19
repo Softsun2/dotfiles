@@ -1,0 +1,65 @@
+#!/bin/sh
+
+# Controls system wide themes
+# I use dwm to trigger theme loading with a bind
+
+THEME_PATH="$HOME"/.dotfiles/theme
+
+loadtheme() {
+  CURRENT_THEME=$(cat "$THEME_PATH"/.current-theme)
+
+  # bg
+  if [ -d "$THEME_PATH"/"$CURRENT_THEME"/bg ]
+  then
+    RANDOM_BG=$(
+      ls "$THEME_PATH"/"$CURRENT_THEME"/bg |
+      shuf |
+      head -n1 |
+      awk '{print $1}'
+    )
+    feh --bg-fill --no-fehbg "$THEME_PATH"/"$CURRENT_THEME"/bg/"$RANDOM_BG"
+  fi
+
+  # xcolors
+  xrdb "$THEME_PATH"/"$CURRENT_THEME"/xcolors
+
+  # kitty
+  if [ -f "$THEME_PATH"/"$CURRENT_THEME"/kitty-theme.conf ]
+  then
+    cp "$THEME_PATH"/"$CURRENT_THEME"/kitty-theme.conf "$HOME"/.dotfiles/config/kitty/theme.conf
+    # can't figure out remote control atm, will just have to reload kitty for the time being
+  fi
+
+  # vscode
+
+  # nvim
+
+  # firefox
+
+  # ... 
+
+  echo "done"
+}
+
+nexttheme() {
+  echo "set the next theme"
+}
+
+settheme() {
+  # will probably want to check subdir structure
+  test -d "$THEME_PATH/$1" &&
+  echo "$1" > "$THEME_PATH/.current-theme" ||
+  echo "Theme \"$1\" not found."
+}
+
+usage() {
+  echo "usage:"
+}
+
+case "$1" in
+  load) loadtheme ;;
+  next) nexttheme ;;
+  set) settheme "$2" ;;
+  list) ls ~/.dotfiles/theme ;;
+  *) usage ;;
+esac

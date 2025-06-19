@@ -1,0 +1,8 @@
+#!/bin/sh
+
+MODE="$1"
+IMAGE="$2"
+flavours generate "$MODE" "$IMAGE"
+feh --bg-fill "$IMAGE"
+flavours apply generated
+
