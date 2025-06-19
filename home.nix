@@ -9,10 +9,11 @@
   home.homeDirectory = /home/softsun2;
   home.packages = with pkgs; [
     meslo-lg ubuntu-sans-mono
-    openvpn tcpdump
     python3 tldr
     st jq tree fzf docker lshw dmidecode xclip
+    qutebrowser
     nixfmt-classic
+    ispell
   ];
   fonts.fontconfig.enable = true;
 
@@ -29,13 +30,17 @@
       # X Colors
       xrdb ${config.home.homeDirectory}/.Xresources;
 
-      exec dwm
+      exec dwm &> ${config.home.homeDirectory}/.dwm-log.out
     ";
   };
 
   home.sessionPath = [
     "${config.home.homeDirectory}/.dotfiles/bin"
   ];
+
+  home.sessionVariables = {
+    SS2_DARK_THEME = 1;
+  };
 
   home.shellAliases = {
     c = "clear";

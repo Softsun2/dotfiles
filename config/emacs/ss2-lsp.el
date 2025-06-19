@@ -19,7 +19,6 @@
   ("C-c [ e" . flymake-goto-next-error)
   ("C-c ] e" . flymake-goto-prev-error)
   ("C-c q e" . flymake-show-project-diagnostics)
-  ("C-c l a" . eglot-code-actions)
   ("C-c r" . eglot-rename)
   ("C-c f" . eglot-format)
 

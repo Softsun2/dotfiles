@@ -1,0 +1,11 @@
+#!/bin/sh
+
+SS2_BG=~/.dotfiles/theme/bg-dark.jpg
+SS2_COLORS=~/.dotfiles/theme/theme-dark.txt
+
+if [ "${SS2_DARK_THEME:-}" ] && [ "$SS2_DARK_THEME" == "0" ]; then
+    SS2_BG=~/.dotfiles/theme/bg-light.jpg
+    SS2_COLORS=~/.dotfiles/theme/theme-light.txt
+fi
+
+feh --bg-fill --no-fehbg "$SS2_BG" && xrdb "$SS2_COLORS"

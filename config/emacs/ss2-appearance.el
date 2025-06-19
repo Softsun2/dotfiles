@@ -1,7 +1,7 @@
 ;;; Emacs Appearance
 
 ;;; Font
-(set-frame-font "Ubuntu Sans Mono") ; default font
+(set-frame-font "Meslo LG M") ; default font
 (set-face-attribute 'default nil :height 120) ; font size = 10 * px
 
 ;;; Theme
@@ -21,18 +21,18 @@
 (load-theme ss2-dark-theme :no-confirm)
 
 ;;; Frame
-(setf (alist-get 'undecorated default-frame-alist) t
-      (alist-get 'internal-border-width default-frame-alist) 0
-      (alist-get 'left-fringe default-frame-alist) 24
-      (alist-get 'right-fringe default-frame-alist) 24
-      (alist-get 'tool-bar-lines default-frame-alist) 0)
-(custom-set-faces
- '(fringe ((t (:background unspecified)))))
-(custom-set-faces
- '(header-line ((t (:background unspecified)))))
+;; (setf (alist-get 'undecorated default-frame-alist) t
+;;       (alist-get 'internal-border-width default-frame-alist) 0
+;;       (alist-get 'left-fringe default-frame-alist) 24
+;;       (alist-get 'right-fringe default-frame-alist) 24
+;;       (alist-get 'tool-bar-lines default-frame-alist) 0)
+;; (custom-set-faces
+;;  '(fringe ((t (:background unspecified)))))
+;; (custom-set-faces
+;;  '(header-line ((t (:background unspecified)))))
 
 ;;; Window
-(setq-default header-line-format "")
+;; (setq-default header-line-format "")
 
 ;;; Startup
 (setq-default
@@ -40,6 +40,7 @@
  initial-buffer-choice t)
 
 ;;; Misc.
+(setq-default frame-resize-pixelwise t)
 (menu-bar-mode -1)
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
