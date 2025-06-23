@@ -32,6 +32,7 @@
           pkgs = nixpkgs.legacyPackages."${system}";
           lib = pkgs.lib;
           modules = [ ./modules/home.nix ];
+          extraSpecialArgs = { inherit system; };
         };
       });
     };
