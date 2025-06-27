@@ -1,0 +1,33 @@
+#!/bin/sh
+
+# Adjusts the brightness of all monitors
+
+# gets monitor names
+listmonitors() {
+  xrandr | grep " connected" | cut -f1 -d " "
+}
+
+# gets monitor brightnesses
+getbrightness() {
+  xrandr --verbose | awk '/Brightness/ { print $2; exit }'
+}
+
+# add or subtract brightness
+case "$1" in
+  up) BRIGHTNESS=$(awk "BEGIN {print $(getbrightness) + 0.05}") ;;
+  down) BRIGHTNESS=$(awk "BEGIN {print $(getbrightness) - 0.05}") ;;
+esac
+
+# bound brightness between 1 and 0
+FULLBRIGHT=$(awk "BEGIN {print 1.00 < $BRIGHTNESS}")
+FULLDIM=$(awk "BEGIN {print $BRIGHTNESS < 0.00}")
+[ "$FULLBRIGHT" -eq 1 ] && BRIGHTNESS=1.00
+[ "$FULLDIM" -eq 1 ] && BRIGHTNESS=0.00
+
+# apply brightness
+for monitor in $(listmonitors)
+do
+  xrandr --output "$monitor" --brightness "$BRIGHTNESS"
+done
+
+#reset bar if we make an indicator

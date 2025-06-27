@@ -1,0 +1,9 @@
+#!/bin/sh
+
+# need to find a way to either skip or download geo-unavailable songs.
+
+# youtube-dl \
+#   --extract-audio \
+#   --audio-format mp3 \
+#   --embed-thumbnail \
+#   --output "%(uploader)s%(title)s.%(ext)s"

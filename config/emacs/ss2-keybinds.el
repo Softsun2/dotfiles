@@ -94,5 +94,5 @@
 ;;   :config
 ;;   (meow-setup)
 ;;   (meow-global-mode 1))
-  
+
 (provide 'ss2-keybinds)

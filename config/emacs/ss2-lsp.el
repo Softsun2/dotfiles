@@ -5,7 +5,6 @@
 (use-package haskell-mode :ensure nil)
 ;; (use-package tuareg :ensure nil)
 
-
 ;;; LSP
 (use-package eglot
   :ensure nil
@@ -14,13 +13,12 @@
   (python-mode . eglot-ensure)
   (c-mode . eglot-ensure)
   (c++-mode . eglot-ensure)
-  (haskell-mode . eglot-ensure)
+  ;; (haskell-mode . eglot-ensure)
   ;; (tuareg-mode . eglot-ensure)
   :bind
   ("C-c [ e" . flymake-goto-next-error)
   ("C-c ] e" . flymake-goto-prev-error)
   ("C-c q e" . flymake-show-project-diagnostics)
-  ("C-c l a" . eglot-code-actions)
   ("C-c r" . eglot-rename)
   ("C-c f" . eglot-format)
 
