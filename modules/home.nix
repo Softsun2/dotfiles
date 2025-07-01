@@ -83,20 +83,24 @@ in lib.mkMerge [
     programs.bash = {
       enable = true;
       enableCompletion = true;
-      shellAliases = {
-        home-switch =
-          "home-manager switch --flake ${config.home.homeDirectory}/.dotfiles";
-      } // lib.optionalAttrs isLinux {
-        nixos-switch =
-          "sudo nixos-rebuild switch --impure --flake ${config.home.homeDirectory}/.dotfiles";
-      } // lib.optionalAttrs isDarwin {
-        darwin-switch =
-          "darwin-rebuild switch --flake ${config.home.homeDirectory}/.dotfiles";
-        # window role patch support
-        # https://nixos.wiki/wiki/Emacs#Window_manager_integration
-        emacs =
-          "${config.programs.emacs.finalPackage}/Applications/Emacs.app/Contents/MacOS/Emacs";
-      };
+      shellAliases = lib.mkMerge [
+        {
+          home-switch =
+            "home-manager switch --flake ${config.home.homeDirectory}/.dotfiles";
+        }
+        (lib.mkIf isLinux {
+          nixos-switch =
+            "sudo nixos-rebuild switch --impure --flake ${config.home.homeDirectory}/.dotfiles";
+        })
+        (lib.mkIf isDarwin {
+          darwin-switch =
+            "darwin-rebuild switch --flake ${config.home.homeDirectory}/.dotfiles";
+          # window role patch support
+          # https://nixos.wiki/wiki/Emacs#Window_manager_integration
+          emacs =
+            "${config.programs.emacs.finalPackage}/Applications/Emacs.app/Contents/MacOS/Emacs";
+        })
+      ];
     };
 
     programs.direnv = {
@@ -106,38 +110,41 @@ in lib.mkMerge [
 
     programs.firefox.enable = true;
 
-    programs.emacs = {
-      enable = true;
-      extraConfig = ''
-        (setq user-init-file
-          "${config.home.homeDirectory}/.dotfiles/config/emacs/ss2-init.el")
-        (load user-init-file)
-      '';
-      # declare emacs packages with nix
-      extraPackages = pkgs:
-        with pkgs; [
-          use-package
-          magit
-          company
-          org-roam
+    programs.emacs = lib.mkMerge [
+      {
+        enable = true;
+        extraConfig = ''
+          (setq user-init-file
+            "${config.home.homeDirectory}/.dotfiles/config/emacs/ss2-init.el")
+          (load user-init-file)
+        '';
+        # declare emacs packages with nix
+        extraPackages = pkgs:
+          with pkgs; [
+            use-package
+            magit
+            company
+            org-roam
 
-          expand-region
-          direnv
+            expand-region
+            direnv
 
-          # language modes
-          nix-mode
-          markdown-mode
-          haskell-mode
-        ];
-    } // lib.optionalAttrs (isDarwin) {
-      package = pkgs.emacs-pgtk.overrideAttrs (o: {
-        patches = o.patches ++ [
-          ../config/emacs/patches/fix-window-role.patch
-          ../config/emacs/patches/round-undecorated-frame.patch
-          ../config/emacs/patches/system-appearance.patch
-        ];
-      });
-    };
+            # language modes
+            nix-mode
+            markdown-mode
+            haskell-mode
+          ];
+      }
+      (lib.mkIf isDarwin {
+        package = pkgs.emacs-pgtk.overrideAttrs (o: {
+          patches = o.patches ++ [
+            ../config/emacs/patches/fix-window-role.patch
+            ../config/emacs/patches/round-undecorated-frame.patch
+            ../config/emacs/patches/system-appearance.patch
+          ];
+        });
+      })
+    ];
 
     programs.tmux = {
       enable = true;
