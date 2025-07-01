@@ -55,23 +55,29 @@ in lib.mkMerge [
       enable = true;
       overrideDevices = true;
       overrideFolders = true;
-      settings = {
-        options = {
-          relaysEnabled = true;
-          urAccepted = -1; # disable anonymous usage data collection
-        };
-        devices.buffalo.id =
-          "DWIDPQK-OJP2OPA-DG2JHVQ-PXVK6PN-64AZ5RZ-LFN6YQJ-E4UTCFI-NRRGNQW";
-        devices.cicada.id =
-          "R5IMJUF-3UTE3HJ-DU5PMQO-GZZ5LX4-RGDBI5S-O7QD2UB-MJCZ5UZ-ZY33FAH";
-        folders.org = {
-          path = "${config.home.homeDirectory}/${config.home.username}/org";
-          devices = [ "buffalo" "cicada" ];
-
-          # devices.woollymammoth.id = "AXQZZYW-NORHZHC-W4VEXSA-L7CNK2E-2FOUHCF-YHU6REP-34LXB4F-AI56WAF";
-          # devices = [ "woollymammoth" "cicada" ];
-        };
-      };
+      settings = lib.mkMerge [
+        {
+          options = {
+            relaysEnabled = true;
+            urAccepted = -1; # disable anonymous usage data collection
+          };
+          devices.cicada.id =
+            "R5IMJUF-3UTE3HJ-DU5PMQO-GZZ5LX4-RGDBI5S-O7QD2UB-MJCZ5UZ-ZY33FAH";
+          folders.org = {
+            path = "${config.home.homeDirectory}/${config.home.username}/org";
+            devices = [ "cicada" ] ++ lib.lists.optional isDarwin "buffalo"
+              ++ lib.lists.optional isLinux "woollymammoth";
+          };
+        }
+        (lib.mkIf isLinux {
+          devices.woollymammoth.id =
+            "AXQZZYW-NORHZHC-W4VEXSA-L7CNK2E-2FOUHCF-YHU6REP-34LXB4F-AI56WAF";
+        })
+        (lib.mkIf isDarwin {
+          devices.buffalo.id =
+            "DWIDPQK-OJP2OPA-DG2JHVQ-PXVK6PN-64AZ5RZ-LFN6YQJ-E4UTCFI-NRRGNQW";
+        })
+      ];
     };
 
     programs.bash = {
@@ -80,10 +86,10 @@ in lib.mkMerge [
       shellAliases = {
         home-switch =
           "home-manager switch --flake ${config.home.homeDirectory}/.dotfiles";
-      } // lib.optionalAttrs (isLinux) {
+      } // lib.optionalAttrs isLinux {
         nixos-switch =
           "sudo nixos-rebuild switch --impure --flake ${config.home.homeDirectory}/.dotfiles";
-      } // lib.optionalAttrs (isDarwin) {
+      } // lib.optionalAttrs isDarwin {
         darwin-switch =
           "darwin-rebuild switch --flake ${config.home.homeDirectory}/.dotfiles";
         # window role patch support
