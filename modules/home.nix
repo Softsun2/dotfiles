@@ -24,19 +24,20 @@ in lib.mkMerge [
         ffmpeg
         yt-dlp
 
+        qutebrowser
+
         # emacs extra packages
         nixfmt-classic
         graphviz
         ispell
       ] ++ lib.lists.optionals isLinux [
         st
-        qutebrowser
         docker
         python3
         lshw
         dmidecode
         xclip
-      ] ++ lib.lists.optionals isDarwin [ plistwatch jq ];
+      ] ++ lib.lists.optionals isDarwin [ plistwatch jq alacritty ];
     fonts.fontconfig.enable = true;
 
     # added to .profile
