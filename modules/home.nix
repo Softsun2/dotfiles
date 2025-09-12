@@ -16,6 +16,7 @@ in lib.mkMerge [
       [
         fontconfig
         meslo-lg
+        ubuntu-sans
         ubuntu-sans-mono
 
         tldr
@@ -30,14 +31,9 @@ in lib.mkMerge [
         nixfmt-classic
         graphviz
         ispell
-      ] ++ lib.lists.optionals isLinux [
-        st
-        docker
-        python3
-        lshw
-        dmidecode
-        xclip
-      ] ++ lib.lists.optionals isDarwin [ plistwatch jq alacritty ];
+      ]
+      ++ lib.lists.optionals isLinux [ st docker python3 lshw dmidecode xclip ]
+      ++ lib.lists.optionals isDarwin [ plistwatch jq alacritty ];
     fonts.fontconfig.enable = true;
 
     # added to .profile
@@ -123,13 +119,11 @@ in lib.mkMerge [
         extraPackages = pkgs:
           with pkgs; [
             use-package
+            direnv
             magit
             company
             org-roam
-
             expand-region
-            direnv
-
             # language modes
             nix-mode
             markdown-mode

@@ -1,7 +1,3 @@
-;; TOOD:
-;; Sentences delimeted by ".  " instead of ". "
-;; org mode move headlines with M-n and M-p ?
-
 ;; disable audio bell
 (setq ring-bell-function 'ignore)
 ;; disable backup files

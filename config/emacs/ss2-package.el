@@ -16,5 +16,6 @@
 (require 'ss2-direnv)
 (require 'ss2-magit)
 (require 'ss2-desktop)
+(require 'ss2-doric-themes)
 
 (provide 'ss2-package)

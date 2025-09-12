@@ -5,9 +5,9 @@
 (set-face-attribute 'default nil :height 200) ; font size = 10 * px
 
 ;;; Theme
-(defvar ss2-light-theme 'modus-operandi
+(defvar ss2-light-theme 'doric-beach
   "Ss2's light theme.")
-(defvar ss2-dark-theme 'modus-vivendi
+(defvar ss2-dark-theme 'doric-fire
   "Ss2's dark theme.")
 (defun ss2-ns-system-appearance-change-load-theme (appearance)
   "Load appropriate light/dark theme when ns-system-appearance changes."
@@ -21,13 +21,18 @@
 
 (load-theme ss2-dark-theme :no-confirm)
 
+;;; Window
+;; (setq-default header-line-format "")
+;\; (custom-set-faces
+;;  '(header-line ((t (:background unspecified)))))
+
 ;;; Darwin Frame
-;; (setf (alist-get 'undecorated-round default-frame-alist) nil
-;;       (alist-get 'internal-border-width default-frame-alist) 0
-;;       (alist-get 'left-fringe default-frame-alist) 24
-;;       (alist-get 'right-fringe default-frame-alist) 24)
-;; (custom-set-faces
-;;  '(fringe ((t (:background unspecified)))))
+(setf (alist-get 'undecorated-round default-frame-alist) t
+      (alist-get 'internal-border-width default-frame-alist) 0
+      (alist-get 'left-fringe default-frame-alist) 24
+      (alist-get 'right-fringe default-frame-alist) 24)
+(custom-set-faces
+ '(fringe ((t (:background unspecified)))))
 
 ;;; Nixos Frame
 ;; (setf (alist-get 'undecorated default-frame-alist) t
@@ -39,9 +44,6 @@
 ;;  '(fringe ((t (:background unspecified)))))
 ;; (custom-set-faces
 ;;  '(header-line ((t (:background unspecified)))))
-
-;;; Window
-;; (setq-default header-line-format "")
 
 ;;; Startup
 (setq-default
