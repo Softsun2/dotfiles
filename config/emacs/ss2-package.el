@@ -9,6 +9,7 @@
 ;; custom: customize user options, some have side effects that won't run if set with setq in ~:config~
 
 (require 'ss2-org)
+(require 'ss2-langtool)
 (require 'ss2-org-roam)
 ;; (require 'ss2-company)
 (require 'ss2-eww)
