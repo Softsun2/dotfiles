@@ -27,7 +27,7 @@
 ;;  '(header-line ((t (:background unspecified)))))
 
 ;;; Darwin Frame
-(setf (alist-get 'undecorated-round default-frame-alist) t
+(setf (alist-get 'undecorated-round default-frame-alist) nil
       (alist-get 'internal-border-width default-frame-alist) 0
       (alist-get 'left-fringe default-frame-alist) 24
       (alist-get 'right-fringe default-frame-alist) 24)
