@@ -111,10 +111,6 @@ in lib.mkMerge [
       {
         enable = true;
         extraConfig = ''
-          ;; inject language tool paths
-          (setq ss2-languagetool-cli "${pkgs.languagetool}/share/languagetool-commandline.jar")
-          (setq ss2-languagetool-java-bin "${pkgs.jre_headless}/bin/java")
-
           (setq user-init-file
             "${config.home.homeDirectory}/.dotfiles/config/emacs/ss2-init.el")
           (load user-init-file)
@@ -129,7 +125,6 @@ in lib.mkMerge [
             org-roam
             expand-region
             # language modes
-            langtool
             nix-mode
             markdown-mode
             haskell-mode
