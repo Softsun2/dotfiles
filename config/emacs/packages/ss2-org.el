@@ -24,6 +24,7 @@
 	       "\n%?")
       :prepend t)))
 
+  (org-agenda-span 60)
   (org-agenda-window-setup 'current-window)
   (org-agenda-prefix-format
    '((agenda . " %i %-12:c%?-12t% s")

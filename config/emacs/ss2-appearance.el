@@ -5,9 +5,9 @@
 (set-face-attribute 'default nil :height 200) ; font size = 10 * px
 
 ;;; Theme
-(defvar ss2-light-theme 'doric-beach
+(defvar ss2-light-theme 'modus-operandi
   "Ss2's light theme.")
-(defvar ss2-dark-theme 'doric-fire
+(defvar ss2-dark-theme 'modus-vivendi
   "Ss2's dark theme.")
 (defun ss2-ns-system-appearance-change-load-theme (appearance)
   "Load appropriate light/dark theme when ns-system-appearance changes."
