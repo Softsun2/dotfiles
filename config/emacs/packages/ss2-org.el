@@ -2,6 +2,19 @@
 
 (use-package org
   :ensure nil
+  :init
+  (defun ss2-org-agenda-re-view ()
+    (interactive)
+    (let ((span-days 24)
+          (offset-past-days 10))
+      (message "Generating agenda for %s days starting %s days ago"
+               span-days offset-past-days)
+      (org-agenda-list nil (- (time-to-days (date-to-time
+                                             (current-time-string)))
+                              offset-past-days)
+                       span-days)
+      (org-agenda-log-mode)
+      (goto-char (point-min))))
   :custom
   (add-to-list 'org-modules 'org-habit)
   (org-directory "~/softsun2/org")
